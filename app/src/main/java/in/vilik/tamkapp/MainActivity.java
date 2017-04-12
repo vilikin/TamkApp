@@ -25,6 +25,9 @@ import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.Pirteria;
 
 public class MainActivity extends AppCompatActivity {
+    /**
+     * Group id selector located in the action bar.
+     */
     Spinner spinner;
 
     ArrayList<String> placeholderGroups = new ArrayList<String>(){{
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         add("16TIKO2");
     }};
 
+    /**
+     * An intent that leads to the settings activity.
+     */
     private Intent toSettingsIntent;
 
     /**
@@ -45,24 +51,33 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    /**
+     * Bootstraps the application.
+     * Setups tab manager, action bar and opens settings on first launch.
+     *
+     * @param savedInstanceState Saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // For clearing preferences.
+        // PreferenceManager.getDefaultSharedPreferences(this).edit().clear().apply();
+
         toSettingsIntent = new Intent(this, SettingsActivity.class);
 
+        // Set default preferences on first launch.
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // If application hasn't been started before, open settings activity.
         if (prefs.getBoolean("v1_first_launch", true)) {
             prefs.edit().putBoolean("v1_first_launch", false).apply();
 
             startActivity(toSettingsIntent);
         }
-
-        //PreferenceManager.getDefaultSharedPreferences(this).edit().clear().apply();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
+    /**
+     * Populates action bar with appropriate menu items.
+     *
+     * @param menu  Menu
+     * @return      Boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -107,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Opens settings activity when corresponding menu option is selected.
+     * @param item      Item that was selected
+     * @return          Boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -120,6 +146,11 @@ public class MainActivity extends AppCompatActivity {
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Toggles group id selector visibility.
+     *
+     * @param visible   If the selector should be visible on the action bar
+     */
     public void toggleSpinner(boolean visible) {
         if (visible) {
             spinner.setVisibility(View.VISIBLE);
