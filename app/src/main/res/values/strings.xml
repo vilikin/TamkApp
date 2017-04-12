@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TamkApp</string>
+    <string name="action_settings">Asetukset</string>
+
+    <string name="no_meal_types_selected">Ei näytetä mitään aterioita</string>
+    <string name="prefix_meal_types_selected">Näytetään: %1$s</string>
+</resources>

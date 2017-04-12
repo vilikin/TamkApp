@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Ruokalistat">
+        <MultiSelectListPreference
+            android:key="campusravita_included_meals"
+            android:title="Ateriatyypit: Campusravita"
+            android:dialogTitle="Ateriatyypit: Campusravita"
+            android:entries="@array/campusravita_meals_readable"
+            android:entryValues="@array/campusravita_meals"
+            android:defaultValue="@array/campusravita_meals"/>
+        <MultiSelectListPreference
+            android:key="pirteria_included_meals"
+            android:title="Ateriatyypit: Pirteria"
+            android:dialogTitle="Ateriatyypit: Pirteria"
+            android:entries="@array/pirteria_meals_readable"
+            android:entryValues="@array/pirteria_meals"
+            android:defaultValue="@array/pirteria_meals"/>
+    </PreferenceCategory>
+</PreferenceScreen>

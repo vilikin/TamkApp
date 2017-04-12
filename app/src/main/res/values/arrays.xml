@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="campusravita_meals">
+        <item>breakfast</item>
+        <item>lunch</item>
+        <item>deli_lunch</item>
+        <item>campus_cafe_salad</item>
+        <item>portion_meal</item>
+        <item>supper</item>
+    </string-array>
+
+    <string-array name="campusravita_meals_readable">
+        <item>Aamiainen</item>
+        <item>Lounas</item>
+        <item>Deli-lounas</item>
+        <item>Campus Café salaatti</item>
+        <item>Annos</item>
+        <item>Iltaruoka</item>
+    </string-array>
+
+    <string-array name="campusravita_meals_json">
+        <item>Aamiainen</item>
+        <item>Lounas</item>
+        <item>Deli-lounas</item>
+        <item>Campus Café salaatti</item>
+        <item>Annos</item>
+        <item>Iltaruoka</item>
+    </string-array>
+
+    <string-array name="pirteria_meals">
+        <item>normal_lunch</item>
+        <item>vege_lunch</item>
+    </string-array>
+
+    <string-array name="pirteria_meals_readable">
+        <item>Linjastolounas</item>
+        <item>Kasvislounas</item>
+    </string-array>
+
+    <string-array name="pirteria_meals_json">
+        <item>LINJASTOLOUNAS</item>
+        <item>KASVISLOUNAS</item>
+    </string-array>
+</resources>
