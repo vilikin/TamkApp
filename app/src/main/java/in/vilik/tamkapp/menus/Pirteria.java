@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 
 /**
@@ -50,7 +51,10 @@ public class Pirteria extends MenuList {
                 Menu m = parseMenu(menuList.getJSONObject(i));
 
                 if (m.getDate().after(now)) {
+                    Debug.log("handleSuccessfulResponse()", "Added: " + m.getDate().toString());
                     menus.add(m);
+                } else {
+                    Debug.log("handleSuccessfulResponse()", "Not added: " + m.getDate().toString());
                 }
             }
         } catch (JSONException | ParseException e) {
@@ -71,7 +75,7 @@ public class Pirteria extends MenuList {
         c.set(Calendar.HOUR_OF_DAY, 18);
         c.set(Calendar.MINUTE, 0);
 
-        menu.setDate(date);
+        menu.setDate(c.getTime());
 
         ArrayList<Meal> meals = new ArrayList<>();
 
