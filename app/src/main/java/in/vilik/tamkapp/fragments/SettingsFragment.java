@@ -18,8 +18,9 @@ import in.vilik.tamkapp.menus.MealTypes;
  */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private final String CAMPUSRAVITA_INCLUDED_MEALS = "campusravita_included_meals";
-    private final String PIRTERIA_INCLUDED_MEALS = "pirteria_included_meals";
+    public final static String CAMPUSRAVITA_INCLUDED_MEALS = "campusravita_included_meals";
+    public final static String PIRTERIA_INCLUDED_MEALS = "pirteria_included_meals";
+    final String INCLUDED_MEALS_SEPARATOR = ", ";
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -73,7 +74,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private String getSummaryForSelectedListItems(Set<String> selectedItems,
                                                   int normalArrayId, int readableArrayId) {
         if (selectedItems.size() > 0) {
-            String separator = ", ";
             StringBuilder summary = new StringBuilder();
 
             for (String selectedItem : selectedItems) {
@@ -81,10 +81,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                         .getReadableMealType(getActivity(), normalArrayId,
                                 readableArrayId, selectedItem);
 
-                summary.append(separator).append(readableType);
+                summary.append(INCLUDED_MEALS_SEPARATOR).append(readableType);
             }
 
-            return getString(R.string.prefix_meal_types_selected, summary.substring(separator.length()));
+            return getString(R.string.prefix_meal_types_selected, summary.substring(INCLUDED_MEALS_SEPARATOR.length()));
         } else {
             return getString(R.string.no_meal_types_selected);
         }

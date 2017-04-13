@@ -29,9 +29,15 @@ import okhttp3.Response;
 
 public class Campusravita extends MenuList {
     private final String API_URL = "http://vilik.in:3000/menu";
+    private final MenuType MENU_TYPE = MenuType.CAMPUSRAVITA;
 
     public Campusravita(Context context) {
         super(context);
+    }
+
+    @Override
+    MenuType getMenuType() {
+        return MENU_TYPE;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class Campusravita extends MenuList {
     }
 
     private Menu parseMenu(JSONObject json) throws JSONException, ParseException {
-        Menu menu = new Menu();
+        Menu menu = new Menu(this);
 
         DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
         Date date = df1.parse(json.getString("date"));

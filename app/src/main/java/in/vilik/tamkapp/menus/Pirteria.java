@@ -24,9 +24,15 @@ import in.vilik.tamkapp.R;
 
 public class Pirteria extends MenuList {
     private final String API_URL = "http://www.amica.fi/modules/json/json/Index?costNumber=0823&language=fi";
+    private final MenuType MENU_TYPE = MenuType.PIRTERIA;
 
     public Pirteria(Context context) {
         super(context);
+    }
+
+    @Override
+    MenuType getMenuType() {
+        return MENU_TYPE;
     }
 
     @Override
@@ -61,7 +67,7 @@ public class Pirteria extends MenuList {
     }
 
     private Menu parseMenu(JSONObject json) throws JSONException, ParseException {
-        Menu menu = new Menu();
+        Menu menu = new Menu(this);
 
         DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.ENGLISH);
         Date date = df1.parse(json.getString("Date"));

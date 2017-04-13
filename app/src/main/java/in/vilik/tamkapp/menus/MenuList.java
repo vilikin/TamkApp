@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import in.vilik.tamkapp.Debug;
+import in.vilik.tamkapp.utils.MenuCache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -16,7 +18,7 @@ import okhttp3.Response;
  * Created by vili on 10/04/2017.
  */
 
-public abstract class MenuList implements Serializable {
+public abstract class MenuList {
     private ArrayList<Menu> menus;
     private Context context;
     private OnMenuLoadedListener listener;
@@ -25,13 +27,8 @@ public abstract class MenuList implements Serializable {
     public MenuList(Context context) {
         this.context = context;
         this.menus = new ArrayList<>();
-        refresh();
-    }
 
-    public MenuList(Context context, OnMenuLoadedListener listener) {
-        this.context = context;
-        this.menus = new ArrayList<>();
-        this.listener = listener;
+        Debug.log("MenuList()", "New MenuList being generated, initiating refresh");
         refresh();
     }
 
@@ -96,9 +93,12 @@ public abstract class MenuList implements Serializable {
     }
 
     abstract String getUrl();
+    abstract MenuType getMenuType();
     abstract void handleSuccessfulResponse(String response);
 
     public void refresh() {
+        Debug.log("refresh()", "NEW SERVER REQUEST: " + getUrl());
+
         Request request = new Request.Builder()
                 .url(getUrl())
                 .build();
@@ -114,7 +114,10 @@ public abstract class MenuList implements Serializable {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    handleSuccessfulResponse(response.body().string());
+                    String body = response.body().string();
+                    MenuCache.writeToFile(context, getMenuType(), body);
+
+                    handleSuccessfulResponse(body);
                     loaded = true;
 
                     if (listener != null) {
