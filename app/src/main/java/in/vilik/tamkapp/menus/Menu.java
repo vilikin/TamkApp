@@ -4,11 +4,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
+import in.vilik.tamkapp.fragments.MenuListItem;
 import in.vilik.tamkapp.fragments.SettingsFragment;
 
 
@@ -16,7 +18,7 @@ import in.vilik.tamkapp.fragments.SettingsFragment;
  * Created by vili on 10/04/2017.
  */
 
-public class Menu {
+public class Menu implements MenuListItem {
     private Date date;
     private ArrayList<Meal> meals;
     private boolean empty;
@@ -85,5 +87,19 @@ public class Menu {
 
     public boolean isEmpty() {
         return empty;
+    }
+
+    @Override
+    public String getPrimaryText() {
+        Calendar c = Calendar.getInstance();
+        Locale locale = Locale.getDefault();
+        c.setTime(date);
+
+        return c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale);
+    }
+
+    @Override
+    public String getSecondaryText() {
+        return null;
     }
 }

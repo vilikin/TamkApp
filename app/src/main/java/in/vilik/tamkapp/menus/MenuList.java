@@ -17,7 +17,6 @@ import okhttp3.Response;
 /**
  * Created by vili on 10/04/2017.
  */
-
 public abstract class MenuList {
     private ArrayList<Menu> menus;
     private Context context;
@@ -71,16 +70,8 @@ public abstract class MenuList {
         this.context = context;
     }
 
-    ArrayList<Menu> getMenus() {
+    public ArrayList<Menu> getMenus() {
         return menus;
-    }
-
-    public int getCount() {
-        return menus.size();
-    }
-
-    public Menu getMenu(int position) {
-        return menus.get(position);
     }
 
     public MenuType getMenuType() {
@@ -88,6 +79,7 @@ public abstract class MenuList {
     }
 
     abstract String getUrl();
+
     abstract boolean handleSuccessfulResponse(String response);
 
     public void loadFromServer(final boolean tryCacheOnFailure) {
@@ -178,29 +170,28 @@ public abstract class MenuList {
         StringBuilder sb = new StringBuilder();
 
         for (Menu menu : menus) {
-            if (!menu.isEmpty()) {
-                sb.append(menu.getDate());
-                sb.append("\n--------------------------------\n");
+            sb.append(menu.getDate());
+            sb.append("\n--------------------------------\n");
 
-                for (Meal meal : menu.getMeals()) {
-                    sb.append(meal.getReadableType());
+            for (Meal meal : menu.getMeals()) {
+                sb.append(meal.getReadableType());
+                sb.append("\n");
+
+                for (MealOption mealOption : meal.getOptions()) {
+                    sb.append("--- ");
+                    sb.append(mealOption.getName());
                     sb.append("\n");
 
-                    for (MealOption mealOption : meal.getOptions()) {
-                        sb.append("--- ");
-                        sb.append(mealOption.getName());
+                    if (mealOption.getDetails() != null) {
+                        sb.append("------ ");
+                        sb.append(mealOption.getDetails());
                         sb.append("\n");
-
-                        if (mealOption.getDetails() != null) {
-                            sb.append("------ ");
-                            sb.append(mealOption.getDetails());
-                            sb.append("\n");
-                        }
                     }
                 }
-
-                sb.append("--------------------------------\n\n");
             }
+
+            sb.append("--------------------------------\n\n");
+
         }
 
         return sb.toString();

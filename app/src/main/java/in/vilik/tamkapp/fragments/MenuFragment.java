@@ -1,12 +1,13 @@
 package in.vilik.tamkapp.fragments;
 
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
@@ -25,6 +26,8 @@ public class MenuFragment extends Fragment {
     View rootView;
     MenuList menuList;
     boolean initialized;
+    RecyclerView recyclerView;
+    MenuListAdapter adapter;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -55,6 +58,17 @@ public class MenuFragment extends Fragment {
             menuList = new Pirteria(getActivity());
         }
 
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
+
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+
+        adapter = new MenuListAdapter(menuList);
+
+
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setVerticalScrollBarEnabled(true);
+
         menuList.setOnMenuLoadedListener(new OnMenuLoadedListener() {
             @Override
             public void onSuccess() {
@@ -77,11 +91,9 @@ public class MenuFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Debug.log("onResume()", "Resumed menu fragment for " + menuList.getClass());
-
         if (initialized) {
-            Debug.log("onResume()", "Triggering loadFromServer for " + menuList.getClass());
-            menuList.loadFromServer(true);
+            Debug.log("onResume()", "Triggering loadFromCache for " + menuList.getClass());
+            menuList.loadFromCache(true, true);
         }
     }
 
@@ -90,8 +102,7 @@ public class MenuFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-                textView.setText(menuList.toString());
+                adapter.notifyDataSetChanged();
             }
         });
     }

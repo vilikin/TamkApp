@@ -1,13 +1,6 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerViewMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.vilik.tamkapp.fragments.MenuFragment">
-
-    <TextView
-        android:padding="16dp"
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</ScrollView>
-
+    tools:context="in.vilik.tamkapp.fragments.MenuFragment" />
