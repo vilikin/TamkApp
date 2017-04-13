@@ -5,5 +5,6 @@ package in.vilik.tamkapp.menus;
  */
 
 public interface OnMenuLoadedListener {
-    void loaded();
+    void onSuccess();
+    void onError(int errorTextId);
 }

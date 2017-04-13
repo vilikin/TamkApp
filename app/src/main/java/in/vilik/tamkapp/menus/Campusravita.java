@@ -29,15 +29,9 @@ import okhttp3.Response;
 
 public class Campusravita extends MenuList {
     private final String API_URL = "http://vilik.in:3000/menu";
-    private final MenuType MENU_TYPE = MenuType.CAMPUSRAVITA;
 
     public Campusravita(Context context) {
-        super(context);
-    }
-
-    @Override
-    MenuType getMenuType() {
-        return MENU_TYPE;
+        super(context, MenuType.CAMPUSRAVITA);
     }
 
     @Override
@@ -46,7 +40,7 @@ public class Campusravita extends MenuList {
     }
 
     @Override
-    void handleSuccessfulResponse(String response) {
+    boolean handleSuccessfulResponse(String response) {
         ArrayList<Menu> menus = getMenus();
 
         menus.clear();
@@ -64,9 +58,11 @@ public class Campusravita extends MenuList {
                     menus.add(m);
                 }
             }
+
+            return true;
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
-            updateError();
+            return false;
         }
     }
 

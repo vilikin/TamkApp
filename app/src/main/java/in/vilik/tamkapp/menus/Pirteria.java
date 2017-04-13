@@ -24,15 +24,9 @@ import in.vilik.tamkapp.R;
 
 public class Pirteria extends MenuList {
     private final String API_URL = "http://www.amica.fi/modules/json/json/Index?costNumber=0823&language=fi";
-    private final MenuType MENU_TYPE = MenuType.PIRTERIA;
 
     public Pirteria(Context context) {
-        super(context);
-    }
-
-    @Override
-    MenuType getMenuType() {
-        return MENU_TYPE;
+        super(context, MenuType.PIRTERIA);
     }
 
     @Override
@@ -41,7 +35,7 @@ public class Pirteria extends MenuList {
     }
 
     @Override
-    void handleSuccessfulResponse(String response) {
+    boolean handleSuccessfulResponse(String response) {
         ArrayList<Menu> menus = getMenus();
 
         menus.clear();
@@ -60,9 +54,11 @@ public class Pirteria extends MenuList {
                     menus.add(m);
                 }
             }
+
+            return true;
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
-            updateError();
+            return false;
         }
     }
 

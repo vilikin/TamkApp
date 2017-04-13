@@ -4,4 +4,6 @@
 
     <string name="no_meal_types_selected">Ei näytetä mitään aterioita</string>
     <string name="prefix_meal_types_selected">Näytetään: %1$s</string>
+    <string name="error_failed_to_parse">Ruokalistaa parsiessa tapahtui virhe, ota yhteys sovelluksen kehittäjään.</string>
+    <string name="error_failed_to_load">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
 </resources>

@@ -15,6 +15,7 @@ import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.MenuType;
 import in.vilik.tamkapp.menus.OnMenuLoadedListener;
 import in.vilik.tamkapp.menus.Pirteria;
+import in.vilik.tamkapp.utils.ErrorToaster;
 
 /**
  * Created by vili on 10/04/2017.
@@ -56,9 +57,16 @@ public class MenuFragment extends Fragment {
 
         menuList.setOnMenuLoadedListener(new OnMenuLoadedListener() {
             @Override
-            public void loaded() {
+            public void onSuccess() {
                 initialized = true;
                 refreshMenuContent();
+            }
+
+            @Override
+            public void onError(final int errorTextId) {
+                initialized = true;
+
+                ErrorToaster.show(getActivity(), errorTextId);
             }
         }, true);
 
@@ -72,8 +80,8 @@ public class MenuFragment extends Fragment {
         Debug.log("onResume()", "Resumed menu fragment for " + menuList.getClass());
 
         if (initialized) {
-            Debug.log("onResume()", "Triggering refresh for " + menuList.getClass());
-            menuList.refresh();
+            Debug.log("onResume()", "Triggering loadFromServer for " + menuList.getClass());
+            menuList.loadFromServer(true);
         }
     }
 
