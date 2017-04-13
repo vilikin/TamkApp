@@ -51,10 +51,7 @@ public class Pirteria extends MenuList {
                 Menu m = parseMenu(menuList.getJSONObject(i));
 
                 if (m.getDate().after(now)) {
-                    Debug.log("handleSuccessfulResponse()", "Added: " + m.getDate().toString());
                     menus.add(m);
-                } else {
-                    Debug.log("handleSuccessfulResponse()", "Not added: " + m.getDate().toString());
                 }
             }
         } catch (JSONException | ParseException e) {
