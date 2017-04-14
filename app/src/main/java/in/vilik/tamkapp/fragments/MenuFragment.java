@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
+
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.Campusravita;
+import in.vilik.tamkapp.menus.Menu;
 import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.MenuType;
 import in.vilik.tamkapp.menus.OnMenuLoadedListener;
@@ -64,6 +67,31 @@ public class MenuFragment extends Fragment {
 
         adapter = new MenuListAdapter(getContext(), menuList.getMenus());
 
+        adapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
+            @Override
+            public void onParentExpanded(int parentPosition) {
+                if (parentPosition == adapter.getParentList().size() - 1) {
+                    int parentIndex = -1;
+
+                    for (int i = 0; i < adapter.getItemCount(); i++) {
+                        if (adapter.isParentViewType(adapter.getItemViewType(i))) {
+                            parentIndex++;
+
+                            if (parentIndex == parentPosition) {
+                                Menu parent = adapter.getParentList().get(parentPosition);
+                                recyclerView.scrollToPosition(i + parent.getChildList().size());
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onParentCollapsed(int parentPosition) {
+
+            }
+        });
 
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);

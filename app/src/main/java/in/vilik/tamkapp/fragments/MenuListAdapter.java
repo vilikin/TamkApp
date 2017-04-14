@@ -2,6 +2,7 @@ package in.vilik.tamkapp.fragments;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,11 @@ public class MenuListAdapter extends ExpandableRecyclerAdapter<Menu, MenuListIte
         }
 
         return new MenuHeaderViewHolder(view);
+    }
+
+    @Override
+    public boolean isParentViewType(int viewType) {
+        return MenuListItem.ItemType.MENU_HEADER.ordinal() == viewType;
     }
 
     @Override
