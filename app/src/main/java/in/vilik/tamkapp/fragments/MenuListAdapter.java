@@ -55,11 +55,9 @@ public class MenuListAdapter extends ExpandableRecyclerAdapter<Menu, MenuListIte
         switch (itemType) {
             case MEAL_HEADER:
                 view = mInflater.inflate(R.layout.meal_header, childViewGroup, false);
-                Debug.log("onCreateChildViewHolder()", "MEAL_HEADER");
                 break;
             case MEAL_OPTION:
                 view = mInflater.inflate(R.layout.meal_option, childViewGroup, false);
-                Debug.log("onCreateChildViewHolder()", "MEAL_OPTION");
                 break;
         }
 

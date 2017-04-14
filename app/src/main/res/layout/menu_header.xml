@@ -10,18 +10,18 @@
         <TextView
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            android:text="Moikka moi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/menu_header_text" />
         <ImageView
+            android:paddingTop="2dp"
+            android:id="@+id/expandIcon"
             android:tint="@color/colorAccent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_expand_more_black_24dp"
-            />
+            app:srcCompat="@drawable/ic_expand_more_black_24dp" />
     </RelativeLayout>
     <View
         android:layout_marginTop="8dp"
