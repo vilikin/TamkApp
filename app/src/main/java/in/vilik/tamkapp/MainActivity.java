@@ -152,10 +152,12 @@ public class MainActivity extends AppCompatActivity {
      * @param visible   If the selector should be visible on the action bar
      */
     public void toggleSpinner(boolean visible) {
-        if (visible) {
-            spinner.setVisibility(View.VISIBLE);
-        } else {
-            spinner.setVisibility(View.INVISIBLE);
+        if (spinner != null) {
+            if (visible) {
+                spinner.setVisibility(View.VISIBLE);
+            } else {
+                spinner.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }
