@@ -41,6 +41,7 @@
         <item>LINJASTOLOUNAS</item>
         <item>KASVISLOUNAS</item>
     </string-array>
+
     <string-array name="weekdays">
         <item>Sunnuntai</item>
         <item>Maanantai</item>

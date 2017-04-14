@@ -48,11 +48,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         // Tab titles
         switch (position) {
             case 0:
-                return "LUKKARI";
+                return context.getString(R.string.tab_header_timetable);
             case 1:
-                return "CAMPUSRAVITA";
+                return context.getString(R.string.tab_header_campusravita);
             case 2:
-                return "PIRTERIA";
+                return context.getString(R.string.tab_header_pirteria);
         }
         return null;
     }

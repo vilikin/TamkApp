@@ -28,14 +28,14 @@ public abstract class MenuList {
         SUCCESSFULLY_LOADED, LOADING_ERROR, PARSING_ERROR, LOADING_IN_PROGRESS
     }
 
-    private static final long CACHED_MENU_MAX_AGE = 1000 * 60; //* 60 * 24; // 1 day
+    private static final long CACHED_MENU_MAX_AGE = 1000 * 60 * 60 * 24; // 1 day
 
     public MenuList(Context context, MenuType menuType) {
         this.context = context;
         this.menuType = menuType;
         this.menus = new ArrayList<>();
 
-        Debug.log("MenuList()", "New MenuList being generated, initiating loadFromServer");
+        Debug.log("MenuList()", "New MenuList being generated, choosing load strategy");
 
         if (MenuCache.has(context, menuType, CACHED_MENU_MAX_AGE)) {
             loadFromCache(false, true);
@@ -85,7 +85,7 @@ public abstract class MenuList {
     public void loadFromServer(final boolean tryCacheOnFailure) {
         status = LoadingStatus.LOADING_IN_PROGRESS;
 
-        Debug.log("loadFromServer()", "NEW SERVER REQUEST: " + getUrl());
+        Debug.log("loadFromServer()", "Attempting to load menu from server: " + getUrl());
 
         Request request = new Request.Builder()
                 .url(getUrl())

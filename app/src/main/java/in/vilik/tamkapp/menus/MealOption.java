@@ -1,7 +1,5 @@
 package in.vilik.tamkapp.menus;
 
-import in.vilik.tamkapp.fragments.MenuListItem;
-
 /**
  * Created by vili on 10/04/2017.
  */

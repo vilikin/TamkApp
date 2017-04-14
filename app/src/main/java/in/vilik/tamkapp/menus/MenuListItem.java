@@ -1,4 +1,4 @@
-package in.vilik.tamkapp.fragments;
+package in.vilik.tamkapp.menus;
 
 /**
  * Created by vili on 13/04/2017.

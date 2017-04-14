@@ -129,7 +129,6 @@ public class MenuFragment extends Fragment {
     }
 
     private void refreshMenuContent() {
-        Debug.log("refreshMenuContent()", menuList.toString());
         Debug.log("refreshMenuContent()", "Refreshing menu content of " + menuList.getClass());
         getActivity().runOnUiThread(new Runnable() {
             @Override

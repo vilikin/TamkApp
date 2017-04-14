@@ -1,9 +1,6 @@
 package in.vilik.tamkapp.menus;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import in.vilik.tamkapp.fragments.MenuListItem;
 
 /**
  * Created by vili on 10/04/2017.

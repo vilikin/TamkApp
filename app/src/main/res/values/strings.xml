@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">TamkApp</string>
     <string name="action_settings">Asetukset</string>
+    <string name="tab_header_timetable">Lukkari</string>
+    <string name="tab_header_campusravita">Campusravita</string>
+    <string name="tab_header_pirteria">Pirteria</string>
 
-    <string name="no_meal_types_selected">Ei näytetä mitään aterioita</string>
-    <string name="prefix_meal_types_selected">Näytetään: %1$s</string>
     <string name="error_failed_to_parse">Ruokalistaa parsiessa tapahtui virhe, ota yhteys sovelluksen kehittäjään.</string>
     <string name="error_failed_to_load">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
-    <string name="menu_header_closed">Ravintola suljettu</string>
+
     <string name="menulist_not_available">Ruokalistoja ei ole saatavilla!\nKokeile myöhemmin uudelleen.</string>
+
+    <string name="settings_menus">Ruokalistat</string>
+    <string name="campusravita_included_meals">Ateriatyypit: Campusravita</string>
+    <string name="pirteria_included_meals">Ateriatyypit: Pirteria</string>
+    <string name="no_meal_types_selected">Ei näytetä mitään aterioita</string>
+    <string name="prefix_meal_types_selected">Näytetään: %1$s</string>
 </resources>

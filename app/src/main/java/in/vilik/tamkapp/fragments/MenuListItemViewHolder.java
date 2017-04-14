@@ -6,14 +6,15 @@ import android.widget.TextView;
 import com.bignerdranch.expandablerecyclerview.ChildViewHolder;
 
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.menus.MenuListItem;
 
 /**
  * Created by vili on 14/04/2017.
  */
 
 public class MenuListItemViewHolder extends ChildViewHolder {
-    TextView primaryTextView;
-    TextView secondaryTextView;
+    private TextView primaryTextView;
+    private TextView secondaryTextView;
 
     public MenuListItemViewHolder(View itemView) {
         super(itemView);

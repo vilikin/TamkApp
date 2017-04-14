@@ -1,28 +1,24 @@
 package in.vilik.tamkapp.fragments;
 
 import android.animation.ObjectAnimator;
-import android.support.v4.animation.ValueAnimatorCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ParentViewHolder;
 
-import org.w3c.dom.Text;
-
-import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.menus.Menu;
+import in.vilik.tamkapp.menus.MenuListItem;
 
 /**
  * Created by vili on 13/04/2017.
  */
 
 public class MenuHeaderViewHolder extends ParentViewHolder {
-    TextView primaryTextView;
-    ImageView expandIcon;
+    private TextView primaryTextView;
+    private ImageView expandIcon;
 
-    public MenuHeaderViewHolder(View itemView) {
+    MenuHeaderViewHolder(View itemView) {
         super(itemView);
 
         primaryTextView = (TextView)itemView.findViewById(R.id.menu_header_text);
@@ -45,7 +41,7 @@ public class MenuHeaderViewHolder extends ParentViewHolder {
         animator.start();
     }
 
-    public void bind(MenuListItem menuListItem) {
+    void bind(MenuListItem menuListItem) {
         primaryTextView.setText(menuListItem.getPrimaryText());
     }
 }
