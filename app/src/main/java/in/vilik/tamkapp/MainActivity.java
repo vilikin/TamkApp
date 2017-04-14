@@ -26,16 +26,6 @@ import in.vilik.tamkapp.menus.Pirteria;
 
 public class MainActivity extends AppCompatActivity {
     /**
-     * Group id selector located in the action bar.
-     */
-    Spinner spinner;
-
-    ArrayList<String> placeholderGroups = new ArrayList<String>(){{
-        add("15TIKOOT");
-        add("16TIKO2");
-    }};
-
-    /**
      * An intent that leads to the settings activity.
      */
     private Intent toSettingsIntent;
@@ -90,21 +80,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        // Check if group selector should be visible on the selected tab
-        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-            @Override
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                        toggleSpinner(true);
-                        break;
-                    default:
-                        toggleSpinner(false);
-                        break;
-                }
-            }
-        });
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -118,13 +93,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.findItem(R.id.spinner);
-        spinner = (Spinner) MenuItemCompat.getActionView(item);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, placeholderGroups);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapter);
         return true;
     }
 
@@ -144,20 +112,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Toggles group id selector visibility.
-     *
-     * @param visible   If the selector should be visible on the action bar
-     */
-    public void toggleSpinner(boolean visible) {
-        if (spinner != null) {
-            if (visible) {
-                spinner.setVisibility(View.VISIBLE);
-            } else {
-                spinner.setVisibility(View.INVISIBLE);
-            }
-        }
     }
 }

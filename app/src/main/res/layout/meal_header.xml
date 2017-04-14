@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:padding="16dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="8dp"
+        android:tint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_restaurant_menu_black_24dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MENU ITEM"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/menu_list_item_header"/>
 </LinearLayout>
