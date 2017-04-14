@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:padding="16dp"
-        android:text="Moikka"
-        android:textColor="@color/colorAccent"
-        android:textSize="20sp"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/menu_header_text"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:text="Moikka moi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/menu_header_text" />
+        <ImageView
+            android:tint="@color/colorAccent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_expand_more_black_24dp"
+            />
+    </RelativeLayout>
+    <View
+        android:layout_marginTop="8dp"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorAccent"/>
 </LinearLayout>

@@ -1,12 +1,15 @@
 package in.vilik.tamkapp.menus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import in.vilik.tamkapp.fragments.MenuListItem;
 
 /**
  * Created by vili on 10/04/2017.
  */
 
-public class Meal {
+public class Meal implements MenuListItem {
     private String type;
     private String readableType;
     private boolean empty;
@@ -55,5 +58,20 @@ public class Meal {
 
     public boolean isEmpty() {
         return empty;
+    }
+
+    @Override
+    public String getPrimaryText() {
+        return getReadableType();
+    }
+
+    @Override
+    public String getSecondaryText() {
+        return null;
+    }
+
+    @Override
+    public ItemType getItemType() {
+        return ItemType.MEAL_HEADER;
     }
 }

@@ -54,7 +54,7 @@ public class Campusravita extends MenuList {
             for (int i = 0; i < menuList.length(); i++) {
                 Menu m = parseMenu(menuList.getJSONObject(i));
 
-                if (m.getDate().after(now)) {
+                if (m.getDate().after(now) && !m.isEmpty()) {
                     menus.add(m);
                 }
             }

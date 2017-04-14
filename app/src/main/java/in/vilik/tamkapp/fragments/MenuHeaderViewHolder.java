@@ -3,15 +3,18 @@ package in.vilik.tamkapp.fragments;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bignerdranch.expandablerecyclerview.ParentViewHolder;
+
 import org.w3c.dom.Text;
 
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.menus.Menu;
 
 /**
  * Created by vili on 13/04/2017.
  */
 
-public class MenuHeaderViewHolder extends MenuListViewHolder {
+public class MenuHeaderViewHolder extends ParentViewHolder {
     TextView primaryTextView;
 
     public MenuHeaderViewHolder(View itemView) {
@@ -20,15 +23,7 @@ public class MenuHeaderViewHolder extends MenuListViewHolder {
         primaryTextView = (TextView)itemView.findViewById(R.id.menu_header_text);
     }
 
-    @Override
-    TextView getPrimaryTextView() {
-        return primaryTextView;
+    public void bind(MenuListItem menuListItem) {
+        primaryTextView.setText(menuListItem.getPrimaryText());
     }
-
-    @Override
-    TextView getSecondaryTextView() {
-        return null;
-    }
-
-
 }

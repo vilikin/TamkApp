@@ -1,10 +1,12 @@
 package in.vilik.tamkapp.menus;
 
+import in.vilik.tamkapp.fragments.MenuListItem;
+
 /**
  * Created by vili on 10/04/2017.
  */
 
-public class MealOption {
+public class MealOption implements MenuListItem {
     private String name;
     private String details;
 
@@ -30,5 +32,20 @@ public class MealOption {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    @Override
+    public String getPrimaryText() {
+        return getName();
+    }
+
+    @Override
+    public String getSecondaryText() {
+        return getDetails();
+    }
+
+    @Override
+    public ItemType getItemType() {
+        return ItemType.MEAL_OPTION;
     }
 }

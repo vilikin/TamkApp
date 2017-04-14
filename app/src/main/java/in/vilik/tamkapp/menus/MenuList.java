@@ -28,7 +28,7 @@ public abstract class MenuList {
         SUCCESSFULLY_LOADED, LOADING_ERROR, PARSING_ERROR, LOADING_IN_PROGRESS
     }
 
-    private static final long CACHED_MENU_MAX_AGE = 1000 * 60 * 60 * 24; // 1 day
+    private static final long CACHED_MENU_MAX_AGE = 1000 * 60; //* 60 * 24; // 1 day
 
     public MenuList(Context context, MenuType menuType) {
         this.context = context;

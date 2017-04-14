@@ -3,10 +3,13 @@ package in.vilik.tamkapp.menus;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.bignerdranch.expandablerecyclerview.model.Parent;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -18,7 +21,7 @@ import in.vilik.tamkapp.fragments.SettingsFragment;
  * Created by vili on 10/04/2017.
  */
 
-public class Menu implements MenuListItem {
+public class Menu implements MenuListItem, Parent<MenuListItem> {
     private Date date;
     private ArrayList<Meal> meals;
     private boolean empty;
@@ -95,11 +98,44 @@ public class Menu implements MenuListItem {
         Locale locale = Locale.getDefault();
         c.setTime(date);
 
-        return c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale);
+        String day = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale);
+        day = day.substring(0, day.length() - 2);
+        return day;
     }
 
     @Override
     public String getSecondaryText() {
         return null;
+    }
+
+    @Override
+    public ItemType getItemType() {
+        return ItemType.MENU_HEADER;
+    }
+
+    @Override
+    public List<MenuListItem> getChildList() {
+        ArrayList<MenuListItem> menuListItems = new ArrayList<>();
+
+        if (!isEmpty()) {
+            for (Meal meal : meals) {
+                menuListItems.add(meal);
+
+                for (MealOption mealOption : meal.getOptions()) {
+                    menuListItems.add(mealOption);
+                }
+            }
+        }
+
+        return menuListItems;
+    }
+
+    @Override
+    public boolean isInitiallyExpanded() {
+        long nowPlus24h = new Date().getTime() + 1000 * 60 * 60 * 24;
+        Date tomorrow = new Date();
+        tomorrow.setTime(nowPlus24h);
+
+        return date.before(tomorrow);
     }
 }

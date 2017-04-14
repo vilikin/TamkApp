@@ -1,55 +1,78 @@
 package in.vilik.tamkapp.fragments;
 
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 
+import java.util.List;
+
+import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.menus.MenuList;
+import in.vilik.tamkapp.menus.Menu;
 
 /**
  * Created by vili on 13/04/2017.
  */
 
-public class MenuListAdapter extends RecyclerView.Adapter<MenuListViewHolder> {
-    private MenuList menuList;
-    private ArrayList<MenuListAdapterItem> adapterItems;
-    public static final int TYPE_MENU_HEADER = 0;
-    public static final int TYPE_MEAL_HEADER = 1;
-    public static final int TYPE_MEAL_OPTION = 2;
-    public static final int TYPE_NO_CONTENT = 3;
+public class MenuListAdapter extends ExpandableRecyclerAdapter<Menu, MenuListItem, MenuHeaderViewHolder, MenuListItemViewHolder>{
+    private LayoutInflater mInflater;
 
-
-    public MenuListAdapter(MenuList menuList) {
-        this.menuList = menuList;
+    public MenuListAdapter(Context context, @NonNull List<Menu> menuList) {
+        super(menuList);
+        mInflater = LayoutInflater.from(context);
     }
 
+    @NonNull
     @Override
-    public int getItemViewType(int position) {
-        return TYPE_MENU_HEADER;
-    }
+    public MenuHeaderViewHolder onCreateParentViewHolder(@NonNull ViewGroup parentViewGroup, int viewType) {
+        View view = null;
+        MenuListItem.ItemType itemType = MenuListItem.ItemType.values()[viewType];
 
-    @Override
-    public MenuListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_MENU_HEADER:
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_header, parent, false);
-                return new MenuHeaderViewHolder(view);
+        switch (itemType) {
+            case MENU_HEADER:
+                view = mInflater.inflate(R.layout.menu_header, parentViewGroup, false);
+                break;
         }
 
-        return null;
+        return new MenuHeaderViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MenuListViewHolder holder, int position) {
-        holder.getPrimaryTextView().setText(menuList.getMenus().get(position).getPrimaryText());
+    public int getChildViewType(int parentPosition, int childPosition) {
+        return getParentList().get(parentPosition).getChildList().get(childPosition).getItemType().ordinal();
+    }
+
+    @NonNull
+    @Override
+    public MenuListItemViewHolder onCreateChildViewHolder(@NonNull ViewGroup childViewGroup, int viewType) {
+        MenuListItem.ItemType itemType = MenuListItem.ItemType.values()[viewType];
+        View view = null;
+
+        switch (itemType) {
+            case MEAL_HEADER:
+                view = mInflater.inflate(R.layout.meal_header, childViewGroup, false);
+                Debug.log("onCreateChildViewHolder()", "MEAL_HEADER");
+                break;
+            case MEAL_OPTION:
+                view = mInflater.inflate(R.layout.meal_option, childViewGroup, false);
+                Debug.log("onCreateChildViewHolder()", "MEAL_OPTION");
+                break;
+        }
+
+        return new MenuListItemViewHolder(view);
     }
 
     @Override
-    public int getItemCount() {
-        return menuList.getMenus().size();
+    public void onBindParentViewHolder(@NonNull MenuHeaderViewHolder parentViewHolder, int parentPosition, @NonNull Menu parent) {
+        parentViewHolder.bind(parent);
+    }
+
+    @Override
+    public void onBindChildViewHolder(@NonNull MenuListItemViewHolder childViewHolder, int parentPosition, int childPosition, @NonNull MenuListItem child) {
+        childViewHolder.bind(child);
     }
 }
