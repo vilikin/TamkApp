@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 
@@ -31,6 +32,7 @@ public class MenuFragment extends Fragment {
     boolean initialized;
     RecyclerView recyclerView;
     MenuListAdapter adapter;
+    LinearLayout noMenuListsOverlay;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -62,6 +64,7 @@ public class MenuFragment extends Fragment {
         }
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
+        noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
@@ -131,6 +134,12 @@ public class MenuFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if (menuList.getMenus().isEmpty()) {
+                    noMenuListsOverlay.setVisibility(View.VISIBLE);
+                } else {
+                    noMenuListsOverlay.setVisibility(View.GONE);
+                }
+
                 adapter.notifyParentDataSetChanged(false);
             }
         });
