@@ -1,5 +1,6 @@
 package in.vilik.tamkapp.menus;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.fragments.MenuListItem;
 import in.vilik.tamkapp.fragments.SettingsFragment;
 
@@ -95,12 +97,16 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
     @Override
     public String getPrimaryText() {
         Calendar c = Calendar.getInstance();
-        Locale locale = Locale.getDefault();
         c.setTime(date);
 
-        String day = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale);
-        day = day.substring(0, day.length() - 2);
-        return day;
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+
+        Context context = getParentMenuList().getContext();
+        String[] weekdays = context.getResources().getStringArray(R.array.weekdays);
+
+        return weekdays[dayOfWeek - 1] + " " + dayOfMonth + "." + month;
     }
 
     @Override
