@@ -68,7 +68,7 @@ public class MenuFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
         noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
 
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         adapter = new MenuListAdapter(getContext(), menuList.getMenus());
 
@@ -100,7 +100,7 @@ public class MenuFragment extends Fragment {
 
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        recyclerView.setVerticalScrollBarEnabled(true);
+        recyclerView.setHasFixedSize(true);
 
         menuList.setOnMenuLoadedListener(new OnMenuLoadedListener() {
             @Override
