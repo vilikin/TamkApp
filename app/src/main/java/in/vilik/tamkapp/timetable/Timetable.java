@@ -25,9 +25,11 @@ import okio.BufferedSink;
  * Created by vili on 16/04/2017.
  */
 
-public class Timetable extends DataLoader {
+public class Timetable extends DataLoader implements API {
     private List<TimetableElement> elements;
-    private API api;
+
+    private Request request;
+
     private Context context;
 
     private OnTimetableUpdatedListener listener;
@@ -35,8 +37,9 @@ public class Timetable extends DataLoader {
     public Timetable(Context context) {
         super(context);
 
-        this.api = new TimetableAPI();
-        setApi(api);
+        setApi(this);
+        RequestBody body = generateRequestBody(new Date(), null, "15TIKOOT");
+        setRequestBody(body);
 
         this.context = context;
         this.elements = new ArrayList<>();
@@ -88,59 +91,59 @@ public class Timetable extends DataLoader {
         triggerOnTimetableUpdatedListener(true);
     }
 
-    private class TimetableAPI implements API {
-        private Request request;
+    /*  ----------------------- API ------------------------------ */
 
-        public TimetableAPI() {
-            updateRequest(new Date(), null, "15TIKOOT");
-        }
+    @Override
+    public Request getRequest() {
+        return request;
+    }
 
-        public void updateRequest(final Date startDate, final Date endDate, final String studentGroup) {
-            RequestBody body = new RequestBody() {
-                @Override
-                public MediaType contentType() {
-                    return MediaType.parse("application/json");
-                }
+    @Override
+    public Type getType() {
+        return Type.TIMETABLE;
+    }
 
-                @Override
-                public void writeTo(BufferedSink sink) throws IOException {
-                    try {
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-                        JSONObject json = new JSONObject();
+    private RequestBody generateRequestBody(final Date startDate,
+                                            final Date endDate,
+                                            final String studentGroup) {
+        return new RequestBody() {
+            @Override
+            public MediaType contentType() {
+                return MediaType.parse("application/json");
+            }
 
-                        json.put("startDate", df.format(startDate));
+            @Override
+            public void writeTo(BufferedSink sink) throws IOException {
+                try {
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+                    JSONObject json = new JSONObject();
 
-                        if (endDate != null) {
-                            json.put("endDate", df.format(endDate));
-                        }
+                    json.put("startDate", df.format(startDate));
 
-                        JSONArray studentGroups = new JSONArray();
-                        studentGroups.put(studentGroup);
-
-                        json.put("studentGroup", studentGroups);
-
-                        sink.writeUtf8(json.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (endDate != null) {
+                        json.put("endDate", df.format(endDate));
                     }
+
+                    JSONArray studentGroups = new JSONArray();
+                    studentGroups.put(studentGroup);
+
+                    json.put("studentGroup", studentGroups);
+
+                    System.out.println(json.toString());
+
+                    sink.writeUtf8(json.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            };
+            }
+        };
+    }
 
-            request = new Request.Builder()
-                    .post(body)
-                    .url("https://opendata.tamk.fi/r1/reservation/search/")
-                    .addHeader("Authorization", "Basic dWdXbUNVa21BOHoweFVIYVR0U0g6")
-                    .build();
-        }
-
-        @Override
-        public Request getRequest() {
-            return request;
-        }
-
-        @Override
-        public Type getType() {
-            return Type.TIMETABLE;
-        }
+    private void setRequestBody(RequestBody body) {
+        request = new Request.Builder()
+                .post(body)
+                .url("https://opendata.tamk.fi/r1/reservation/search/")
+                .addHeader("Authorization", "Basic dWdXbUNVa21BOHoweFVIYVR0U0g6")
+                .build();
     }
 }
