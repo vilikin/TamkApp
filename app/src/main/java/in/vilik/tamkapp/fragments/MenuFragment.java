@@ -99,7 +99,6 @@ public class MenuFragment extends Fragment {
 
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
 
         menuList.setOnMenuUpdatedListener(new OnMenuUpdatedListener() {
             @Override
