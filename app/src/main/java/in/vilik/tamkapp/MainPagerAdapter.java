@@ -25,7 +25,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return TimetableFragment.newInstance(position + 1);
+                return TimetableFragment.newInstance();
             case 1:
                 return MenuFragment.newInstance(API.Type.CAMPUSRAVITA_MENU);
             case 2:

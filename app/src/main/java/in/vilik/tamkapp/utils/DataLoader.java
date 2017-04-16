@@ -30,19 +30,29 @@ public abstract class DataLoader {
     private API api;
     private LoadingStatus status;
     private OnDataLoadedListener listener;
-    private long cacheMaxAge;
+    private long cacheMaxAge = DEFAULT_CACHE_MAX_AGE;
 
     private Context context;
 
     private String methodPrefix;
 
+    public DataLoader(Context context) {
+        this.context = context;
+    }
+
     public DataLoader(Context context, API api) {
         this.context = context;
 
+        setApi(api);
+    }
+
+    public API getApi() {
+        return api;
+    }
+
+    public void setApi(API api) {
         this.api = api;
         this.methodPrefix = api.getType().name() + ":";
-
-        this.cacheMaxAge = DEFAULT_CACHE_MAX_AGE;
     }
 
     public long getCacheMaxAge() {
@@ -89,7 +99,7 @@ public abstract class DataLoader {
                     loadDataFromCache(false);
                 } else {
                     Debug.log(methodPrefix + "onFailure()", "Triggering loading failure");
-                    listener.onFailure();
+                    if (listener != null) listener.onFailure();
                 }
             }
 
@@ -101,14 +111,14 @@ public abstract class DataLoader {
                     String body = response.body().string();
                     DataCache.write(context, api.getType(), body);
 
-                    listener.onSuccess(body);
+                    if (listener != null) listener.onSuccess(body);
                 } else if (tryCacheOnFailure) {
                     Debug.log(methodPrefix + "onResponse()", "Server request returned error code");
                     loadDataFromCache(false);
                 } else {
                     Debug.log(methodPrefix + "onResponse()", "Server request returned error code, " +
                             "triggering loading failure");
-                    listener.onFailure();
+                    if (listener != null) listener.onFailure();
                 }
             }
         });
@@ -119,13 +129,13 @@ public abstract class DataLoader {
             Debug.log(methodPrefix + "loadDataFromCache()", "Cache available, reading data");
             String cachedData = DataCache.read(context, api.getType());
 
-            listener.onSuccess(cachedData);
+            if (listener != null) listener.onSuccess(cachedData);
         } else if (tryServerOnFailure) {
             Debug.log(methodPrefix + "loadDataFromCache()", "Cache not available, trying server");
             loadDataFromServer(false);
         } else {
             Debug.log(methodPrefix + "loadDataFromCache()", "Cache not available, triggering loading failure");
-            listener.onFailure();
+            if (listener != null) listener.onFailure();
         }
     }
 }

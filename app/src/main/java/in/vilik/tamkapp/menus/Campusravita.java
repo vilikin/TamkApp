@@ -29,8 +29,6 @@ import okhttp3.Response;
  */
 
 public class Campusravita extends MenuList {
-    private final String API_URL = "http://vilik.in:3000/menu";
-
     public Campusravita(Context context) {
         super(context, new API() {
             @Override
