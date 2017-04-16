@@ -1,4 +1,4 @@
-package in.vilik.tamkapp.fragments;
+package in.vilik.tamkapp.menus.recyclerview;
 
 import android.animation.ObjectAnimator;
 import android.view.View;
@@ -14,11 +14,11 @@ import in.vilik.tamkapp.menus.MenuListItem;
  * Created by vili on 13/04/2017.
  */
 
-public class MenuHeaderViewHolder extends ParentViewHolder {
+class MenuHeaderViewHolder extends ParentViewHolder {
     private TextView primaryTextView;
     private ImageView expandIcon;
 
-    MenuHeaderViewHolder(View itemView) {
+    public MenuHeaderViewHolder(View itemView) {
         super(itemView);
 
         primaryTextView = (TextView)itemView.findViewById(R.id.menu_header_text);

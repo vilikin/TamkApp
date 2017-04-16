@@ -19,6 +19,7 @@ import in.vilik.tamkapp.menus.Menu;
 import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.OnMenuUpdatedListener;
 import in.vilik.tamkapp.menus.Pirteria;
+import in.vilik.tamkapp.menus.recyclerview.MenuListAdapter;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.DataLoader;
 import in.vilik.tamkapp.utils.ErrorToaster;

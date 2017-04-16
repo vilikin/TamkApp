@@ -1,4 +1,4 @@
-package in.vilik.tamkapp.fragments;
+package in.vilik.tamkapp.menus.recyclerview;
 
 import android.view.View;
 import android.widget.TextView;
@@ -12,7 +12,7 @@ import in.vilik.tamkapp.menus.MenuListItem;
  * Created by vili on 14/04/2017.
  */
 
-public class MenuListItemViewHolder extends ChildViewHolder {
+class MenuListItemViewHolder extends ChildViewHolder {
     private TextView primaryTextView;
     private TextView secondaryTextView;
 

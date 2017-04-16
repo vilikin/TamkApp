@@ -1,4 +1,4 @@
-package in.vilik.tamkapp.fragments;
+package in.vilik.tamkapp.menus.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -21,7 +21,7 @@ import in.vilik.tamkapp.menus.MenuListItem;
 public class MenuListAdapter extends ExpandableRecyclerAdapter<Menu, MenuListItem, MenuHeaderViewHolder, MenuListItemViewHolder>{
     private LayoutInflater mInflater;
 
-    MenuListAdapter(Context context, @NonNull List<Menu> menuList) {
+    public MenuListAdapter(Context context, @NonNull List<Menu> menuList) {
         super(menuList);
         mInflater = LayoutInflater.from(context);
     }
