@@ -1,5 +1,6 @@
 package in.vilik.tamkapp.timetable;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Day implements TimetableElement {
 
     public Day(Timetable parent) {
         this.parent = parent;
+        this.reservations = new ArrayList<>();
     }
 
     public Date getDate() {
@@ -26,10 +28,6 @@ public class Day implements TimetableElement {
 
     public List<Reservation> getReservations() {
         return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
     }
 
     @Override

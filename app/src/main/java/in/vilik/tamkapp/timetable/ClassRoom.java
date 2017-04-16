@@ -10,7 +10,14 @@ public class ClassRoom {
     private String name;
     private String building;
 
-    public ClassRoom(Reservation parent) {
+    public ClassRoom() {
+    }
+
+    public Reservation getParent() {
+        return parent;
+    }
+
+    public void setParent(Reservation parent) {
         this.parent = parent;
     }
 
@@ -36,5 +43,14 @@ public class ClassRoom {
 
     public void setBuilding(String building) {
         this.building = building;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassRoom {" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", building='" + building + '\'' +
+                '}';
     }
 }

@@ -10,7 +10,14 @@ public class Realization {
     private String name;
     private String code;
 
-    public Realization(Reservation parent) {
+    public Realization() {
+    }
+
+    public Reservation getParent() {
+        return parent;
+    }
+
+    public void setParent(Reservation parent) {
         this.parent = parent;
     }
 
@@ -28,5 +35,13 @@ public class Realization {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "Realization {" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }

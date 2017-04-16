@@ -30,12 +30,13 @@ public class TimetableFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
 
-        Timetable timetable = new Timetable(getContext());
+        final Timetable timetable = new Timetable(getContext());
 
         timetable.setOnTimetableUpdatedListener(new OnTimetableUpdatedListener() {
             @Override
             public void onSuccess() {
                 System.out.println("SUCCESS!");
+                System.out.println(timetable.toString());
             }
 
             @Override

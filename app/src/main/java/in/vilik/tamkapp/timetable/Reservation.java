@@ -1,6 +1,7 @@
 package in.vilik.tamkapp.timetable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  */
 
 public class Reservation implements TimetableElement {
+    private int id;
     private Day parent;
     private String subject;
     private String description;
@@ -19,10 +21,25 @@ public class Reservation implements TimetableElement {
     private List<Realization> realizations;
     private List<String> studentGroups;
 
-    public Reservation(Day parent) {
-        this.parent = parent;
+    public Reservation() {
         this.realizations = new ArrayList<>();
         this.studentGroups = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Day getParent() {
+        return parent;
+    }
+
+    public void setParent(Day parent) {
+        this.parent = parent;
     }
 
     public String getSubject() {
@@ -79,6 +96,19 @@ public class Reservation implements TimetableElement {
 
     public void setStudentGroups(List<String> studentGroups) {
         this.studentGroups = studentGroups;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation {" +
+                "subject='" + subject + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", classRoom=" + classRoom +
+                ", realizations=" + Arrays.toString(realizations.toArray()) +
+                ", studentGroups=" + Arrays.toString(studentGroups.toArray()) +
+                '}';
     }
 
     @Override
