@@ -17,21 +17,30 @@ import java.util.Locale;
 
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.utils.API;
+import okhttp3.Request;
 
 /**
  * Created by vili on 10/04/2017.
  */
 
 public class Pirteria extends MenuList {
-    private final String API_URL = "http://www.amica.fi/modules/json/json/Index?costNumber=0823&language=fi";
 
     public Pirteria(Context context) {
-        super(context, MenuType.PIRTERIA);
-    }
+        super(context, new API() {
+            @Override
+            public Request getRequest() {
+                return new Request.Builder()
+                        .get()
+                        .url("http://www.amica.fi/modules/json/json/Index?costNumber=0823&language=fi")
+                        .build();
+            }
 
-    @Override
-    String getUrl() {
-        return API_URL;
+            @Override
+            public Type getType() {
+                return Type.PIRTERIA_MENU;
+            }
+        });
     }
 
     @Override

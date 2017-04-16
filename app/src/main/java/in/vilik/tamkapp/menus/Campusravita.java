@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.utils.API;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -31,15 +32,19 @@ public class Campusravita extends MenuList {
     private final String API_URL = "http://vilik.in:3000/menu";
 
     public Campusravita(Context context) {
-        super(context, MenuType.CAMPUSRAVITA);
+        super(context, new API() {
+            @Override
+            public Request getRequest() {
+                return new Request.Builder().get().url("http://vilik.in:3000/menu").build();
+            }
+
+            @Override
+            public Type getType() {
+                return Type.CAMPUSRAVITA_MENU;
+            }
+        });
     }
 
-    @Override
-    String getUrl() {
-        return API_URL;
-    }
-
-    @Override
     boolean handleSuccessfulResponse(String response) {
         ArrayList<Menu> menus = getMenus();
 

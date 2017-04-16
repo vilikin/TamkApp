@@ -33,11 +33,11 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(parentMenuList.getContext());
 
-        switch (getParentMenuList().getMenuType()) {
-            case CAMPUSRAVITA:
+        switch (getParentMenuList().getApiType()) {
+            case CAMPUSRAVITA_MENU:
                 includedMeals = prefs.getStringSet(SettingsFragment.CAMPUSRAVITA_INCLUDED_MEALS, null);
                 break;
-            case PIRTERIA:
+            case PIRTERIA_MENU:
                 includedMeals = prefs.getStringSet(SettingsFragment.PIRTERIA_INCLUDED_MEALS, null);
                 break;
         }

@@ -3,7 +3,6 @@ package in.vilik.tamkapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,29 +13,28 @@ import java.io.OutputStreamWriter;
 import java.util.Date;
 
 import in.vilik.tamkapp.Debug;
-import in.vilik.tamkapp.menus.MenuType;
 
 /**
  * Created by vili on 13/04/2017.
  */
-public class MenuCache {
+public class DataCache {
     final static String CACHE_PREFERENCE_PREFIX = "cached_";
     final static String CACHE_FILE_PREFIX = "";
     final static String CACHE_FILE_SUFFIX = ".json";
 
-    public static boolean has(Context context, MenuType menuType, long maxAge) {
+    public static boolean has(Context context, API.Type apiType, long maxAge) {
         Date maxAgeDate = new Date(new Date().getTime() - maxAge);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        long lastCached = prefs.getLong(CACHE_PREFERENCE_PREFIX + menuType.name(), -1);
+        long lastCached = prefs.getLong(CACHE_PREFERENCE_PREFIX + apiType.name(), -1);
 
         return lastCached != -1 && new Date(lastCached).after(maxAgeDate);
     }
 
-    public static void write(Context context, MenuType menuType, String data) {
+    public static void write(Context context, API.Type apiType, String data) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context
-                    .openFileOutput(CACHE_FILE_PREFIX + menuType.name() + CACHE_FILE_SUFFIX,
+                    .openFileOutput(CACHE_FILE_PREFIX + apiType.name() + CACHE_FILE_SUFFIX,
                             Context.MODE_PRIVATE));
 
             outputStreamWriter.write(data);
@@ -44,7 +42,7 @@ public class MenuCache {
 
             Date now = new Date();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            prefs.edit().putLong(CACHE_PREFERENCE_PREFIX + menuType.name(), now.getTime()).apply();
+            prefs.edit().putLong(CACHE_PREFERENCE_PREFIX + apiType.name(), now.getTime()).apply();
         }
 
         catch (IOException e) {
@@ -52,12 +50,12 @@ public class MenuCache {
         }
     }
 
-    public static String read(Context context, MenuType menuType) {
+    public static String read(Context context, API.Type apiType) {
         String content = null;
 
         try {
             InputStream inputStream = context
-                    .openFileInput(CACHE_FILE_PREFIX + menuType.name() + CACHE_FILE_SUFFIX);
+                    .openFileInput(CACHE_FILE_PREFIX + apiType.name() + CACHE_FILE_SUFFIX);
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

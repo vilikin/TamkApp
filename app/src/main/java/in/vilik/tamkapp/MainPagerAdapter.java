@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import in.vilik.tamkapp.fragments.MenuFragment;
 import in.vilik.tamkapp.fragments.TimetableFragment;
-import in.vilik.tamkapp.menus.Campusravita;
-import in.vilik.tamkapp.menus.MenuType;
-import in.vilik.tamkapp.menus.Pirteria;
+import in.vilik.tamkapp.utils.API;
 
 /**
  * Created by vili on 10/04/2017.
@@ -29,9 +27,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return TimetableFragment.newInstance(position + 1);
             case 1:
-                return MenuFragment.newInstance(MenuType.CAMPUSRAVITA);
+                return MenuFragment.newInstance(API.Type.CAMPUSRAVITA_MENU);
             case 2:
-                return MenuFragment.newInstance(MenuType.PIRTERIA);
+                return MenuFragment.newInstance(API.Type.PIRTERIA_MENU);
         }
 
         return null;

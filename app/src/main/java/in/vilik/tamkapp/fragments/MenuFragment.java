@@ -2,8 +2,6 @@ package in.vilik.tamkapp.fragments;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +17,10 @@ import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.Campusravita;
 import in.vilik.tamkapp.menus.Menu;
 import in.vilik.tamkapp.menus.MenuList;
-import in.vilik.tamkapp.menus.MenuType;
-import in.vilik.tamkapp.menus.OnMenuLoadedListener;
+import in.vilik.tamkapp.menus.OnMenuUpdatedListener;
 import in.vilik.tamkapp.menus.Pirteria;
+import in.vilik.tamkapp.utils.API;
+import in.vilik.tamkapp.utils.DataLoader;
 import in.vilik.tamkapp.utils.ErrorToaster;
 
 /**
@@ -40,7 +39,7 @@ public class MenuFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static Fragment newInstance(MenuType menuType) {
+    public static Fragment newInstance(API.Type menuType) {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
         args.putInt("type", menuType.ordinal());
@@ -55,13 +54,13 @@ public class MenuFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        MenuType menuType = MenuType.values()[getArguments().getInt("type")];
+        API.Type menuType = API.Type.values()[getArguments().getInt("type")];
 
-        Debug.log("onCreateView()", "Creating view for menu type " + menuType.toString());
+        Debug.log("onCreateView()", "Creating view for menu type " + menuType.name());
 
-        if (menuType == MenuType.CAMPUSRAVITA) {
+        if (menuType == API.Type.CAMPUSRAVITA_MENU) {
             menuList = new Campusravita(getActivity());
-        } else if (menuType == MenuType.PIRTERIA) {
+        } else if (menuType == API.Type.PIRTERIA_MENU) {
             menuList = new Pirteria(getActivity());
         }
 
@@ -102,7 +101,7 @@ public class MenuFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
-        menuList.setOnMenuLoadedListener(new OnMenuLoadedListener() {
+        menuList.setOnMenuUpdatedListener(new OnMenuUpdatedListener() {
             @Override
             public void onSuccess() {
                 initialized = true;
@@ -110,12 +109,14 @@ public class MenuFragment extends Fragment {
             }
 
             @Override
-            public void onError(final int errorTextId) {
+            public void onError() {
                 initialized = true;
 
-                ErrorToaster.show(getActivity(), errorTextId);
+                ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD);
             }
-        }, true);
+        });
+
+        menuList.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
 
         return rootView;
     }
@@ -125,8 +126,8 @@ public class MenuFragment extends Fragment {
         super.onResume();
 
         if (initialized) {
-            Debug.log("onResume()", "Triggering loadFromCache for " + menuList.getClass());
-            menuList.loadFromCache(true, true);
+            Debug.log("onResume()", "Triggering loadData for " + menuList.getClass());
+            menuList.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
         }
     }
 
