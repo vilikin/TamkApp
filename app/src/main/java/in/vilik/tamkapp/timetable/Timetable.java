@@ -32,6 +32,8 @@ import okio.BufferedSink;
 public class Timetable extends DataLoader implements API {
     private List<Day> days;
 
+    private List<TimetableElement> elements;
+
     private Request request;
 
     private Context context;
@@ -44,6 +46,7 @@ public class Timetable extends DataLoader implements API {
         super(context);
 
         this.days = new ArrayList<>();
+        this.elements = new ArrayList<>();
         this.studentGroup = "15tikoot";
 
         setApi(this);
@@ -56,6 +59,7 @@ public class Timetable extends DataLoader implements API {
             @Override
             public void onSuccess(String data) {
                 boolean successfullyParsed = parseTimetable(data);
+                refreshVisibleElementsList();
                 triggerOnTimetableUpdatedListener(successfullyParsed);
             }
 
@@ -86,8 +90,9 @@ public class Timetable extends DataLoader implements API {
         return context;
     }
 
-    public List<TimetableElement> getElements(int maxDays) {
-        List<TimetableElement> elements = new ArrayList<>();
+    private void refreshVisibleElementsList() {
+        int maxDays = 7;
+        elements.clear();
         Reservation reservationForNowBlock = null;
 
         Date now = new Date();
@@ -115,7 +120,7 @@ public class Timetable extends DataLoader implements API {
                     }
                 }
 
-                if (dayCounter >= maxDays) {
+                if (maxDays != -1 && dayCounter >= maxDays) {
                     break;
                 }
             }
@@ -124,13 +129,15 @@ public class Timetable extends DataLoader implements API {
         if (reservationForNowBlock != null) {
             elements.add(0, new NowBlock(reservationForNowBlock));
         }
+    }
 
+    public List<TimetableElement> getElements() {
         return elements;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        List<TimetableElement> elements = getElements(7);
+        List<TimetableElement> elements = getElements();
 
         for (TimetableElement element : elements) {
             sb.append(element.getType().name());

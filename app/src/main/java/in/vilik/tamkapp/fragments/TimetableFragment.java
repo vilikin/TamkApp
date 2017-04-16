@@ -2,14 +2,19 @@ package in.vilik.tamkapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.menus.MenuList;
+import in.vilik.tamkapp.menus.recyclerview.MenuListAdapter;
 import in.vilik.tamkapp.timetable.OnTimetableUpdatedListener;
 import in.vilik.tamkapp.timetable.Timetable;
+import in.vilik.tamkapp.timetable.recyclerview.TimetableAdapter;
 import in.vilik.tamkapp.utils.DataLoader;
 
 /**
@@ -17,6 +22,12 @@ import in.vilik.tamkapp.utils.DataLoader;
  */
 
 public class TimetableFragment extends Fragment {
+    View rootView;
+    Timetable timetable;
+    boolean initialized;
+    RecyclerView recyclerView;
+    TimetableAdapter adapter;
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -28,15 +39,24 @@ public class TimetableFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
+        initialized = false;
 
-        final Timetable timetable = new Timetable(getContext());
+        View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerViewTimetable);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+
+        timetable = new Timetable(getContext());
+
+        // TODO: GET NUMBER OF DAYS FROM SETTINGS
+        adapter = new TimetableAdapter(timetable);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(manager);
 
         timetable.setOnTimetableUpdatedListener(new OnTimetableUpdatedListener() {
             @Override
             public void onSuccess() {
-                System.out.println("SUCCESS!");
-                System.out.println(timetable.toString());
+                System.out.println("TIMETABLE LOADED");
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -46,8 +66,6 @@ public class TimetableFragment extends Fragment {
         });
 
         timetable.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
-        //TextView textView = (TextView) rootView.findViewById(R.id.section_label_timetable);
-        //textView.setText();
         return rootView;
     }
 }
