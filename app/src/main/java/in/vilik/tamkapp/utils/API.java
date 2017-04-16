@@ -13,4 +13,5 @@ public interface API {
 
     Request getRequest();
     Type getType();
+    String getCacheKey();
 }

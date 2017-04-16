@@ -1,7 +1,6 @@
 package in.vilik.tamkapp.timetable;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.utils.API;
@@ -40,13 +38,16 @@ public class Timetable extends DataLoader implements API {
 
     private OnTimetableUpdatedListener listener;
 
+    private String studentGroup;
+
     public Timetable(Context context) {
         super(context);
 
         this.days = new ArrayList<>();
+        this.studentGroup = "15tikoot";
 
         setApi(this);
-        RequestBody body = generateRequestBody(new Date(), null, "15TIKOOT");
+        RequestBody body = generateRequestBody(new Date(), null, studentGroup);
         setRequestBody(body);
 
         this.context = context;
@@ -90,24 +91,33 @@ public class Timetable extends DataLoader implements API {
         Reservation reservationForNowBlock = null;
 
         Date now = new Date();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.set(Calendar.HOUR_OF_DAY, 5);
+
+        Date todayMorning = calendar.getTime();
+
         int dayCounter = 0;
 
         for (Day day : days) {
-            elements.add(day);
-            dayCounter++;
+            if (day.getDate().after(todayMorning)) {
+                elements.add(day);
+                dayCounter++;
 
-            for (Reservation reservation : day.getReservations()) {
-                elements.add(reservation);
+                for (Reservation reservation : day.getReservations()) {
+                    elements.add(reservation);
 
-                if (DateUtil.isOnRange(reservation.getStartDate(),
-                        reservation.getEndDate(), now) &&
-                        reservationForNowBlock == null) {
-                    reservationForNowBlock = reservation;
+                    if (DateUtil.isOnRange(reservation.getStartDate(),
+                            reservation.getEndDate(), now) &&
+                            reservationForNowBlock == null) {
+                        reservationForNowBlock = reservation;
+                    }
                 }
-            }
 
-            if (dayCounter >= maxDays) {
-                break;
+                if (dayCounter >= maxDays) {
+                    break;
+                }
             }
         }
 
@@ -265,6 +275,11 @@ public class Timetable extends DataLoader implements API {
     @Override
     public Type getType() {
         return Type.TIMETABLE;
+    }
+
+    @Override
+    public String getCacheKey() {
+        return "timetable_" + studentGroup;
     }
 
     private RequestBody generateRequestBody(final Date startDate,

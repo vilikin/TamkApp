@@ -45,7 +45,7 @@ public class TimetableFragment extends Fragment {
             }
         });
 
-        timetable.loadData(DataLoader.LoadingStrategy.SERVER_FIRST);
+        timetable.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
         //TextView textView = (TextView) rootView.findViewById(R.id.section_label_timetable);
         //textView.setText();
         return rootView;

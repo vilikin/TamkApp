@@ -40,6 +40,11 @@ public class Campusravita extends MenuList {
             public Type getType() {
                 return Type.CAMPUSRAVITA_MENU;
             }
+
+            @Override
+            public String getCacheKey() {
+                return "campusravita";
+            }
         });
     }
 

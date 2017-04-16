@@ -40,6 +40,11 @@ public class Pirteria extends MenuList {
             public Type getType() {
                 return Type.PIRTERIA_MENU;
             }
+
+            @Override
+            public String getCacheKey() {
+                return "pirteria";
+            }
         });
     }
 

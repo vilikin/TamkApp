@@ -109,7 +109,7 @@ public abstract class DataLoader {
                     Debug.log(methodPrefix + "onResponse()", "Request succeeded");
 
                     String body = response.body().string();
-                    DataCache.write(context, api.getType(), body);
+                    DataCache.write(context, api.getCacheKey(), body);
 
                     if (listener != null) listener.onSuccess(body);
                 } else if (tryCacheOnFailure) {
@@ -125,9 +125,9 @@ public abstract class DataLoader {
     }
 
     private void loadDataFromCache(boolean tryServerOnFailure) {
-        if (DataCache.has(context, api.getType(), cacheMaxAge)) {
+        if (DataCache.has(context, api.getCacheKey(), cacheMaxAge)) {
             Debug.log(methodPrefix + "loadDataFromCache()", "Cache available, reading data");
-            String cachedData = DataCache.read(context, api.getType());
+            String cachedData = DataCache.read(context, api.getCacheKey());
 
             if (listener != null) listener.onSuccess(cachedData);
         } else if (tryServerOnFailure) {
