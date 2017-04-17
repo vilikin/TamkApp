@@ -136,10 +136,6 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
 
     @Override
     public boolean isInitiallyExpanded() {
-        long nowPlus24h = new Date().getTime() + 1000 * 60 * 60 * 24;
-        Date tomorrow = new Date();
-        tomorrow.setTime(nowPlus24h);
-
-        return date.before(tomorrow);
+        return getParentMenuList().getMenus().get(0) == this;
     }
 }
