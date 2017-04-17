@@ -30,16 +30,22 @@
     <string-array name="pirteria_meals">
         <item>normal_lunch</item>
         <item>vege_lunch</item>
+        <item>soup_lunch</item>
+        <item>portion_meal</item>
     </string-array>
 
     <string-array name="pirteria_meals_readable">
         <item>Linjastolounas</item>
         <item>Kasvislounas</item>
+        <item>Keittolounas</item>
+        <item>Annosruoka</item>
     </string-array>
 
     <string-array name="pirteria_meals_json">
         <item>LINJASTOLOUNAS</item>
         <item>KASVISLOUNAS</item>
+        <item>KEITTOLOUNAS</item>
+        <item>ANNOSRUOKA</item>
     </string-array>
 
     <string-array name="weekdays">
