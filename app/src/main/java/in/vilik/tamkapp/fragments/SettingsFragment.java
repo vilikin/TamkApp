@@ -18,14 +18,15 @@ import in.vilik.tamkapp.menus.MealTypes;
  */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public final static String CAMPUSRAVITA_INCLUDED_MEALS = "campusravita_included_meals";
-    public final static String PIRTERIA_INCLUDED_MEALS = "pirteria_included_meals";
-    public final static String NUMBER_THING = "number_of_reservations";
+    private String key_campusravita_meals;
+    private String key_pirteria_meals;
+    private String key_student_group;
+    private String key_timetable_period;
+    private String key_timetable_show_weekends;
 
     final String INCLUDED_MEALS_SEPARATOR = ", ";
 
     public SettingsFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -46,6 +47,17 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        key_campusravita_meals = getResources()
+                .getString(R.string.preference_key_campusravita_meals);
+        key_pirteria_meals = getResources()
+                .getString(R.string.preference_key_pirteria_meals);
+        key_student_group = getResources()
+                .getString(R.string.preference_key_student_group);
+        key_timetable_period = getResources()
+                .getString(R.string.preference_key_timetable_period);
+        key_timetable_show_weekends = getResources()
+                .getString(R.string.preference_key_timetable_show_weekends);
+
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
@@ -58,21 +70,52 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     }
 
     private void updateSummaries(SharedPreferences sharedPreferences) {
-        Set<String> campusravitaIncludedMeals = sharedPreferences.getStringSet(CAMPUSRAVITA_INCLUDED_MEALS,
+        Set<String> campusravitaIncludedMeals = sharedPreferences.getStringSet(key_campusravita_meals,
                 new HashSet<String>());
 
-        findPreference(CAMPUSRAVITA_INCLUDED_MEALS)
+        findPreference(key_campusravita_meals)
                 .setSummary(getSummaryForSelectedListItems(campusravitaIncludedMeals,
                         R.array.campusravita_meals, R.array.campusravita_meals_readable));
 
-        Set<String> pirteriaIncludedMeals = sharedPreferences.getStringSet(PIRTERIA_INCLUDED_MEALS,
+        Set<String> pirteriaIncludedMeals = sharedPreferences.getStringSet(key_pirteria_meals,
                 new HashSet<String>());
 
-        findPreference(PIRTERIA_INCLUDED_MEALS)
+        findPreference(key_pirteria_meals)
                 .setSummary(getSummaryForSelectedListItems(pirteriaIncludedMeals,
                         R.array.pirteria_meals, R.array.pirteria_meals_readable));
 
-        findPreference(NUMBER_THING).setSummary(getString(R.string.preference_timetable_day_count_summary, sharedPreferences.getInt(NUMBER_THING, 7)));
+        String selectedStudentGroup = sharedPreferences.getString(key_student_group, "");
+        String studentGroupSummary;
+
+        if (selectedStudentGroup.trim().isEmpty()) {
+            studentGroupSummary = getResources().getString(R.string.group_summary_default);
+        } else {
+            studentGroupSummary = getResources()
+                    .getString(R.string.group_summary, selectedStudentGroup);
+        }
+
+        findPreference(key_student_group)
+                .setSummary(studentGroupSummary);
+
+        String selectedTimetablePeriod = sharedPreferences.getString(key_timetable_period, null);
+        String timetablePeriodSummary = getSummaryForSelectedPeriod(selectedTimetablePeriod);
+
+        findPreference(key_timetable_period)
+                .setSummary(timetablePeriodSummary);
+
+    }
+
+    private String getSummaryForSelectedPeriod(String selectedTimetablePeriod) {
+        String[] periods = getResources().getStringArray(R.array.timetable_periods);
+        String[] summaries = getResources().getStringArray(R.array.timetable_periods_summary);
+
+        for (int i = 0; i < periods.length; i++) {
+            if (periods[i].equals(selectedTimetablePeriod)) {
+                return summaries[i];
+            }
+        }
+
+        return null;
     }
 
     private String getSummaryForSelectedListItems(Set<String> selectedItems,
@@ -88,9 +131,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 summary.append(INCLUDED_MEALS_SEPARATOR).append(readableType);
             }
 
-            return getString(R.string.prefix_meal_types_selected, summary.substring(INCLUDED_MEALS_SEPARATOR.length()));
+            return getString(R.string.meal_types_selected_summary, summary.substring(INCLUDED_MEALS_SEPARATOR.length()));
         } else {
-            return getString(R.string.no_meal_types_selected);
+            return getString(R.string.no_meal_types_selected_summary);
         }
     }
 }

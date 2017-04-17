@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="timetable_periods">
+        <item>this_week</item>
+        <item>one_month</item>
+        <item>all</item>
+    </string-array>
+
+    <string-array name="timetable_periods_readable">
+        <item>Tämä viikko</item>
+        <item>30 päivää</item>
+        <item>Puoli vuotta</item>
+    </string-array>
+
+    <string-array name="timetable_periods_summary">
+        <item>Näytetään tämä viikko</item>
+        <item>Näytetään seuraavat 30 päivää</item>
+        <item>Näytetään puoli vuotta</item>
+    </string-array>
+
     <string-array name="campusravita_meals">
         <item>breakfast</item>
         <item>lunch</item>

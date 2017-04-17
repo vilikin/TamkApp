@@ -2,37 +2,44 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
+        android:title="@string/settings_timetable">
+        <EditTextPreference
+            android:key="@string/preference_key_student_group"
+            android:title="@string/group"
+            android:dialogTitle="@string/group_dialog_title"
+            android:capitalize="characters"
+            android:selectAllOnFocus="true"
+            android:hint="@string/group_dialog_hint"
+            android:summary="@string/group_summary_default"
+            android:defaultValue="@string/group_default"/>
+        <ListPreference
+            android:key="@string/preference_key_timetable_period"
+            android:title="@string/timetable_period_title"
+            android:defaultValue="@string/timetable_period_default"
+            android:entries="@array/timetable_periods_readable"
+            android:entryValues="@array/timetable_periods" />
+        <SwitchPreference
+            android:key="@string/preference_key_timetable_show_weekends"
+            android:defaultValue="true"
+            android:title="@string/timetable_show_weekends_title"
+            android:summary="@string/timetable_show_weekends_summary"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
         android:title="@string/settings_menus">
         <MultiSelectListPreference
-            android:key="campusravita_included_meals"
+            android:key="@string/preference_key_campusravita_meals"
             android:title="@string/campusravita_included_meals"
             android:dialogTitle="@string/campusravita_included_meals"
             android:entries="@array/campusravita_meals_readable"
             android:entryValues="@array/campusravita_meals"
             android:defaultValue="@array/campusravita_meals"/>
         <MultiSelectListPreference
-            android:key="pirteria_included_meals"
+            android:key="@string/preference_key_pirteria_meals"
             android:title="@string/pirteria_included_meals"
             android:dialogTitle="@string/pirteria_included_meals"
             android:entries="@array/pirteria_meals_readable"
             android:entryValues="@array/pirteria_meals"
             android:defaultValue="@array/pirteria_meals"/>
-        </PreferenceCategory>
-    <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
-        android:defaultValue="7"
-        android:key="number_of_reservations"
-        android:title="Shown days"
-        app:vnt_maxValue="365"
-        app:vnt_minValue="1"
-        app:vnt_setWrapSelectorWheel="true"/>
-    <EditTextPreference
-        android:key="studentGroup"
-        android:title="Student group"
-        android:dialogTitle="Student group"
-        android:defaultValue="@string/default_class"/>
-    <Preference
-        android:title="Testi"
-        android:defaultValue="@string/default_class"
-        android:key="studentGroup"
-        />
+    </PreferenceCategory>
 </PreferenceScreen>
