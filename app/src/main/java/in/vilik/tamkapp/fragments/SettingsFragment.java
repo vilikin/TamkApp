@@ -20,6 +20,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     public final static String CAMPUSRAVITA_INCLUDED_MEALS = "campusravita_included_meals";
     public final static String PIRTERIA_INCLUDED_MEALS = "pirteria_included_meals";
+    public final static String NUMBER_THING = "number_of_reservations";
+
     final String INCLUDED_MEALS_SEPARATOR = ", ";
 
     public SettingsFragment() {
@@ -69,6 +71,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         findPreference(PIRTERIA_INCLUDED_MEALS)
                 .setSummary(getSummaryForSelectedListItems(pirteriaIncludedMeals,
                         R.array.pirteria_meals, R.array.pirteria_meals_readable));
+
+        findPreference(NUMBER_THING).setSummary(getString(R.string.preference_timetable_day_count_summary, sharedPreferences.getInt(NUMBER_THING, 7)));
     }
 
     private String getSummaryForSelectedListItems(Set<String> selectedItems,

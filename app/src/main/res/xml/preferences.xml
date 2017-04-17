@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:title="@string/settings_menus">
         <MultiSelectListPreference
@@ -17,4 +18,21 @@
             android:entryValues="@array/pirteria_meals"
             android:defaultValue="@array/pirteria_meals"/>
         </PreferenceCategory>
+    <com.vanniktech.vntnumberpickerpreference.VNTNumberPickerPreference
+        android:defaultValue="7"
+        android:key="number_of_reservations"
+        android:title="Shown days"
+        app:vnt_maxValue="365"
+        app:vnt_minValue="1"
+        app:vnt_setWrapSelectorWheel="true"/>
+    <EditTextPreference
+        android:key="studentGroup"
+        android:title="Student group"
+        android:dialogTitle="Student group"
+        android:defaultValue="@string/default_class"/>
+    <Preference
+        android:title="Testi"
+        android:defaultValue="@string/default_class"
+        android:key="studentGroup"
+        />
 </PreferenceScreen>

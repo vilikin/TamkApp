@@ -304,7 +304,7 @@ public class Timetable extends DataLoader implements API {
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
                     JSONObject json = new JSONObject();
 
-                    json.put("startDate", df.format(startDate));
+                    json.put("startDate", df.format(new Date(startDate.getTime() - 1000 * 60 * 60 * 12)));
 
                     if (endDate != null) {
                         json.put("endDate", df.format(endDate));

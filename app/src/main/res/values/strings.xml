@@ -15,4 +15,7 @@
     <string name="pirteria_included_meals">Ateriatyypit: Pirteria</string>
     <string name="no_meal_types_selected">Ei näytetä mitään aterioita</string>
     <string name="prefix_meal_types_selected">Näytetään: %1$s</string>
+
+    <string name="preference_timetable_day_count_summary">Näytetään %1$d päivää</string>
+    <string name="default_class">15TIKOOT</string>
 </resources>

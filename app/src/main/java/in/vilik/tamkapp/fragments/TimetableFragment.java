@@ -47,7 +47,6 @@ public class TimetableFragment extends Fragment {
 
         timetable = new Timetable(getContext());
 
-        // TODO: GET NUMBER OF DAYS FROM SETTINGS
         adapter = new TimetableAdapter(timetable);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
