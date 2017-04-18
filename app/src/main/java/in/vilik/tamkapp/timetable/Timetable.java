@@ -45,21 +45,26 @@ public class Timetable extends DataLoader implements API {
 
     private OnTimetableUpdatedListener listener;
 
-    private String studentGroup;
+    private String studentGroupPreferenceKey;
+    private String studentGroupDefault;
 
     public Timetable(Context context) {
         super(context);
 
-        this.days = new ArrayList<>();
-        this.elements = new ArrayList<>();
-        this.studentGroup = "15tikoot";
-
-        setApi(this);
-        RequestBody body = generateRequestBody(new Date(), null, studentGroup);
-        setRequestBody(body);
-
         this.context = context;
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        studentGroupPreferenceKey = context.getResources()
+                .getString(R.string.preference_key_student_group);
+        studentGroupDefault = context.getResources()
+                .getString(R.string.group_default);
+
+        this.days = new ArrayList<>();
+        this.elements = new ArrayList<>();
+
+        setApi(this);
+        RequestBody body = generateRequestBody();
+        setRequestBody(body);
 
         setOnDataLoadedListener(new OnDataLoadedListener() {
             @Override
@@ -330,12 +335,13 @@ public class Timetable extends DataLoader implements API {
 
     @Override
     public String getCacheKey() {
+        String studentGroup = preferences
+                .getString(studentGroupPreferenceKey, studentGroupDefault);
+
         return "timetable_" + studentGroup;
     }
 
-    private RequestBody generateRequestBody(final Date startDate,
-                                            final Date endDate,
-                                            final String studentGroup) {
+    private RequestBody generateRequestBody() {
         return new RequestBody() {
             @Override
             public MediaType contentType() {
@@ -348,11 +354,12 @@ public class Timetable extends DataLoader implements API {
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
                     JSONObject json = new JSONObject();
 
-                    json.put("startDate", df.format(new Date(startDate.getTime() - 1000 * 60 * 60 * 12)));
+                    Date now = new Date();
 
-                    if (endDate != null) {
-                        json.put("endDate", df.format(endDate));
-                    }
+                    json.put("startDate", df.format(new Date(now.getTime() - 1000 * 60 * 60 * 12)));
+
+                    String studentGroup = preferences
+                            .getString(studentGroupPreferenceKey, studentGroupDefault);
 
                     JSONArray studentGroups = new JSONArray();
                     studentGroups.put(studentGroup);

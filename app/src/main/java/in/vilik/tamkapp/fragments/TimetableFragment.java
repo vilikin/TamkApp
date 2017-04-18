@@ -56,9 +56,7 @@ public class TimetableFragment extends Fragment {
             @Override
             public void onSuccess() {
                 System.out.println("TIMETABLE LOADED");
-
-                adapter.notifyDataSetChanged();
-                initialized = true;
+                refresh();
             }
 
             @Override
@@ -79,5 +77,15 @@ public class TimetableFragment extends Fragment {
             Debug.log("onResume()", "Triggering loadData for Timetable");
             timetable.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
         }
+    }
+
+    private void refresh() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+                initialized = true;
+            }
+        });
     }
 }
