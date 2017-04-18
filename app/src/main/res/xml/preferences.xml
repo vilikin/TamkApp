@@ -23,7 +23,6 @@
             android:defaultValue="@bool/preference_default_timetable_show_weekends"
             android:title="@string/preference_title_timetable_show_weekends"
             android:summary="@string/preference_summary_timetable_show_weekends"/>
-
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/preference_category_menu">

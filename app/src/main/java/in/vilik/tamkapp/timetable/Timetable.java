@@ -101,16 +101,20 @@ public class Timetable extends DataLoader implements API {
         Date now = new Date();
 
         for (Day day : days) {
-            elements.add(day);
+            if (day.getReservations().size() > 0) {
+                elements.add(day);
 
-            for (Reservation reservation : day.getReservations()) {
-                elements.add(reservation);
+                for (Reservation reservation : day.getReservations()) {
+                    elements.add(reservation);
 
-                if (DateUtil.isOnRange(reservation.getStartDate(),
-                        reservation.getEndDate(), now) &&
-                        reservationForNowBlock == null) {
-                    reservationForNowBlock = reservation;
+                    if (DateUtil.isOnRange(reservation.getStartDate(),
+                            reservation.getEndDate(), now) &&
+                            reservationForNowBlock == null) {
+                        reservationForNowBlock = reservation;
+                    }
                 }
+            } else {
+                elements.add(new EmptyDay(day));
             }
         }
 

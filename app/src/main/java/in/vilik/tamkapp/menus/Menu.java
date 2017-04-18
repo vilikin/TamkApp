@@ -14,6 +14,7 @@ import java.util.Set;
 
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.utils.AppPreferences;
+import in.vilik.tamkapp.utils.DateUtil;
 
 
 /**
@@ -95,17 +96,7 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
 
     @Override
     public String getPrimaryText() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        int month = c.get(Calendar.MONTH);
-
-        Context context = getParentMenuList().getContext();
-        String[] weekdays = context.getResources().getStringArray(R.array.weekdays);
-
-        return weekdays[dayOfWeek - 1] + " " + dayOfMonth + "." + month;
+        return DateUtil.formatDate(parentMenuList.getContext(), date);
     }
 
     @Override

@@ -67,12 +67,12 @@
     </string-array>
 
     <string-array name="weekdays">
-        <item>Sunnuntai</item>
-        <item>Maanantai</item>
-        <item>Tiistai</item>
-        <item>Keskiviikko</item>
-        <item>Torstai</item>
-        <item>Perjantai</item>
-        <item>Lauantai</item>
+        <item>Sunnuntaina</item>
+        <item>Maanantaina</item>
+        <item>Tiistaina</item>
+        <item>Keskiviikkona</item>
+        <item>Torstaina</item>
+        <item>Perjantaina</item>
+        <item>Lauantaina</item>
     </string-array>
 </resources>

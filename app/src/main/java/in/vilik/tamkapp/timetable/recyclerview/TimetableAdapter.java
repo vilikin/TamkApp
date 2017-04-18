@@ -38,6 +38,9 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
             case DAY_HEADER:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_day_header, parent, false);
                 return new DayHeaderVH(view);
+            case DAY_HEADER_EMPTY:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_day_header_empty, parent, false);
+                return new DayHeaderVH(view);
             case RESERVATION:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_reservation, parent, false);
                 return new ReservationVH(view);

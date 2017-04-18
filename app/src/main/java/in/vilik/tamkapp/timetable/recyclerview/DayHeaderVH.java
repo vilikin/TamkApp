@@ -21,6 +21,6 @@ class DayHeaderVH extends TimetableViewHolder {
     public void bind(TimetableElement element) {
         Day day = (Day) element;
         TextView title = (TextView) itemView.findViewById(R.id.dayHeaderTitle);
-        title.setText(day.getDate().toString());
+        title.setText(day.getFormattedDate());
     }
 }

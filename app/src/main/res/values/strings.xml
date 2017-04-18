@@ -6,6 +6,11 @@
     <string name="tab_header_campusravita">Campusravita</string>
     <string name="tab_header_pirteria">Pirteria</string>
 
+    <string name="date_today">Tänään</string>
+    <string name="date_tomorrow">Huomenna</string>
+
+    <string name="timetable_no_reservations">Ei tunteja %1$s</string>
+
     <string name="error_failed_to_parse">Ruokalistaa parsiessa tapahtui virhe, ota yhteys sovelluksen kehittäjään.</string>
     <string name="error_failed_to_load">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
 

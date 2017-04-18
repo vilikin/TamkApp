@@ -4,9 +4,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp">
     <TextView
+        style="@style/list_header_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/colorAccent"
         android:id="@+id/dayHeaderTitle"/>
+    <View
+        android:layout_marginTop="8dp"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorAccent"/>
 </LinearLayout>

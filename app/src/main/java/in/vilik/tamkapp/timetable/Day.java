@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import in.vilik.tamkapp.utils.DateUtil;
+
 /**
  * Created by vili on 16/04/2017.
  */
@@ -18,8 +20,16 @@ public class Day implements TimetableElement {
         this.reservations = new ArrayList<>();
     }
 
+    public Timetable getParent() {
+        return parent;
+    }
+
     public Date getDate() {
         return date;
+    }
+
+    public String getFormattedDate() {
+        return DateUtil.formatDate(parent.getContext(), date);
     }
 
     public void setDate(Date date) {
