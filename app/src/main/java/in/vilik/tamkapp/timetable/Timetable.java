@@ -336,7 +336,7 @@ public class Timetable extends DataLoader implements API {
 
                     Date now = new Date();
 
-                    json.put("startDate", df.format(new Date(now.getTime() - 1000 * 60 * 60 * 12)));
+                    json.put("startDate", df.format(new Date(now.getTime() - 1000 * 60 * 60 * 24)));
 
                     String studentGroup = preferences.getTimetableStudentGroup();
 
