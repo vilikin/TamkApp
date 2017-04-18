@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 
 import static java.util.Calendar.DATE;
@@ -95,6 +94,23 @@ public class DateUtil {
             String[] weekdays = resources.getStringArray(R.array.weekdays);
 
             return weekdays[dayOfWeek - 1] + " " + dayOfMonth + "." + (month + 1);
+        }
+    }
+
+    public static String getDigitalTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        return String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)) +
+                ":" +
+                toTwoDigits(calendar.get(Calendar.MINUTE));
+    }
+
+    public static String toTwoDigits(int number) {
+        if (number <= 9) {
+            return "0" + number;
+        } else {
+            return String.valueOf(number);
         }
     }
 }

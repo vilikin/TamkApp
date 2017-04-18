@@ -20,6 +20,11 @@ class ReservationVH extends TimetableViewHolder {
     public void bind(TimetableElement element) {
         Reservation reservation = (Reservation) element;
         TextView title = (TextView) itemView.findViewById(R.id.reservationTitle);
-        title.setText(reservation.getSubject());
+        TextView date = (TextView) itemView.findViewById(R.id.reservationDate);
+        TextView classRoom = (TextView) itemView.findViewById(R.id.reservationClassRoom);
+
+        title.setText(reservation.getViewHeader());
+        date.setText(reservation.getViewDateString());
+        classRoom.setText(reservation.getClassRoom().getCode());
     }
 }

@@ -4,7 +4,11 @@ package in.vilik.tamkapp.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.Set;
@@ -42,12 +46,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         super.onCreate(savedInstanceState);
 
         preferences = new AppPreferences(getActivity());
-
-        if (preferences.isFirstLaunch()) {
-            preferences.setFirstLaunch(false);
-
-            Toast.makeText(getActivity(), "FIRST TIME", Toast.LENGTH_LONG).show();
-        }
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);

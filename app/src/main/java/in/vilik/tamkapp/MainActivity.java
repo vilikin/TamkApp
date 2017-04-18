@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         // If application hasn't been started before, open settings activity.
         if (preferences.isFirstLaunch()) {
+            preferences.setFirstLaunch(false);
             startActivity(toSettingsIntent);
         }
 

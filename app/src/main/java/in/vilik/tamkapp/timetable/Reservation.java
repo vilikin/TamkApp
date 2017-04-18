@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import in.vilik.tamkapp.utils.DateUtil;
+
 /**
  * Created by vili on 16/04/2017.
  */
@@ -99,20 +101,44 @@ public class Reservation implements TimetableElement {
     }
 
     @Override
-    public String toString() {
-        return "Reservation {" +
-                "subject='" + subject + '\'' +
-                ", description='" + description + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", classRoom=" + classRoom +
-                ", realizations=" + Arrays.toString(realizations.toArray()) +
-                ", studentGroups=" + Arrays.toString(studentGroups.toArray()) +
-                '}';
-    }
-
-    @Override
     public Type getType() {
         return Type.RESERVATION;
+    }
+
+    public String getViewHeader() {
+        if (subjectHasRealizationString()) {
+            StringBuilder sb = new StringBuilder();
+
+            for (Realization realization : realizations) {
+                sb.append("\n").append(realization.getName());
+            }
+
+            return sb.toString().substring(1);
+        } else {
+            return subject;
+        }
+    }
+
+    public String getViewDateString() {
+        String start = DateUtil.getDigitalTime(startDate);
+        String end = DateUtil.getDigitalTime(endDate);
+
+        return start + " - " + end;
+    }
+
+    private boolean subjectHasRealizationString() {
+        if (realizations.size() == 0) {
+            return false;
+        } else {
+            int realizationsFound = 0;
+
+            for (Realization realization : realizations) {
+                if (subject.contains(realization.getName() + " " + realization.getCode())) {
+                    realizationsFound++;
+                }
+            }
+
+            return realizationsFound == realizations.size();
+        }
     }
 }

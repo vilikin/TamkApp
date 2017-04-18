@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="in.vilik.tamkapp.MainActivity">
+    tools:context="in.vilik.tamkapp.SettingsActivity">
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/settings_action"
-        app:showAsAction="never" />
+        android:id="@+id/action_ready"
+        android:title="@string/ready_action"
+        app:showAsAction="ifRoom" />
 </menu>

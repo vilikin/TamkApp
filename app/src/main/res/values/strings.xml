@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">TamkApp</string>
-    <string name="action_settings">Asetukset</string>
+
+    <string name="settings_action">Asetukset</string>
+
+    <string name="settings_activity">Asetukset</string>
+    <string name="ready_action">Valmista</string>
 
     <string name="tab_header_timetable">Lukkari</string>
     <string name="tab_header_campusravita">Campusravita</string>
@@ -46,5 +50,4 @@
 
     <string name="preference_title_timetable_show_weekends">Näytä viikonloput</string>
     <string name="preference_summary_timetable_show_weekends">Näytä lauantait ja sunnuntait lukkarissa</string>
-
 </resources>
