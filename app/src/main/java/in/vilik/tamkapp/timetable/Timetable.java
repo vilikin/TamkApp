@@ -1,6 +1,8 @@
 package in.vilik.tamkapp.timetable;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import in.vilik.tamkapp.Debug;
+import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.DataLoader;
 import in.vilik.tamkapp.utils.DateUtil;
@@ -38,6 +41,8 @@ public class Timetable extends DataLoader implements API {
 
     private Context context;
 
+    private SharedPreferences preferences;
+
     private OnTimetableUpdatedListener listener;
 
     private String studentGroup;
@@ -54,6 +59,7 @@ public class Timetable extends DataLoader implements API {
         setRequestBody(body);
 
         this.context = context;
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         setOnDataLoadedListener(new OnDataLoadedListener() {
             @Override
@@ -91,37 +97,21 @@ public class Timetable extends DataLoader implements API {
     }
 
     private void refreshVisibleElementsList() {
-        int maxDays = 7;
         elements.clear();
         Reservation reservationForNowBlock = null;
 
         Date now = new Date();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        calendar.set(Calendar.HOUR_OF_DAY, 5);
-
-        Date todayMorning = calendar.getTime();
-
-        int dayCounter = 0;
-
         for (Day day : days) {
-            if (day.getDate().after(todayMorning)) {
-                elements.add(day);
-                dayCounter++;
+            elements.add(day);
 
-                for (Reservation reservation : day.getReservations()) {
-                    elements.add(reservation);
+            for (Reservation reservation : day.getReservations()) {
+                elements.add(reservation);
 
-                    if (DateUtil.isOnRange(reservation.getStartDate(),
-                            reservation.getEndDate(), now) &&
-                            reservationForNowBlock == null) {
-                        reservationForNowBlock = reservation;
-                    }
-                }
-
-                if (maxDays != -1 && dayCounter >= maxDays) {
-                    break;
+                if (DateUtil.isOnRange(reservation.getStartDate(),
+                        reservation.getEndDate(), now) &&
+                        reservationForNowBlock == null) {
+                    reservationForNowBlock = reservation;
                 }
             }
         }
@@ -144,12 +134,12 @@ public class Timetable extends DataLoader implements API {
             sb.append("\n");
             switch (element.getType()) {
                 case DAY_HEADER:
-                    Day d = (Day)element;
+                    Day d = (Day) element;
                     sb.append(d.getDate());
                     sb.append("\n");
                     break;
                 case RESERVATION:
-                    Reservation r = (Reservation)element;
+                    Reservation r = (Reservation) element;
                     sb.append(r.toString());
                     sb.append("\n");
                     break;
@@ -168,6 +158,8 @@ public class Timetable extends DataLoader implements API {
             JSONArray reservationsJson = json.getJSONArray("reservations");
 
             List<Reservation> reservations = parseReservations(reservationsJson);
+
+            generateDays();
             addReservationsToDays(reservations);
 
             return true;
@@ -178,27 +170,79 @@ public class Timetable extends DataLoader implements API {
     }
 
     private void addReservationsToDays(List<Reservation> reservations) {
-        days.clear();
-
         for (final Reservation reservation : reservations) {
-            boolean matchingDayFound = false;
-
             for (Day day : days) {
                 if (DateUtil.areOnSameDay(day.getDate(), reservation.getStartDate())) {
                     day.getReservations().add(reservation);
-                    matchingDayFound = true;
+                }
+            }
+        }
+    }
+
+    private void generateDays() {
+        days.clear();
+
+        String preferenceKeyPeriod = context
+                .getResources()
+                .getString(R.string.preference_key_timetable_period);
+
+        String preferenceKeyWeekends = context
+                .getResources()
+                .getString(R.string.preference_key_timetable_show_weekends);
+
+        String defaultPreference = context
+                .getResources()
+                .getString(R.string.timetable_period_default);
+
+        String period = preferences
+                .getString(preferenceKeyPeriod, defaultPreference);
+
+        boolean showWeekends = preferences
+                .getBoolean(preferenceKeyWeekends, true);
+
+        Debug.log("generateDays()", "Generating days: " + period +
+                " | Show weekends: " + showWeekends);
+
+        List<Date> dates;
+
+        switch (period) {
+            case "this_week":
+                dates = DateUtil.getThisWeek();
+                break;
+            case "one_month":
+                dates = DateUtil.getDays(30);
+                break;
+            case "half_year":
+                dates = DateUtil.getDays(182);
+                break;
+            default:
+                dates = DateUtil.getDays(0);
+        }
+
+        Debug.log("generateDays()", "Got " + dates.size() + " dates in total");
+
+        Calendar calendar = Calendar.getInstance();
+
+        for (Date date : dates) {
+            boolean insertDay = true;
+
+            if (!showWeekends) {
+                calendar.setTime(date);
+                int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+
+                if (weekDay == Calendar.SATURDAY || weekDay == Calendar.SUNDAY) {
+                    insertDay = false;
                 }
             }
 
-            if (!matchingDayFound) {
+            if (insertDay) {
                 Day day = new Day(this);
-
-                day.setDate(reservation.getStartDate());
-                day.getReservations().add(reservation);
-
+                day.setDate(date);
                 days.add(day);
             }
         }
+
+        Debug.log("generateDays()", "There are now " + days.size() + " days in timetable");
     }
 
     private List<Reservation> parseReservations(JSONArray reservationsJson) throws JSONException, ParseException {

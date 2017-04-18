@@ -3,7 +3,7 @@
     <string-array name="timetable_periods">
         <item>this_week</item>
         <item>one_month</item>
-        <item>all</item>
+        <item>half_year</item>
     </string-array>
 
     <string-array name="timetable_periods_readable">

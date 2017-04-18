@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.recyclerview.MenuListAdapter;
@@ -55,7 +56,9 @@ public class TimetableFragment extends Fragment {
             @Override
             public void onSuccess() {
                 System.out.println("TIMETABLE LOADED");
+
                 adapter.notifyDataSetChanged();
+                initialized = true;
             }
 
             @Override
@@ -66,5 +69,15 @@ public class TimetableFragment extends Fragment {
 
         timetable.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (initialized) {
+            Debug.log("onResume()", "Triggering loadData for Timetable");
+            timetable.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
+        }
     }
 }
