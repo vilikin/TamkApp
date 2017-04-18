@@ -1,9 +1,7 @@
 package in.vilik.tamkapp.menus;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
 
 import com.bignerdranch.expandablerecyclerview.model.Parent;
 
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.fragments.SettingsFragment;
+import in.vilik.tamkapp.utils.AppPreferences;
 
 
 /**
@@ -31,19 +29,17 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
 
     public Menu(MenuList parentMenuList) {
         this.parentMenuList = parentMenuList;
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(parentMenuList.getContext());
+
+        AppPreferences preferences = new AppPreferences(parentMenuList.getContext());
 
         Resources resources = parentMenuList.getContext().getResources();
 
         switch (getParentMenuList().getApiType()) {
             case CAMPUSRAVITA_MENU:
-                includedMeals = prefs.getStringSet(resources
-                        .getString(R.string.preference_key_campusravita_meals), null);
+                includedMeals = preferences.getCampusravitaMeals();
                 break;
             case PIRTERIA_MENU:
-                includedMeals = prefs.getStringSet(resources
-                        .getString(R.string.preference_key_pirteria_meals), null);
+                includedMeals = preferences.getPirteriaMeals();
                 break;
         }
 

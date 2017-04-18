@@ -20,6 +20,7 @@ import java.util.List;
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.utils.API;
+import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
 import in.vilik.tamkapp.utils.DateUtil;
 import in.vilik.tamkapp.utils.OnDataLoadedListener;
@@ -41,23 +42,15 @@ public class Timetable extends DataLoader implements API {
 
     private Context context;
 
-    private SharedPreferences preferences;
+    private AppPreferences preferences;
 
     private OnTimetableUpdatedListener listener;
-
-    private String studentGroupPreferenceKey;
-    private String studentGroupDefault;
 
     public Timetable(Context context) {
         super(context);
 
         this.context = context;
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        studentGroupPreferenceKey = context.getResources()
-                .getString(R.string.preference_key_student_group);
-        studentGroupDefault = context.getResources()
-                .getString(R.string.group_default);
+        preferences = new AppPreferences(context);
 
         this.days = new ArrayList<>();
         this.elements = new ArrayList<>();
@@ -187,23 +180,9 @@ public class Timetable extends DataLoader implements API {
     private void generateDays() {
         days.clear();
 
-        String preferenceKeyPeriod = context
-                .getResources()
-                .getString(R.string.preference_key_timetable_period);
+        String period = preferences.getTimetablePeriod();
 
-        String preferenceKeyWeekends = context
-                .getResources()
-                .getString(R.string.preference_key_timetable_show_weekends);
-
-        String defaultPreference = context
-                .getResources()
-                .getString(R.string.timetable_period_default);
-
-        String period = preferences
-                .getString(preferenceKeyPeriod, defaultPreference);
-
-        boolean showWeekends = preferences
-                .getBoolean(preferenceKeyWeekends, true);
+        boolean showWeekends = preferences.areWeekendsShown();
 
         Debug.log("generateDays()", "Generating days: " + period +
                 " | Show weekends: " + showWeekends);
@@ -335,10 +314,7 @@ public class Timetable extends DataLoader implements API {
 
     @Override
     public String getCacheKey() {
-        String studentGroup = preferences
-                .getString(studentGroupPreferenceKey, studentGroupDefault);
-
-        return "timetable_" + studentGroup;
+        return "timetable_" + preferences.getTimetableStudentGroup();
     }
 
     private RequestBody generateRequestBody() {
@@ -358,8 +334,7 @@ public class Timetable extends DataLoader implements API {
 
                     json.put("startDate", df.format(new Date(now.getTime() - 1000 * 60 * 60 * 12)));
 
-                    String studentGroup = preferences
-                            .getString(studentGroupPreferenceKey, studentGroupDefault);
+                    String studentGroup = preferences.getTimetableStudentGroup();
 
                     JSONArray studentGroups = new JSONArray();
                     studentGroups.put(studentGroup);

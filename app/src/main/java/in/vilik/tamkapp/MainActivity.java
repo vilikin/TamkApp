@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import in.vilik.tamkapp.menus.Campusravita;
 import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.Pirteria;
+import in.vilik.tamkapp.utils.AppPreferences;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -60,12 +61,10 @@ public class MainActivity extends AppCompatActivity {
         // Set default preferences on first launch.
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        AppPreferences preferences = new AppPreferences(this);
 
         // If application hasn't been started before, open settings activity.
-        if (prefs.getBoolean("v1_first_launch", true)) {
-            prefs.edit().putBoolean("v1_first_launch", false).apply();
-
+        if (preferences.isFirstLaunch()) {
             startActivity(toSettingsIntent);
         }
 

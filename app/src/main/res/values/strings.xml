@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TamkApp</string>
     <string name="action_settings">Asetukset</string>
+
     <string name="tab_header_timetable">Lukkari</string>
     <string name="tab_header_campusravita">Campusravita</string>
     <string name="tab_header_pirteria">Pirteria</string>
@@ -10,29 +11,35 @@
 
     <string name="menulist_not_available">Ruokalistoja ei ole saatavilla!\nKokeile myöhemmin uudelleen.</string>
 
-    <string name="settings_menus">Ruokalistat</string>
-    <string name="campusravita_included_meals">Ateriatyypit: Campusravita</string>
-    <string name="pirteria_included_meals">Ateriatyypit: Pirteria</string>
-    <string name="no_meal_types_selected_summary">Ei näytetä mitään aterioita</string>
-    <string name="meal_types_selected_summary">Näytetään: %1$s</string>
-
-    <string name="settings_timetable">Lukkari</string>
-    <string name="group">Ryhmätunnus</string>
-    <string name="group_summary">Valittuna %1$s</string>
-    <string name="group_summary_default">Aseta ryhmätunnus nähdäksesi lukujärjestyksen</string>
-    <string name="group_dialog_title">Ryhmätunnuksesi</string>
-    <string name="group_dialog_hint">Esim. 15TIKOOT</string>
-    <string name="group_default" />
-
+    <string name="preference_key_first_launch">first_launch</string>
     <string name="preference_key_campusravita_meals">campusravita_meals</string>
     <string name="preference_key_pirteria_meals">pirteria_meals</string>
-    <string name="preference_key_student_group">student_group</string>
+    <string name="preference_key_timetable_student_group">student_group</string>
     <string name="preference_key_timetable_period">timetable_period</string>
     <string name="preference_key_timetable_show_weekends">timetable_show_weekends</string>
-    <string name="timetable_period_default">this_week</string>
 
-    <string name="timetable_period_title">Aikaväli</string>
-    <string name="timetable_show_weekends_title">Näytä viikonloput</string>
-    <string name="timetable_show_weekends_summary">Näytä lauantait ja sunnuntait lukkarissa</string>
+    <string name="preference_default_timetable_period">this_week</string>
+    <string name="preference_default_timetable_student_group"/>
+    <bool name="preference_default_timetable_show_weekends">true</bool>
+
+    <string name="preference_category_menu">Ruokalistat</string>
+
+    <string name="preference_title_campusravita_meals">Ateriatyypit: Campusravita</string>
+    <string name="preference_title_pirteria_meals">Ateriatyypit: Pirteria</string>
+    <string name="preference_summary_empty_meals">Ei näytetä mitään aterioita</string>
+    <string name="preference_summary_selected_meals">Näytetään: %1$s</string>
+
+    <string name="preference_category_timetable">Lukkari</string>
+
+    <string name="preference_title_timetable_student_group">Ryhmätunnus</string>
+    <string name="preference_summary_timetable_student_group">Valittuna %1$s</string>
+    <string name="preference_summary_default_timetable_student_group">Aseta ryhmätunnus nähdäksesi lukujärjestyksen</string>
+    <string name="preference_dialog_title_timetable_student_group">Ryhmätunnuksesi</string>
+    <string name="preference_dialog_hint_timetable_student_group">Esim. 15TIKOOT</string>
+
+    <string name="preference_title_timetable_period">Aikaväli</string>
+
+    <string name="preference_title_timetable_show_weekends">Näytä viikonloput</string>
+    <string name="preference_summary_timetable_show_weekends">Näytä lauantait ja sunnuntait lukkarissa</string>
 
 </resources>
