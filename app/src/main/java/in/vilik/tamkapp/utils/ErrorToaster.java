@@ -1,8 +1,6 @@
 package in.vilik.tamkapp.utils;
 
 import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
 import android.widget.Toast;
 
 import in.vilik.tamkapp.Debug;
@@ -14,8 +12,8 @@ import in.vilik.tamkapp.R;
 
 public class ErrorToaster {
     static final int TOAST_LENGTH = Toast.LENGTH_LONG;
-    public static final int ERROR_FAILED_TO_PARSE = R.string.error_failed_to_parse;
-    public static final int ERROR_FAILED_TO_LOAD = R.string.error_failed_to_load;
+    public static final int ERROR_FAILED_TO_LOAD_MENU = R.string.error_failed_to_load_menu;
+    public static final int ERROR_FAILED_TO_LOAD_TIMETABLE = R.string.error_failed_to_load_timetable;
 
     public static void show(final Activity activity, int errorTextId) {
         final String errorText = activity.getResources().getString(errorTextId);

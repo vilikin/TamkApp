@@ -7,16 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.menus.MenuList;
-import in.vilik.tamkapp.menus.recyclerview.MenuListAdapter;
 import in.vilik.tamkapp.timetable.OnTimetableUpdatedListener;
 import in.vilik.tamkapp.timetable.Timetable;
 import in.vilik.tamkapp.timetable.recyclerview.TimetableAdapter;
 import in.vilik.tamkapp.utils.DataLoader;
+import in.vilik.tamkapp.utils.ErrorToaster;
 
 /**
  * Created by vili on 10/04/2017.
@@ -55,13 +53,13 @@ public class TimetableFragment extends Fragment {
         timetable.setOnTimetableUpdatedListener(new OnTimetableUpdatedListener() {
             @Override
             public void onSuccess() {
-                System.out.println("TIMETABLE LOADED");
+                Debug.log("onSuccess()", "Timetable ready, refreshing UI");
                 refresh();
             }
 
             @Override
             public void onError() {
-                System.out.println("ERROR");
+                ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD_TIMETABLE);
             }
         });
 

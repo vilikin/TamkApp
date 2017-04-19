@@ -112,7 +112,7 @@ public class MenuFragment extends Fragment {
             public void onError() {
                 initialized = true;
 
-                ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD);
+                ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD_MENU);
             }
         });
 

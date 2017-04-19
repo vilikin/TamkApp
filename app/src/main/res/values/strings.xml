@@ -20,10 +20,10 @@
     <string name="timetable_reservation_atm">Juuri nyt</string>
     <string name="timetable_no_reservations">Ei tunteja %1$s</string>
 
-    <string name="error_failed_to_parse">Ruokalistaa parsiessa tapahtui virhe, ota yhteys sovelluksen kehittäjään.</string>
-    <string name="error_failed_to_load">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
+    <string name="error_failed_to_load_menu">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
+    <string name="error_failed_to_load_timetable">Lukkaria ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
 
-    <string name="menulist_not_available">Ruokalistoja ei ole saatavilla!\nKokeile myöhemmin uudelleen.</string>
+    <string name="menulist_not_available">Ruokalistoja ei löytynyt!\nKokeile myöhemmin uudelleen.</string>
 
     <string name="preference_key_first_launch">first_launch</string>
     <string name="preference_key_campusravita_meals">campusravita_meals</string>
