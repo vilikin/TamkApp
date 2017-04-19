@@ -68,12 +68,13 @@ public class Timetable extends DataLoader implements API {
             @Override
             public void onSuccess(String data) {
                 boolean successfullyParsed = parseTimetable(data);
-                refreshVisibleElementsList();
+                refreshVisibleElementsList(false);
                 triggerOnTimetableUpdatedListener(successfullyParsed);
             }
 
             @Override
             public void onFailure() {
+                refreshVisibleElementsList(true);
                 triggerOnTimetableUpdatedListener(false);
             }
         });
@@ -99,10 +100,25 @@ public class Timetable extends DataLoader implements API {
         return context;
     }
 
-    private void refreshVisibleElementsList() {
+    private void refreshVisibleElementsList(boolean loadError) {
         elements.clear();
 
-        if (preferences.getTimetableStudentGroup().isEmpty()) {
+        if (loadError) {
+            AnnouncementBlock ab = new AnnouncementBlock();
+            Resources resources = context.getResources();
+
+            ab.setTitle(resources.getString(R.string.timetable_block_load_error_title));
+            ab.setBody(resources.getString(R.string.timetable_block_load_error_body));
+
+            ab.setListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loadData(LoadingStrategy.SERVER_FIRST);
+                }
+            });
+
+            elements.add(ab);
+        } else if (preferences.getTimetableStudentGroup().isEmpty()) {
             AnnouncementBlock ab = new AnnouncementBlock();
             Resources resources = context.getResources();
 
@@ -117,7 +133,7 @@ public class Timetable extends DataLoader implements API {
                 }
             });
 
-            elements.add(0, ab);
+            elements.add(ab);
         } else {
             Reservation reservationForNowBlock = null;
 

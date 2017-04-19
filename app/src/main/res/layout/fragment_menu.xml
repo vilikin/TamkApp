@@ -6,20 +6,20 @@
     tools:context="in.vilik.tamkapp.fragments.MenuFragment"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="visible"
-        android:id="@+id/empty_menulist_overlay">
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/empty_menulist_overlay"
+        style="@style/announcement_block">
         <TextView
-            android:textAlignment="center"
-            style="@style/normal_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/menulist_not_available"/>
+            style="@style/announcement_block_header"
+            android:text="@string/menulist_error_block_header"/>
+        <TextView
+            style="@style/announcement_block_title"
+            android:text="@string/menulist_error_block_title"
+            android:id="@+id/announcementBlockTitle"/>
+        <TextView
+            style="@style/announcement_block_body"
+            android:text="@string/menulist_error_block_body"
+            android:id="@+id/announcementBlockBody"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

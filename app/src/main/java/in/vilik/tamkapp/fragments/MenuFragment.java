@@ -68,6 +68,13 @@ public class MenuFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
         noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
 
+        noMenuListsOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuList.loadData(DataLoader.LoadingStrategy.SERVER_FIRST);
+            }
+        });
+
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
         adapter = new MenuListAdapter(getContext(), menuList.getMenus());

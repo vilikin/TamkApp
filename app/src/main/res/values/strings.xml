@@ -23,8 +23,6 @@
     <string name="error_failed_to_load_menu">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
     <string name="error_failed_to_load_timetable">Lukkaria ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
 
-    <string name="menulist_not_available">Ruokalistoja ei löytynyt!\nKokeile myöhemmin uudelleen.</string>
-
     <string name="preference_key_first_launch">first_launch</string>
     <string name="preference_key_campusravita_meals">campusravita_meals</string>
     <string name="preference_key_pirteria_meals">pirteria_meals</string>
@@ -55,4 +53,10 @@
 
     <string name="preference_title_timetable_show_weekends">Näytä viikonloput</string>
     <string name="preference_summary_timetable_show_weekends">Näytä lauantait ja sunnuntait lukkarissa</string>
+
+    <string name="timetable_block_load_error_title">Pieleen meni</string>
+    <string name="timetable_block_load_error_body">Lukkaria ladattaessa tapahtui jokin virhe. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
+    <string name="menulist_error_block_header">Virhe</string>
+    <string name="menulist_error_block_title">Pieleen meni</string>
+    <string name="menulist_error_block_body">Ruokalistoja ladattaessa tapahtui jokin virhe tai yhtäkään ateriatyyppiä ei ole valittuna. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
 </resources>

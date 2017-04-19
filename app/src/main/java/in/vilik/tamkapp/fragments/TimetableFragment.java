@@ -60,6 +60,7 @@ public class TimetableFragment extends Fragment {
             @Override
             public void onError() {
                 ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD_TIMETABLE);
+                refresh();
             }
         });
 
