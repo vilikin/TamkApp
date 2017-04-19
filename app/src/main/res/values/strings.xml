@@ -32,7 +32,7 @@
     <string name="preference_key_timetable_period">timetable_period</string>
     <string name="preference_key_timetable_show_weekends">timetable_show_weekends</string>
 
-    <string name="preference_default_timetable_period">this_week</string>
+    <string name="preference_default_timetable_period">one_month</string>
     <string name="preference_default_timetable_student_group"/>
     <bool name="preference_default_timetable_show_weekends">true</bool>
 
