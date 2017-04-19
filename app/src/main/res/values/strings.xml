@@ -13,6 +13,11 @@
     <string name="date_today">Tänään</string>
     <string name="date_tomorrow">Huomenna</string>
 
+    <string name="timetable_announcement_block_header">Ilmoitus</string>
+    <string name="timetable_block_no_group_title">Tervetuloa TamkAppiin!</string>
+    <string name="timetable_block_no_group_body">Nähdäksesi lukkarisi, voit käydä syöttämässä ryhmätunnuksesi sovelluksen asetuksissa. Asetuksiin pääset oikean yläkulman valikosta tai klikkaamalla tätä ilmoitusta.</string>
+
+    <string name="timetable_reservation_atm">Juuri nyt</string>
     <string name="timetable_no_reservations">Ei tunteja %1$s</string>
 
     <string name="error_failed_to_parse">Ruokalistaa parsiessa tapahtui virhe, ota yhteys sovelluksen kehittäjään.</string>

@@ -13,7 +13,7 @@ import in.vilik.tamkapp.R;
  */
 
 public class ErrorToaster {
-    static final int TOAST_LENGTH = Toast.LENGTH_SHORT;
+    static final int TOAST_LENGTH = Toast.LENGTH_LONG;
     public static final int ERROR_FAILED_TO_PARSE = R.string.error_failed_to_parse;
     public static final int ERROR_FAILED_TO_LOAD = R.string.error_failed_to_load;
 

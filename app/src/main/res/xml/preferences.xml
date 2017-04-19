@@ -32,7 +32,7 @@
             android:dialogTitle="@string/preference_title_campusravita_meals"
             android:entries="@array/campusravita_meals_readable"
             android:entryValues="@array/campusravita_meals"
-            android:defaultValue="@array/campusravita_meals"/>
+            android:defaultValue="@array/campusravita_meals" />
         <MultiSelectListPreference
             android:key="@string/preference_key_pirteria_meals"
             android:title="@string/preference_title_pirteria_meals"

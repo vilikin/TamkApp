@@ -1,8 +1,11 @@
 package in.vilik.tamkapp.timetable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 import in.vilik.tamkapp.Debug;
+import in.vilik.tamkapp.MainActivity;
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.SettingsActivity;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
@@ -96,30 +101,50 @@ public class Timetable extends DataLoader implements API {
 
     private void refreshVisibleElementsList() {
         elements.clear();
-        Reservation reservationForNowBlock = null;
 
-        Date now = new Date();
+        if (preferences.getTimetableStudentGroup().isEmpty()) {
+            AnnouncementBlock ab = new AnnouncementBlock();
+            Resources resources = context.getResources();
 
-        for (Day day : days) {
-            if (day.getReservations().size() > 0) {
-                elements.add(day);
+            ab.setTitle(resources.getString(R.string.timetable_block_no_group_title));
+            ab.setBody(resources.getString(R.string.timetable_block_no_group_body));
 
-                for (Reservation reservation : day.getReservations()) {
-                    elements.add(reservation);
-
-                    if (DateUtil.isOnRange(reservation.getStartDate(),
-                            reservation.getEndDate(), now) &&
-                            reservationForNowBlock == null) {
-                        reservationForNowBlock = reservation;
-                    }
+            ab.setListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, SettingsActivity.class);
+                    context.getApplicationContext().startActivity(intent);
                 }
-            } else {
-                elements.add(new EmptyDay(day));
-            }
-        }
+            });
 
-        if (reservationForNowBlock != null) {
-            elements.add(0, new NowBlock(reservationForNowBlock));
+            elements.add(0, ab);
+        } else {
+            Reservation reservationForNowBlock = null;
+
+            Date now = new Date();
+
+            for (Day day : days) {
+                if (day.getReservations().size() > 0) {
+                    elements.add(day);
+
+                    for (Reservation reservation : day.getReservations()) {
+                        elements.add(reservation);
+
+                        if (DateUtil.isOnRange(reservation.getStartDate(),
+                                reservation.getEndDate(), now) &&
+                                reservationForNowBlock == null) {
+                            reservationForNowBlock = reservation;
+                        }
+                    }
+                } else {
+                    elements.add(new EmptyDay(day));
+                }
+            }
+
+            if (reservationForNowBlock != null) {
+                elements.add(0, new NowBlock(reservationForNowBlock));
+            }
+
         }
     }
 
@@ -176,6 +201,22 @@ public class Timetable extends DataLoader implements API {
             for (Day day : days) {
                 if (DateUtil.areOnSameDay(day.getDate(), reservation.getStartDate())) {
                     day.getReservations().add(reservation);
+                }
+            }
+        }
+
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+
+        if (!days.isEmpty() && calendar.get(Calendar.HOUR_OF_DAY) >= 18) {
+            List<Reservation> firstDayReservations = days.get(0).getReservations();
+
+            if (!firstDayReservations.isEmpty()) {
+                Reservation last = firstDayReservations
+                        .get(firstDayReservations.size() - 1);
+
+                if (now.after(last.getEndDate())) {
+                    days.remove(0);
                 }
             }
         }

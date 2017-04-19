@@ -32,6 +32,9 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
         TimetableElement.Type type = TimetableElement.Type.values()[viewType];
 
         switch (type) {
+            case ANNOUNCEMENT_BLOCK:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_announcement_block, parent, false);
+                return new AnnouncementBlockVH(view);
             case NOW_BLOCK:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_now_block, parent, false);
                 return new NowBlockVH(view);

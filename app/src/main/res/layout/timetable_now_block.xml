@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorAccent"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    android:padding="16dp"
+    android:elevation="5dp">
     <TextView
-        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/nowBlockWhen"
+        android:text="@string/timetable_reservation_atm"/>
+    <TextView
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textColor="#fff"
+        android:textColor="@color/colorWhite"
         android:id="@+id/nowBlockTitle"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical">
+        <ImageView
+            style="@style/reservation_icon"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_date_black_24dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/reservation_date_text"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/nowBlockDate"/>
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+        <ImageView
+            style="@style/reservation_icon"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_home_black_24dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/reservation_date_text"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/nowBlockClassRoom"/>
+    </LinearLayout>
 </LinearLayout>
