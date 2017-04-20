@@ -1,7 +1,6 @@
 package in.vilik.tamkapp.fragments;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,7 +73,11 @@ public class MenuFragment extends Fragment {
         Debug.log("onCreateView()", "Creating view for menu type " + menuType.name());
 
         if (menuType == API.Type.CAMPUSRAVITA_MENU) {
-            menuList = new Campusravita(getActivity());
+            if (locale.getLanguage().equals("fi")) {
+                menuList = new Campusravita(getActivity(), "fi");
+            } else {
+                menuList = new Campusravita(getActivity(), "en");
+            }
         } else if (menuType == API.Type.PIRTERIA_MENU) {
             menuList = new Pirteria(getActivity());
 

@@ -33,7 +33,7 @@
 
     <string name="timetable_announcement_block_header">Announcement</string>
     <string name="timetable_block_no_group_title">Welcome to TamkApp!</string>
-    <string name="timetable_block_no_group_body">To see your timetable, you should enter your group id in settings. You can get to the settings from the menu or by clicking this announcement.</string>
+    <string name="timetable_block_no_group_body">To get started, enter your student group in the settings. You can get to the settings from the menu or by tapping this message.</string>
 
     <string name="timetable_more_groups">%1$s and %2$d other groups</string>
     <string name="timetable_no_classroom">No classroom</string>
@@ -74,5 +74,5 @@
 
     <string name="menulist_no_localization_header">Error</string>
     <string name="menulist_no_localization_title">No localization</string>
-    <string name="menulist_no_localization_body">This menu is not available in English.\nTo see the menu anyway, tap this message.</string>
+    <string name="menulist_no_localization_body">This menu is not available in English.\nTo see the menu in Finnish, tap this message.</string>
 </resources>

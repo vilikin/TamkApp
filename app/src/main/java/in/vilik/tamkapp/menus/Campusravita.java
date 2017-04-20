@@ -28,11 +28,12 @@ import okhttp3.Request;
 public class Campusravita extends MenuList {
     private AppPreferences preferences;
 
-    public Campusravita(Context context) {
+    public Campusravita(Context context, final String language) {
         super(context, new API() {
             @Override
             public Request getRequest() {
-                return new Request.Builder().get().url("http://vilik.in:3000/menu").build();
+                return new Request.Builder().get()
+                        .url("http://vilik.in:3000/menu?lang=" + language).build();
             }
 
             @Override
@@ -42,7 +43,7 @@ public class Campusravita extends MenuList {
 
             @Override
             public String getCacheKey() {
-                return "campusravita";
+                return "campusravita_" + language;
             }
         });
 
