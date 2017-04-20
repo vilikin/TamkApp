@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DateUtil;
 
 /**
@@ -26,9 +27,13 @@ public class Reservation implements TimetableElement {
     private List<Realization> realizations;
     private List<String> studentGroups;
 
+    //private Context context;
+
     public Reservation() {
         this.realizations = new ArrayList<>();
         this.studentGroups = new ArrayList<>();
+
+        //context = getParent().getParent().getContext();
     }
 
     public int getId() {
@@ -129,6 +134,16 @@ public class Reservation implements TimetableElement {
 
         for (Realization realization : realizations) {
             sb.append(", ").append(realization.getCode());
+        }
+
+        return sb.toString().substring(2);
+    }
+
+    public String getStudentGroupsString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (String studentGroup : studentGroups) {
+            sb.append(", ").append(studentGroup);
         }
 
         return sb.toString().substring(2);

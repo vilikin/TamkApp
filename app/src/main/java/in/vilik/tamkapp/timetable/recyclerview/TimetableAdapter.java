@@ -23,6 +23,7 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
+
         return timetable.getElements().get(position).getType().ordinal();
     }
 

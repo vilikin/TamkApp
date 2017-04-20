@@ -47,4 +47,21 @@
             style="@style/reservation_date_text"
             android:id="@+id/reservationClassRoom"/>
     </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:id="@+id/reservationStudentGroupsLayout">
+        <ImageView
+            style="@style/reservation_icon"
+            app:srcCompat="@drawable/ic_group_black_24dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/reservation_date_text"
+            android:id="@+id/reservationStudentGroupsText"/>
+    </LinearLayout>
 </LinearLayout>

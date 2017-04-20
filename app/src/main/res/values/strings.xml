@@ -17,6 +17,7 @@
     <string name="timetable_block_no_group_title">Tervetuloa TamkAppiin!</string>
     <string name="timetable_block_no_group_body">Nähdäksesi lukkarisi, voit käydä syöttämässä ryhmätunnuksesi sovelluksen asetuksissa. Asetuksiin pääset oikean yläkulman valikosta tai klikkaamalla tätä ilmoitusta.</string>
 
+    <string name="timetable_more_groups">%1$s ja %2$d muuta ryhmää</string>
     <string name="timetable_no_classroom">Ei luokkatilaa</string>
     <string name="timetable_reservation_atm">Juuri nyt</string>
     <string name="timetable_no_reservations">Ei tunteja %1$s</string>
