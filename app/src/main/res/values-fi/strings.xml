@@ -46,9 +46,9 @@
     <string name="preference_summary_timetable_show_weekends">Näytä lauantait ja sunnuntait lukkarissa</string>
 
     <string name="timetable_block_load_error_title">Pieleen meni</string>
-    <string name="timetable_block_load_error_body">Lukkaria ladattaessa tapahtui jokin virhe. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
+    <string name="timetable_block_load_error_body">Lukkaria ladattaessa tapahtui jokin virhe. Tarkista Internet yhteytesi ja kokeile uudelleen.</string>
 
-    <string name="menulist_error_block_header">Virhe</string>
-    <string name="menulist_error_block_title">Pieleen meni</string>
-    <string name="menulist_error_block_body">Ruokalistoja ladattaessa tapahtui jokin virhe tai yhtäkään ateriatyyppiä ei ole valittuna. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
+    <string name="menulist_error_block_header">Hups</string>
+    <string name="menulist_error_block_title">Ei mitään nähtävää</string>
+    <string name="menulist_error_block_body">Ruokaa ei näytä olevan tarjolla? Kokeile myöhemmin uudelleen!</string>
 </resources>

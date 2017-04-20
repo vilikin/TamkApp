@@ -3,6 +3,7 @@ package in.vilik.tamkapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class MenuFragment extends Fragment {
     LinearLayout noMenuListsOverlay;
     LinearLayout noLocalizationOverlay;
     AppPreferences preferences;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -63,6 +65,9 @@ public class MenuFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_menu, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView;
+
         noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
         noLocalizationOverlay = (LinearLayout) rootView.findViewById(R.id.no_localization_menulist_overlay);
 
@@ -94,13 +99,6 @@ public class MenuFragment extends Fragment {
                 });
             }
         }
-
-        noMenuListsOverlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                menuList.loadData(DataLoader.LoadingStrategy.SERVER_FIRST);
-            }
-        });
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
@@ -138,19 +136,25 @@ public class MenuFragment extends Fragment {
         menuList.setOnMenuUpdatedListener(new OnMenuUpdatedListener() {
             @Override
             public void onSuccess() {
-                initialized = true;
                 refreshMenuContent();
             }
 
             @Override
             public void onError() {
-                initialized = true;
+                refreshMenuContent();
 
                 ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD_MENU);
             }
         });
 
         menuList.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                menuList.loadData(DataLoader.LoadingStrategy.SERVER_FIRST);
+            }
+        });
 
         return rootView;
     }
@@ -166,7 +170,10 @@ public class MenuFragment extends Fragment {
     }
 
     private void refreshMenuContent() {
+        initialized = true;
+
         Debug.log("refreshMenuContent()", "Refreshing menu content of " + menuList.getClass());
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -177,6 +184,8 @@ public class MenuFragment extends Fragment {
                 }
 
                 adapter.notifyParentDataSetChanged(false);
+
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

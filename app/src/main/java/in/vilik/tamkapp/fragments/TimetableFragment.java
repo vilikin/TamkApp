@@ -2,6 +2,7 @@ package in.vilik.tamkapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class TimetableFragment extends Fragment {
     boolean initialized;
     RecyclerView recyclerView;
     TimetableAdapter adapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -43,6 +45,9 @@ public class TimetableFragment extends Fragment {
         initialized = false;
 
         View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView;
+
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerViewTimetable);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
@@ -69,6 +74,13 @@ public class TimetableFragment extends Fragment {
         });
 
         timetable.loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                timetable.loadData(DataLoader.LoadingStrategy.SERVER_FIRST);
+            }
+        });
         return rootView;
     }
 
@@ -83,11 +95,14 @@ public class TimetableFragment extends Fragment {
     }
 
     private void refresh() {
+        initialized = true;
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 adapter.notifyDataSetChanged();
-                initialized = true;
+
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
