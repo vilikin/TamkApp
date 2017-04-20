@@ -17,6 +17,7 @@
     <string name="timetable_block_no_group_title">Tervetuloa TamkAppiin!</string>
     <string name="timetable_block_no_group_body">Nähdäksesi lukkarisi, voit käydä syöttämässä ryhmätunnuksesi sovelluksen asetuksissa. Asetuksiin pääset oikean yläkulman valikosta tai klikkaamalla tätä ilmoitusta.</string>
 
+    <string name="timetable_no_classroom">Ei luokkatilaa</string>
     <string name="timetable_reservation_atm">Juuri nyt</string>
     <string name="timetable_no_reservations">Ei tunteja %1$s</string>
 
@@ -44,7 +45,7 @@
     <string name="preference_summary_empty_meals">Ei näytetä mitään aterioita</string>
     <string name="preference_summary_selected_meals">Näytetään: %1$s</string>
 
-    <string name="preference_title_menu_show_diets">Näytä erityisruokavaliot</string>
+    <string name="preference_title_menu_show_diets">Näytä erityisruokavaliomerkinnät</string>
     <string name="preference_title_menu_prices">Hinnat</string>
 
     <string name="preference_category_timetable">Lukkari</string>
@@ -62,6 +63,7 @@
 
     <string name="timetable_block_load_error_title">Pieleen meni</string>
     <string name="timetable_block_load_error_body">Lukkaria ladattaessa tapahtui jokin virhe. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
+
     <string name="menulist_error_block_header">Virhe</string>
     <string name="menulist_error_block_title">Pieleen meni</string>
     <string name="menulist_error_block_body">Ruokalistoja ladattaessa tapahtui jokin virhe tai yhtäkään ateriatyyppiä ei ole valittuna. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>

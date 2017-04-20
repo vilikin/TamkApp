@@ -113,13 +113,25 @@ public class Reservation implements TimetableElement {
             StringBuilder sb = new StringBuilder();
 
             for (Realization realization : realizations) {
-                sb.append("\n").append(realization.getName());
+                if (!sb.toString().contains(realization.getName())) {
+                    sb.append("\n").append(realization.getName());
+                }
             }
 
             return sb.toString().substring(1);
         } else {
             return subject;
         }
+    }
+
+    public String getRealizationsString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Realization realization : realizations) {
+            sb.append(", ").append(realization.getCode());
+        }
+
+        return sb.toString().substring(2);
     }
 
     public String getViewDateString() {

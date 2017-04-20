@@ -50,6 +50,11 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
+    <style name="reservatio_header_subtext">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+    </style>
+
     <style name="reservation_date_text">
         <item name="android:textSize">16sp</item>
         <!--item name="android:textStyle">bold</item-->

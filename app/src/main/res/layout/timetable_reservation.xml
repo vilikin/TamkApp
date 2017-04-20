@@ -10,9 +10,14 @@
         style="@style/reservatio_header_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reservationTitle"
-        android:layout_marginBottom="8dp"/>
+        android:id="@+id/reservationTitle"/>
+    <TextView
+        style="@style/reservatio_header_subtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reservationRealizationCodes" />
     <LinearLayout
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
