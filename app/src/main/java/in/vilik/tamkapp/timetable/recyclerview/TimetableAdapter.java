@@ -61,4 +61,6 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
     public int getItemCount() {
         return timetable.getElements().size();
     }
+
+
 }
