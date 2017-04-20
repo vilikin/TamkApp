@@ -47,6 +47,7 @@ public class TimetableFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView;
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimaryDark);
 
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerViewTimetable);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
