@@ -122,13 +122,6 @@ public class Timetable extends DataLoader implements API {
             ab.setTitle(resources.getString(R.string.timetable_block_load_error_title));
             ab.setBody(resources.getString(R.string.timetable_block_load_error_body));
 
-            ab.setListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    loadData(LoadingStrategy.SERVER_FIRST);
-                }
-            });
-
             elements.add(ab);
         } else if (preferences.getTimetableStudentGroup().isEmpty()) {
             AnnouncementBlock ab = new AnnouncementBlock();
