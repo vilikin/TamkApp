@@ -33,8 +33,6 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
 
         AppPreferences preferences = new AppPreferences(parentMenuList.getContext());
 
-        Resources resources = parentMenuList.getContext().getResources();
-
         switch (getParentMenuList().getApiType()) {
             case CAMPUSRAVITA_MENU:
                 includedMeals = preferences.getCampusravitaMeals();

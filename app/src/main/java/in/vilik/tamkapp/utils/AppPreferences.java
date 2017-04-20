@@ -21,6 +21,7 @@ public class AppPreferences {
     private static String key_first_launch;
     private static String key_campusravita_meals;
     private static String key_pirteria_meals;
+    private static String key_menu_show_diets;
     private static String key_timetable_student_group;
     private static String key_timetable_period;
     private static String key_timetable_show_weekends;
@@ -28,6 +29,7 @@ public class AppPreferences {
     private static boolean default_first_launch;
     private static Set<String> default_campusravita_meals;
     private static Set<String> default_pirteria_meals;
+    private static boolean default_menu_show_diets;
     private static String default_timetable_student_group;
     private static String default_timetable_period;
     private static boolean default_timetable_show_weekends;
@@ -50,6 +52,9 @@ public class AppPreferences {
             key_pirteria_meals = resources
                     .getString(R.string.preference_key_pirteria_meals);
 
+            key_menu_show_diets = resources
+                    .getString(R.string.preference_key_menu_show_diets);
+
             key_timetable_student_group = resources
                     .getString(R.string.preference_key_timetable_student_group);
 
@@ -71,6 +76,9 @@ public class AppPreferences {
 
             default_pirteria_meals = new HashSet<>(Arrays.asList(pirteria_meals));
 
+            default_menu_show_diets = resources
+                    .getBoolean(R.bool.preference_default_menu_show_diets);
+
             default_timetable_student_group = resources
                     .getString(R.string.preference_default_timetable_student_group);
 
@@ -88,6 +96,10 @@ public class AppPreferences {
 
     public String getKeyPirteriaMeals() {
         return key_pirteria_meals;
+    }
+
+    public String getKeyShowDiets() {
+        return key_menu_show_diets;
     }
 
     public String getKeyTimetableStudentGroup() {
@@ -116,6 +128,10 @@ public class AppPreferences {
 
     public Set<String> getPirteriaMeals() {
         return preferences.getStringSet(key_pirteria_meals, default_pirteria_meals);
+    }
+
+    public boolean areDietsShown() {
+        return preferences.getBoolean(key_menu_show_diets, default_menu_show_diets);
     }
 
     public String getTimetableStudentGroup() {

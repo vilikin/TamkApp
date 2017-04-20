@@ -40,5 +40,9 @@
             android:entries="@array/pirteria_meals_readable"
             android:entryValues="@array/pirteria_meals"
             android:defaultValue="@array/pirteria_meals"/>
+        <SwitchPreference
+            android:key="@string/preference_key_menu_show_diets"
+            android:defaultValue="@bool/preference_default_timetable_show_weekends"
+            android:title="@string/preference_title_menu_show_diets"/>
     </PreferenceCategory>
 </PreferenceScreen>

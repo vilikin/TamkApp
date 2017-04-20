@@ -29,10 +29,13 @@
     <string name="preference_key_timetable_student_group">student_group</string>
     <string name="preference_key_timetable_period">timetable_period</string>
     <string name="preference_key_timetable_show_weekends">timetable_show_weekends</string>
+    <string name="preference_key_menu_show_diets">menu_show_diets</string>
+    <string name="preference_key_menu_prices">menu_prices</string>
 
     <string name="preference_default_timetable_period">one_month</string>
     <string name="preference_default_timetable_student_group"/>
     <bool name="preference_default_timetable_show_weekends">true</bool>
+    <bool name="preference_default_menu_show_diets">true</bool>
 
     <string name="preference_category_menu">Ruokalistat</string>
 
@@ -40,6 +43,9 @@
     <string name="preference_title_pirteria_meals">Ateriatyypit: Pirteria</string>
     <string name="preference_summary_empty_meals">Ei näytetä mitään aterioita</string>
     <string name="preference_summary_selected_meals">Näytetään: %1$s</string>
+
+    <string name="preference_title_menu_show_diets">Näytä erityisruokavaliot</string>
+    <string name="preference_title_menu_prices">Hinnat</string>
 
     <string name="preference_category_timetable">Lukkari</string>
 

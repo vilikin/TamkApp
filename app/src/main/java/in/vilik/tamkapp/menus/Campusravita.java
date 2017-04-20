@@ -6,29 +6,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.menus.recyclerview.Diet;
 import in.vilik.tamkapp.utils.API;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
+import in.vilik.tamkapp.utils.AppPreferences;
 import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by vili on 10/04/2017.
  */
 
 public class Campusravita extends MenuList {
+    private AppPreferences preferences;
+
     public Campusravita(Context context) {
         super(context, new API() {
             @Override
@@ -46,6 +45,8 @@ public class Campusravita extends MenuList {
                 return "campusravita";
             }
         });
+
+        this.preferences = new AppPreferences(context);
     }
 
     boolean handleSuccessfulResponse(String response) {
@@ -132,10 +133,36 @@ public class Campusravita extends MenuList {
     private MealOption parseOption(JSONObject json) throws JSONException {
         MealOption option = new MealOption(json.getString("name"));
 
+        List<Diet> diets = new ArrayList<>();
+
+        JSONArray dietsJson = json.getJSONArray("diets");
+
+        for (int i = 0; i < dietsJson.length(); i++) {
+            diets.add(parseDiet(dietsJson.getJSONObject(i)));
+        }
+
+        option.setDiets(diets);
+
+        option.setDietsShown(preferences.areDietsShown());
+
+        /*
+        option.setPriceForStudent(json.getDouble("priceForStudent"));
+        option.setPriceForStaff(json.getDouble("priceForStaff"));
+        option.setPriceForOther(json.getDouble("priceForOthers"));
+        */
+
         if (json.has("details")) {
             option.setDetails(json.getString("details"));
         }
 
         return option;
+    }
+
+    private Diet parseDiet(JSONObject json) throws JSONException {
+        Diet diet = new Diet();
+        diet.setName(json.getString("name"));
+        diet.setAbbreviation(json.getString("abbreviation"));
+
+        return diet;
     }
 }

@@ -13,11 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
+import in.vilik.tamkapp.menus.recyclerview.Diet;
 import in.vilik.tamkapp.utils.API;
+import in.vilik.tamkapp.utils.AppPreferences;
 import okhttp3.Request;
 
 /**
@@ -25,6 +28,8 @@ import okhttp3.Request;
  */
 
 public class Pirteria extends MenuList {
+
+    private AppPreferences preferences;
 
     public Pirteria(Context context) {
         super(context, new API() {
@@ -46,6 +51,8 @@ public class Pirteria extends MenuList {
                 return "pirteria";
             }
         });
+
+        preferences = new AppPreferences(context);
     }
 
     @Override
@@ -135,12 +142,19 @@ public class Pirteria extends MenuList {
 
         String name = "";
         String details = "";
+        List<Diet> diets = null;
 
         for (int i = 0; i < optionsJson.length(); i++) {
+            String component = optionsJson.getString(i);
+
             if (i == 0) {
-                name = optionsJson.getString(i);
+                name = removeDietsFromName(component);
+                diets = getDietsFromName(component);
+            } else if (preferences.areDietsShown()) {
+                details += details.equals("") ? component : ", " + component;
             } else {
-                details += details.equals("") ? optionsJson.getString(i) : ", " + optionsJson.getString(i);
+                String plain = removeDietsFromName(component);
+                details += details.equals("") ? plain : ", " + plain;
             }
         }
 
@@ -150,10 +164,40 @@ public class Pirteria extends MenuList {
             mealOption.setDetails(details);
         }
 
+        mealOption.setDiets(diets);
+
+        mealOption.setDietsShown(preferences.areDietsShown());
+
         options.add(mealOption);
 
         meal.setOptions(options);
 
         return meal;
     }
+
+    private String removeDietsFromName(String name) {
+        return name.split("[(]")[0].trim();
+    }
+
+    private List<Diet> getDietsFromName(String name) {
+        List<Diet> diets = new ArrayList<>();
+
+        String[] dietsStart = name.split("[(]");
+
+        if (dietsStart.length > 1) {
+            String dietsRaw = dietsStart[1].split("[)]")[0];
+
+            String[] abbreviations = dietsRaw.split(",");
+
+            if (abbreviations.length > 0) {
+                for (String abbreviation : abbreviations) {
+                    diets.add(new Diet(abbreviation.trim(), null));
+                }
+            }
+        }
+
+        return diets;
+    }
+
+
 }
