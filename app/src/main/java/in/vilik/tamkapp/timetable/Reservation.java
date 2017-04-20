@@ -163,7 +163,7 @@ public class Reservation implements TimetableElement {
             int realizationsFound = 0;
 
             for (Realization realization : realizations) {
-                if (subject.contains(realization.getName() + " " + realization.getCode())) {
+                if (subject.contains(realization.getCode())) {
                     realizationsFound++;
                 }
             }

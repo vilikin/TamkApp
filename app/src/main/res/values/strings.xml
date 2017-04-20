@@ -38,7 +38,7 @@
     <string name="timetable_more_groups">%1$s and %2$d other groups</string>
     <string name="timetable_no_classroom">No classroom</string>
     <string name="timetable_reservation_atm">Just now</string>
-    <string name="timetable_no_reservations">No lectures %1$s</string>
+    <string name="timetable_no_reservations">No lectures on %1$s</string>
 
     <string name="error_failed_to_load_menu">Error occurred while loading menu, try again later.</string>
     <string name="error_failed_to_load_timetable">Error occurred while loading timetable, try again later.</string>

@@ -51,8 +51,12 @@ public class Timetable extends DataLoader implements API {
 
     private OnTimetableUpdatedListener listener;
 
-    public Timetable(Context context) {
+    private String language;
+
+    public Timetable(Context context, String language) {
         super(context);
+
+        setLanguage(language);
 
         this.context = context;
         preferences = new AppPreferences(context);
@@ -78,6 +82,14 @@ public class Timetable extends DataLoader implements API {
                 triggerOnTimetableUpdatedListener(false);
             }
         });
+    }
+
+    public void setLanguage(String language) {
+        if (!language.equals("fi")) {
+            this.language = "en";
+        } else {
+            this.language = language;
+        }
     }
 
     private void triggerOnTimetableUpdatedListener(boolean success) {
@@ -375,7 +387,7 @@ public class Timetable extends DataLoader implements API {
 
     @Override
     public String getCacheKey() {
-        return "timetable_" + preferences.getTimetableStudentGroup();
+        return "timetable_" + preferences.getTimetableStudentGroup() + "_" + language;
     }
 
     private RequestBody generateRequestBody() {
@@ -417,6 +429,7 @@ public class Timetable extends DataLoader implements API {
                 .post(body)
                 .url("https://opendata.tamk.fi/r1/reservation/search/")
                 .addHeader("Authorization", "Basic dWdXbUNVa21BOHoweFVIYVR0U0g6")
+                .addHeader("Accept-Language", language)
                 .build();
     }
 }

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Locale;
+
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.timetable.OnTimetableUpdatedListener;
@@ -44,7 +46,9 @@ public class TimetableFragment extends Fragment {
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerViewTimetable);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
 
-        timetable = new Timetable(getContext());
+        Locale locale = Locale.getDefault();
+
+        timetable = new Timetable(getContext(), locale.getLanguage());
 
         adapter = new TimetableAdapter(timetable);
         recyclerView.setAdapter(adapter);
