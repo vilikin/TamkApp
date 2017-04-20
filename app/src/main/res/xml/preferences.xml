@@ -43,6 +43,7 @@
         <SwitchPreference
             android:key="@string/preference_key_menu_show_diets"
             android:defaultValue="@bool/preference_default_timetable_show_weekends"
-            android:title="@string/preference_title_menu_show_diets"/>
+            android:title="@string/preference_title_menu_show_diets"
+            android:summary="@string/preference_summary_menu_show_diets"/>
     </PreferenceCategory>
 </PreferenceScreen>

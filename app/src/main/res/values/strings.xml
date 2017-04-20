@@ -51,6 +51,7 @@
     <string name="preference_summary_selected_meals">Showing: %1$s</string>
 
     <string name="preference_title_menu_show_diets">Show diets</string>
+    <string name="preference_summary_menu_show_diets">Descriptions in restaurant websites</string>
 
     <string name="preference_category_timetable">Timetable</string>
 

@@ -31,6 +31,7 @@
     <string name="preference_summary_selected_meals">Näytetään: %1$s</string>
 
     <string name="preference_title_menu_show_diets">Näytä erityisruokavaliomerkinnät</string>
+    <string name="preference_summary_menu_show_diets">Kuvaukset ravintoloiden verkkosivuilla</string>
 
     <string name="preference_category_timetable">Lukkari</string>
 
