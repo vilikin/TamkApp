@@ -7,15 +7,15 @@
     </string-array>
 
     <string-array name="timetable_periods_readable">
-        <item>Tämä viikko</item>
-        <item>Kuukausi</item>
-        <item>Puoli vuotta</item>
+        <item>This week</item>
+        <item>Month</item>
+        <item>Half year</item>
     </string-array>
 
     <string-array name="timetable_periods_summary">
-        <item>Näytetään tämä viikko</item>
-        <item>Näytetään kuukausi</item>
-        <item>Näytetään puoli vuotta</item>
+        <item>Showing this week</item>
+        <item>Showing one month</item>
+        <item>Showing half year</item>
     </string-array>
 
     <string-array name="campusravita_meals">
@@ -28,12 +28,12 @@
     </string-array>
 
     <string-array name="campusravita_meals_readable">
-        <item>Aamiainen</item>
-        <item>Lounas</item>
-        <item>Deli-lounas</item>
-        <item>Campus Café salaatti</item>
-        <item>Annos</item>
-        <item>Iltaruoka</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Deli-lunch</item>
+        <item>Campus Café salad</item>
+        <item>Portion meal</item>
+        <item>Supper</item>
     </string-array>
 
     <string-array name="campusravita_meals_json">
@@ -53,10 +53,10 @@
     </string-array>
 
     <string-array name="pirteria_meals_readable">
-        <item>Linjastolounas</item>
-        <item>Kasvislounas</item>
-        <item>Keittolounas</item>
-        <item>Annosruoka</item>
+        <item>Normal lunch</item>
+        <item>Vege lunch</item>
+        <item>Soup lunch</item>
+        <item>Portion meal</item>
     </string-array>
 
     <string-array name="pirteria_meals_json">
@@ -67,12 +67,12 @@
     </string-array>
 
     <string-array name="weekdays">
-        <item>Sunnuntaina</item>
-        <item>Maanantaina</item>
-        <item>Tiistaina</item>
-        <item>Keskiviikkona</item>
-        <item>Torstaina</item>
-        <item>Perjantaina</item>
-        <item>Lauantaina</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
     </string-array>
 </resources>

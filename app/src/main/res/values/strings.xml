@@ -1,30 +1,4 @@
 <resources>
-    <string name="app_name">TamkApp</string>
-
-    <string name="settings_action">Asetukset</string>
-
-    <string name="settings_activity">Asetukset</string>
-    <string name="ready_action">Valmista</string>
-
-    <string name="tab_header_timetable">Lukkari</string>
-    <string name="tab_header_campusravita">Campusravita</string>
-    <string name="tab_header_pirteria">Pirteria</string>
-
-    <string name="date_today">Tänään</string>
-    <string name="date_tomorrow">Huomenna</string>
-
-    <string name="timetable_announcement_block_header">Ilmoitus</string>
-    <string name="timetable_block_no_group_title">Tervetuloa TamkAppiin!</string>
-    <string name="timetable_block_no_group_body">Nähdäksesi lukkarisi, voit käydä syöttämässä ryhmätunnuksesi sovelluksen asetuksissa. Asetuksiin pääset oikean yläkulman valikosta tai klikkaamalla tätä ilmoitusta.</string>
-
-    <string name="timetable_more_groups">%1$s ja %2$d muuta ryhmää</string>
-    <string name="timetable_no_classroom">Ei luokkatilaa</string>
-    <string name="timetable_reservation_atm">Juuri nyt</string>
-    <string name="timetable_no_reservations">Ei tunteja %1$s</string>
-
-    <string name="error_failed_to_load_menu">Ruokalistaa ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
-    <string name="error_failed_to_load_timetable">Lukkaria ladatessa tapahtui virhe, kokeile myöhemmin uudelleen.</string>
-
     <string name="preference_key_first_launch">first_launch</string>
     <string name="preference_key_campusravita_meals">campusravita_meals</string>
     <string name="preference_key_pirteria_meals">pirteria_meals</string>
@@ -39,33 +13,59 @@
     <bool name="preference_default_timetable_show_weekends">true</bool>
     <bool name="preference_default_menu_show_diets">true</bool>
 
-    <string name="preference_category_menu">Ruokalistat</string>
 
-    <string name="preference_title_campusravita_meals">Ateriatyypit: Campusravita</string>
-    <string name="preference_title_pirteria_meals">Ateriatyypit: Pirteria</string>
-    <string name="preference_summary_empty_meals">Ei näytetä mitään aterioita</string>
-    <string name="preference_summary_selected_meals">Näytetään: %1$s</string>
+    <string name="app_name">TamkApp</string>
 
-    <string name="preference_title_menu_show_diets">Näytä erityisruokavaliomerkinnät</string>
-    <string name="preference_title_menu_prices">Hinnat</string>
+    <string name="settings_action">Settings</string>
 
-    <string name="preference_category_timetable">Lukkari</string>
+    <string name="settings_activity">Settings</string>
+    <string name="ready_action">Ready</string>
 
-    <string name="preference_title_timetable_student_group">Ryhmätunnus</string>
-    <string name="preference_summary_timetable_student_group">Valittuna %1$s</string>
-    <string name="preference_summary_default_timetable_student_group">Aseta ryhmätunnus nähdäksesi lukujärjestyksen</string>
-    <string name="preference_dialog_title_timetable_student_group">Ryhmätunnuksesi</string>
-    <string name="preference_dialog_hint_timetable_student_group">Esim. 15TIKOOT</string>
+    <string name="tab_header_timetable">Timetable</string>
+    <string name="tab_header_campusravita">Campusravita</string>
+    <string name="tab_header_pirteria">Pirteria</string>
 
-    <string name="preference_title_timetable_period">Aikaväli</string>
+    <string name="date_today">Today</string>
+    <string name="date_tomorrow">Tomorrow</string>
 
-    <string name="preference_title_timetable_show_weekends">Näytä viikonloput</string>
-    <string name="preference_summary_timetable_show_weekends">Näytä lauantait ja sunnuntait lukkarissa</string>
+    <string name="timetable_announcement_block_header">Announcement</string>
+    <string name="timetable_block_no_group_title">Welcome to TamkApp!</string>
+    <string name="timetable_block_no_group_body">To see your timetable, you should enter your group id in settings. You can get to the settings from the menu or by clicking this announcement.</string>
 
-    <string name="timetable_block_load_error_title">Pieleen meni</string>
-    <string name="timetable_block_load_error_body">Lukkaria ladattaessa tapahtui jokin virhe. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
+    <string name="timetable_more_groups">%1$s and %2$d other groups</string>
+    <string name="timetable_no_classroom">No classroom</string>
+    <string name="timetable_reservation_atm">Just now</string>
+    <string name="timetable_no_reservations">No lectures %1$s</string>
 
-    <string name="menulist_error_block_header">Virhe</string>
-    <string name="menulist_error_block_title">Pieleen meni</string>
-    <string name="menulist_error_block_body">Ruokalistoja ladattaessa tapahtui jokin virhe tai yhtäkään ateriatyyppiä ei ole valittuna. Tarkista Internet yhteytesi ja klikkaa tästä yrittääksesi lataamista uudelleen.</string>
+    <string name="error_failed_to_load_menu">Error occurred while loading menu, try again later.</string>
+    <string name="error_failed_to_load_timetable">Error occurred while loading timetable, try again later.</string>
+
+    <string name="preference_category_menu">Menu</string>
+
+    <string name="preference_title_campusravita_meals">Meal types: Campusravita</string>
+    <string name="preference_title_pirteria_meals">Meal types: Pirteria</string>
+    <string name="preference_summary_empty_meals">Not showing any meals</string>
+    <string name="preference_summary_selected_meals">Showing: %1$s</string>
+
+    <string name="preference_title_menu_show_diets">Show diets</string>
+
+    <string name="preference_category_timetable">Timetable</string>
+
+    <string name="preference_title_timetable_student_group">Student group</string>
+    <string name="preference_summary_timetable_student_group">%1$s selected</string>
+    <string name="preference_summary_default_timetable_student_group">Enter student group to see your timetable</string>
+    <string name="preference_dialog_title_timetable_student_group">Your student group</string>
+    <string name="preference_dialog_hint_timetable_student_group">15TIKOOT for example</string>
+
+    <string name="preference_title_timetable_period">Time period</string>
+
+    <string name="preference_title_timetable_show_weekends">Show weekends</string>
+    <string name="preference_summary_timetable_show_weekends">Show saturdays and sundays on timetable</string>
+
+    <string name="timetable_block_load_error_title">Something went wrong</string>
+    <string name="timetable_block_load_error_body">An error occurred while loading timetable. Check your Internet connection and try again by tapping this message.</string>
+
+    <string name="menulist_error_block_header">Error</string>
+    <string name="menulist_error_block_title">Something went wrong</string>
+    <string name="menulist_error_block_body">An error occurred while loading menu or no meal types were selected. Check your Internet connection and try again by tapping this message.</string>
 </resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="timetable_periods_readable">
+        <item>Tämä viikko</item>
+        <item>Kuukausi</item>
+        <item>Puoli vuotta</item>
+    </string-array>
+
+    <string-array name="timetable_periods_summary">
+        <item>Näytetään tämä viikko</item>
+        <item>Näytetään kuukausi</item>
+        <item>Näytetään puoli vuotta</item>
+    </string-array>
+
+    <string-array name="campusravita_meals_readable">
+        <item>Aamiainen</item>
+        <item>Lounas</item>
+        <item>Deli-lounas</item>
+        <item>Campus Café salaatti</item>
+        <item>Annos</item>
+        <item>Iltaruoka</item>
+    </string-array>
+
+    <string-array name="campusravita_meals_json">
+        <item>Aamiainen</item>
+        <item>Lounas</item>
+        <item>Deli-lounas</item>
+        <item>Campus Café salaatti</item>
+        <item>Annos</item>
+        <item>Iltaruoka</item>
+    </string-array>
+
+    <string-array name="pirteria_meals_readable">
+        <item>Linjastolounas</item>
+        <item>Kasvislounas</item>
+        <item>Keittolounas</item>
+        <item>Annosruoka</item>
+    </string-array>
+
+    <string-array name="weekdays">
+        <item>Sunnuntaina</item>
+        <item>Maanantaina</item>
+        <item>Tiistaina</item>
+        <item>Keskiviikkona</item>
+        <item>Torstaina</item>
+        <item>Perjantaina</item>
+        <item>Lauantaina</item>
+    </string-array>
+</resources>
