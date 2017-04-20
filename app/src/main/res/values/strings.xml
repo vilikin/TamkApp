@@ -7,7 +7,10 @@
     <string name="preference_key_timetable_show_weekends">timetable_show_weekends</string>
     <string name="preference_key_menu_show_diets">menu_show_diets</string>
     <string name="preference_key_menu_prices">menu_prices</string>
+    <string name="preference_key_show_pirteria_on_english_locale">show_pirteria_on_english_locale</string>
 
+
+    <bool name="preference_default_show_pirteria_on_english_locale">false</bool>
     <string name="preference_default_timetable_period">one_month</string>
     <string name="preference_default_timetable_student_group"/>
     <bool name="preference_default_timetable_show_weekends">true</bool>
@@ -68,4 +71,8 @@
     <string name="menulist_error_block_header">Error</string>
     <string name="menulist_error_block_title">Something went wrong</string>
     <string name="menulist_error_block_body">An error occurred while loading menu or no meal types were selected. Check your Internet connection and try again by tapping this message.</string>
+
+    <string name="menulist_no_localization_header">Error</string>
+    <string name="menulist_no_localization_title">No localization</string>
+    <string name="menulist_no_localization_body">This menu is not available in English.\nTo see the menu anyway, tap this message.</string>
 </resources>

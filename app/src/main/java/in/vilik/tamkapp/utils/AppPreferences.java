@@ -25,6 +25,7 @@ public class AppPreferences {
     private static String key_timetable_student_group;
     private static String key_timetable_period;
     private static String key_timetable_show_weekends;
+    private static String key_show_pirteria_on_english_locale;
 
     private static boolean default_first_launch;
     private static Set<String> default_campusravita_meals;
@@ -33,6 +34,7 @@ public class AppPreferences {
     private static String default_timetable_student_group;
     private static String default_timetable_period;
     private static boolean default_timetable_show_weekends;
+    private static boolean default_show_pirteria_on_english_locale;
 
     private static Resources resources;
     private SharedPreferences preferences;
@@ -64,6 +66,9 @@ public class AppPreferences {
             key_timetable_show_weekends = resources
                     .getString(R.string.preference_key_timetable_show_weekends);
 
+            key_show_pirteria_on_english_locale = resources
+                    .getString(R.string.preference_key_show_pirteria_on_english_locale);
+
             default_first_launch = true;
 
             String[] campusravita_meals = resources
@@ -87,6 +92,9 @@ public class AppPreferences {
 
             default_timetable_show_weekends = resources
                     .getBoolean(R.bool.preference_default_timetable_show_weekends);
+
+            default_show_pirteria_on_english_locale = resources
+                    .getBoolean(R.bool.preference_default_show_pirteria_on_english_locale);
         }
     }
 
@@ -112,6 +120,10 @@ public class AppPreferences {
 
     public String getKeyTimetableShowWeekends() {
         return key_timetable_show_weekends;
+    }
+
+    public String getKeyShowPirteriaOnEnglishLocale() {
+        return key_show_pirteria_on_english_locale;
     }
 
     public boolean isFirstLaunch() {
@@ -144,5 +156,13 @@ public class AppPreferences {
 
     public boolean areWeekendsShown() {
         return preferences.getBoolean(key_timetable_show_weekends, default_timetable_show_weekends);
+    }
+
+    public boolean isPirteriaMenuShownOnEnglishLocale() {
+        return preferences.getBoolean(key_show_pirteria_on_english_locale, default_show_pirteria_on_english_locale);
+    }
+
+    public void setPirteriaMenuShownOnEnglishLocale(boolean isShown) {
+        preferences.edit().putBoolean(key_show_pirteria_on_english_locale, isShown).apply();
     }
 }

@@ -22,6 +22,21 @@
             android:id="@+id/announcementBlockBody"/>
     </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/no_localization_menulist_overlay"
+        android:visibility="gone"
+        style="@style/announcement_block">
+        <TextView
+            style="@style/announcement_block_header"
+            android:text="@string/menulist_no_localization_header"/>
+        <TextView
+            style="@style/announcement_block_title"
+            android:text="@string/menulist_no_localization_title" />
+        <TextView
+            style="@style/announcement_block_body"
+            android:text="@string/menulist_no_localization_body" />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewMenu"
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package in.vilik.tamkapp.fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.widget.LinearLayout;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 
+import java.util.Locale;
+
 import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.Campusravita;
@@ -21,6 +24,7 @@ import in.vilik.tamkapp.menus.OnMenuUpdatedListener;
 import in.vilik.tamkapp.menus.Pirteria;
 import in.vilik.tamkapp.menus.recyclerview.MenuListAdapter;
 import in.vilik.tamkapp.utils.API;
+import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
 import in.vilik.tamkapp.utils.ErrorToaster;
 
@@ -35,6 +39,8 @@ public class MenuFragment extends Fragment {
     RecyclerView recyclerView;
     MenuListAdapter adapter;
     LinearLayout noMenuListsOverlay;
+    LinearLayout noLocalizationOverlay;
+    AppPreferences preferences;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -53,7 +59,15 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         initialized = false;
 
+        preferences = new AppPreferences(getContext());
+
         rootView = inflater.inflate(R.layout.fragment_menu, container, false);
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
+        noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
+        noLocalizationOverlay = (LinearLayout) rootView.findViewById(R.id.no_localization_menulist_overlay);
+
+        Locale locale = Locale.getDefault();
 
         API.Type menuType = API.Type.values()[getArguments().getInt("type")];
 
@@ -63,10 +77,20 @@ public class MenuFragment extends Fragment {
             menuList = new Campusravita(getActivity());
         } else if (menuType == API.Type.PIRTERIA_MENU) {
             menuList = new Pirteria(getActivity());
-        }
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
-        noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
+            if (locale.getLanguage().equals("en")
+                    && !preferences.isPirteriaMenuShownOnEnglishLocale()) {
+                noLocalizationOverlay.setVisibility(View.VISIBLE);
+
+                noLocalizationOverlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        preferences.setPirteriaMenuShownOnEnglishLocale(true);
+                        noLocalizationOverlay.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }
 
         noMenuListsOverlay.setOnClickListener(new View.OnClickListener() {
             @Override
