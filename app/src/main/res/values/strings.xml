@@ -12,7 +12,7 @@
 
     <bool name="preference_default_show_pirteria_on_english_locale">false</bool>
     <string name="preference_default_timetable_period">one_month</string>
-    <string name="preference_default_timetable_student_group"/>
+    <string name="preference_default_timetable_student_group" />
     <bool name="preference_default_timetable_show_weekends">true</bool>
     <bool name="preference_default_menu_show_diets">true</bool>
 
@@ -76,4 +76,11 @@
     <string name="menulist_no_localization_header">Error</string>
     <string name="menulist_no_localization_title">No localization</string>
     <string name="menulist_no_localization_body">This menu is not available in English.\nTo see the menu in Finnish, tap this message.</string>
+
+    <string name="deadline_activity_title">Add deadline</string>
+    <string name="deadline_activity_input_time_all_day">--:--</string>
+    <string name="deadline_activity_dialog_time_all_day">No time</string>
+    <string name="deadline_activity_input_name">Name</string>
+    <string name="deadline_activity_action_save">Save</string>
+    <string name="deadline_activity_hint_select_date">Select date</string>
 </resources>

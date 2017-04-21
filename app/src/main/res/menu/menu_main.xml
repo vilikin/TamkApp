@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="in.vilik.tamkapp.MainActivity">
     <item
+        android:id="@+id/action_add_deadline"
+        android:title="Add deadline"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/action_settings"
         android:title="@string/settings_action"
         app:showAsAction="never" />

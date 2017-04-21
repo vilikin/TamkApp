@@ -1,5 +1,8 @@
 package in.vilik.tamkapp;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -11,19 +14,31 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import in.vilik.tamkapp.menus.Campusravita;
 import in.vilik.tamkapp.menus.MenuList;
 import in.vilik.tamkapp.menus.Pirteria;
 import in.vilik.tamkapp.utils.AppPreferences;
+
+import static android.R.id.input;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -108,9 +123,26 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.action_settings:
                 startActivity(toSettingsIntent);
-                break;
+                return true;
+            case R.id.action_add_deadline:
+                addDeadline();
+
+                return true;
         }
 
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addDeadline() {
+        Intent intent = new Intent(this, DeadlineActivity.class);
+        intent.putExtra("fullDay", true);
+        startActivity(intent);
+    }
+
+    private void addDeadline(Calendar calendar) {
+        Intent intent = new Intent(this, DeadlineActivity.class);
+        intent.putExtra("date", calendar);
+        intent.putExtra("fullDay", true);
+        startActivity(intent);
     }
 }

@@ -13,7 +13,6 @@ import in.vilik.tamkapp.timetable.TimetableElement;
 /**
  * Created by vili on 16/04/2017.
  */
-
 class ReservationVH extends TimetableViewHolder {
     public ReservationVH(View itemView) {
         super(itemView);
