@@ -78,6 +78,7 @@ public class Timetable extends DataLoader implements API {
 
             @Override
             public void onFailure() {
+                generateDays();
                 refreshVisibleElementsList(true);
                 triggerOnTimetableUpdatedListener(false);
             }
@@ -139,33 +140,32 @@ public class Timetable extends DataLoader implements API {
             });
 
             elements.add(ab);
-        } else {
-            Reservation reservationForNowBlock = null;
+        }
 
-            Date now = new Date();
+        Reservation reservationForNowBlock = null;
 
-            for (Day day : days) {
-                if (day.getReservations().size() > 0) {
-                    elements.add(day);
+        Date now = new Date();
 
-                    for (Reservation reservation : day.getReservations()) {
-                        elements.add(reservation);
+        for (Day day : days) {
+            if (day.getReservations().size() > 0) {
+                elements.add(day);
 
-                        if (DateUtil.isOnRange(reservation.getStartDate(),
-                                reservation.getEndDate(), now) &&
-                                reservationForNowBlock == null) {
-                            reservationForNowBlock = reservation;
-                        }
+                for (Reservation reservation : day.getReservations()) {
+                    elements.add(reservation);
+
+                    if (DateUtil.isOnRange(reservation.getStartDate(),
+                            reservation.getEndDate(), now) &&
+                            reservationForNowBlock == null) {
+                        reservationForNowBlock = reservation;
                     }
-                } else {
-                    elements.add(new EmptyDay(day));
                 }
+            } else {
+                elements.add(new EmptyDay(day));
             }
+        }
 
-            if (reservationForNowBlock != null) {
-                elements.add(0, new NowBlock(reservationForNowBlock));
-            }
-
+        if (reservationForNowBlock != null) {
+            elements.add(0, new NowBlock(reservationForNowBlock));
         }
     }
 

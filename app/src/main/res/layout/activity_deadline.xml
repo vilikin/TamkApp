@@ -16,7 +16,7 @@
             android:id="@+id/deadline_input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:maxLines="1"
             android:hint="@string/deadline_activity_input_name" />
 

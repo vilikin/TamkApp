@@ -82,6 +82,7 @@ public class TimetableFragment extends Fragment {
                 timetable.loadData(DataLoader.LoadingStrategy.SERVER_FIRST);
             }
         });
+
         return rootView;
     }
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -95,6 +96,29 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+                if (position != 0) {
+                    fab.hide();
+                } else {
+                    fab.show();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -124,16 +148,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 startActivity(toSettingsIntent);
                 return true;
-            case R.id.action_add_deadline:
-                addDeadline();
-
-                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void addDeadline() {
+    public void addDeadline(View view) {
         Intent intent = new Intent(this, DeadlineActivity.class);
         intent.putExtra("fullDay", true);
         startActivity(intent);

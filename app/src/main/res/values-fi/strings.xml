@@ -37,7 +37,7 @@
 
     <string name="preference_title_timetable_student_group">Ryhmätunnus</string>
     <string name="preference_summary_timetable_student_group">Valittuna %1$s</string>
-    <string name="preference_summary_default_timetable_student_group">Aseta ryhmätunnus nähdäksesi lukujärjestyksen</string>
+    <string name="preference_summary_default_timetable_student_group">Aseta ryhmätunnus lukujärjestystä varten</string>
     <string name="preference_dialog_title_timetable_student_group">Ryhmätunnuksesi</string>
     <string name="preference_dialog_hint_timetable_student_group">Esim. 15TIKOOT</string>
 
