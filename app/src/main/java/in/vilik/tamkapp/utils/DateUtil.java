@@ -18,10 +18,14 @@ import static java.util.Calendar.DAY_OF_YEAR;
  */
 public class DateUtil {
     public static boolean areOnSameDay(Date first, Date second) {
-        long firstDay = first.getTime() / (1000 * 60 * 60 * 24);
-        long secondDay = second.getTime() / (1000 * 60 * 60 * 24);
+        Calendar firstCalendar = Calendar.getInstance();
+        firstCalendar.setTime(first);
 
-        return firstDay == secondDay;
+        Calendar secondCalendar = Calendar.getInstance();
+        secondCalendar.setTime(second);
+
+        return firstCalendar.get(Calendar.YEAR) == secondCalendar.get(Calendar.YEAR) &&
+               firstCalendar.get(Calendar.DAY_OF_YEAR) == secondCalendar.get(Calendar.DAY_OF_YEAR);
     }
 
     public static boolean isOnRange(Date rangeStart, Date rangeEnd, Date date) {
