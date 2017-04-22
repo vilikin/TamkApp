@@ -6,7 +6,7 @@ package in.vilik.tamkapp.timetable;
 
 public interface TimetableElement {
     enum Type {
-        NOW_BLOCK, DAY_HEADER, DAY_HEADER_EMPTY, RESERVATION, ANNOUNCEMENT_BLOCK
+        NOW_BLOCK, DAY_HEADER, DAY_HEADER_EMPTY, RESERVATION, ANNOUNCEMENT_BLOCK, DEADLINE
     }
 
     Type getType();

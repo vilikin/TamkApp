@@ -48,6 +48,9 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
             case RESERVATION:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_reservation, parent, false);
                 return new ReservationVH(view);
+            case DEADLINE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_deadline, parent, false);
+                return new DeadlineVH(view);
         }
 
         return null;

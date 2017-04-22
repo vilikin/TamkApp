@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +9,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
 
         <EditText
             android:id="@+id/deadline_input_name"
@@ -41,4 +41,12 @@
             android:drawableStart="@drawable/ic_date_black_24dp"
             android:drawableLeft="@drawable/ic_date_black_24dp" />
     </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa. Pystyt myös lisäämään merkintöjä suoraan oikealle päivälle painamalla päivän otsikkoa hetken aikaa."/>
+
 </LinearLayout>

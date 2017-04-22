@@ -14,10 +14,13 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import in.vilik.tamkapp.timetable.deadlines.Deadline;
+import in.vilik.tamkapp.timetable.deadlines.DeadlineStorage;
 import in.vilik.tamkapp.utils.DateUtil;
 
 import static java.util.Calendar.MONTH;
@@ -214,11 +217,23 @@ public class DeadlineActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_save:
+                saveDeadline();
+
                 NavUtils.navigateUpFromSameTask(this);
-                // TODO: SAVE
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveDeadline() {
+        Deadline deadline = new Deadline();
+
+        deadline.setName(nameField.getText().toString());
+        deadline.setFullDay(fullDay);
+        deadline.setDate(calendar.getTime());
+
+        boolean success = DeadlineStorage.addDeadline(this, deadline);
+        Toast.makeText(this, "Added deadline: " + success, Toast.LENGTH_LONG).show();
     }
 }

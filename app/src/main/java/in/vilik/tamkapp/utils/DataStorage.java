@@ -18,7 +18,7 @@ import in.vilik.tamkapp.Debug;
  * Created by vili on 22/04/2017.
  */
 
-public class DataWriter {
+public class DataStorage {
     public static void write(Context context, String filename, String data) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context

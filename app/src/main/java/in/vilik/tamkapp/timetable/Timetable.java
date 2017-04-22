@@ -24,6 +24,8 @@ import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.MainActivity;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.SettingsActivity;
+import in.vilik.tamkapp.timetable.deadlines.Deadline;
+import in.vilik.tamkapp.timetable.deadlines.DeadlineStorage;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
@@ -162,6 +164,10 @@ public class Timetable extends DataLoader implements API {
             } else {
                 elements.add(new EmptyDay(day));
             }
+
+            for (Deadline deadline : day.getDeadlines()) {
+                elements.add(deadline);
+            }
         }
 
         if (reservationForNowBlock != null) {
@@ -171,30 +177,6 @@ public class Timetable extends DataLoader implements API {
 
     public List<TimetableElement> getElements() {
         return elements;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        List<TimetableElement> elements = getElements();
-
-        for (TimetableElement element : elements) {
-            sb.append(element.getType().name());
-            sb.append("\n");
-            switch (element.getType()) {
-                case DAY_HEADER:
-                    Day d = (Day) element;
-                    sb.append(d.getDate());
-                    sb.append("\n");
-                    break;
-                case RESERVATION:
-                    Reservation r = (Reservation) element;
-                    sb.append(r.toString());
-                    sb.append("\n");
-                    break;
-            }
-        }
-
-        return sb.toString();
     }
 
     /*  ----------------------- PARSING ------------------------------ */
@@ -250,9 +232,6 @@ public class Timetable extends DataLoader implements API {
 
         boolean showWeekends = preferences.areWeekendsShown();
 
-        Debug.log("generateDays()", "Generating days: " + period +
-                " | Show weekends: " + showWeekends);
-
         List<Date> dates;
 
         switch (period) {
@@ -269,7 +248,7 @@ public class Timetable extends DataLoader implements API {
                 dates = DateUtil.getDays(0);
         }
 
-        Debug.log("generateDays()", "Got " + dates.size() + " dates in total");
+        List<Deadline> deadlines = DeadlineStorage.getDeadlines(context);
 
         Calendar calendar = Calendar.getInstance();
 
@@ -288,6 +267,14 @@ public class Timetable extends DataLoader implements API {
             if (insertDay) {
                 Day day = new Day(this);
                 day.setDate(date);
+
+                for (Deadline deadline : deadlines) {
+                    if (DateUtil.areOnSameDay(date, deadline.getDate())) {
+                        deadline.setTimetable(this);
+                        day.getDeadlines().add(deadline);
+                    }
+                }
+
                 days.add(day);
             }
         }
