@@ -18,9 +18,9 @@ import in.vilik.tamkapp.Debug;
  * Created by vili on 13/04/2017.
  */
 public class DataCache {
-    final static String CACHE_PREFERENCE_PREFIX = "cached_";
-    final static String CACHE_FILE_PREFIX = "";
-    final static String CACHE_FILE_SUFFIX = ".json";
+    private final static String CACHE_PREFERENCE_PREFIX = "cached_";
+    private final static String CACHE_FILE_PREFIX = "";
+    private final static String CACHE_FILE_SUFFIX = ".json";
 
     public static boolean has(Context context, String cacheKey, long maxAge) {
         Date maxAgeDate = new Date(new Date().getTime() - maxAge);
@@ -32,50 +32,17 @@ public class DataCache {
     }
 
     public static void write(Context context, String cacheKey, String data) {
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context
-                    .openFileOutput(CACHE_FILE_PREFIX + cacheKey+ CACHE_FILE_SUFFIX,
-                            Context.MODE_PRIVATE));
+        String filename = CACHE_FILE_PREFIX + cacheKey + CACHE_FILE_SUFFIX;
+        DataWriter.write(context, filename, data);
 
-            outputStreamWriter.write(data);
-            outputStreamWriter.close();
-
-            Date now = new Date();
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            prefs.edit().putLong(CACHE_PREFERENCE_PREFIX + cacheKey, now.getTime()).apply();
-        }
-
-        catch (IOException e) {
-            Debug.log("writeToFile()", "File write failed: " + e.toString());
-        }
+        Date now = new Date();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putLong(CACHE_PREFERENCE_PREFIX + cacheKey, now.getTime()).apply();
     }
 
     public static String read(Context context, String cacheKey) {
-        String content = null;
+        String filename = CACHE_FILE_PREFIX + cacheKey + CACHE_FILE_SUFFIX;
 
-        try {
-            InputStream inputStream = context
-                    .openFileInput(CACHE_FILE_PREFIX + cacheKey + CACHE_FILE_SUFFIX);
-
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString;
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString);
-                }
-
-                inputStream.close();
-                content = stringBuilder.toString();
-            }
-        } catch (FileNotFoundException e) {
-            Debug.log("readFromFile()", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Debug.log("readFromFile()", "Can not read file: " + e.toString());
-        }
-
-        return content;
+        return DataWriter.read(context, filename);
     }
 }
