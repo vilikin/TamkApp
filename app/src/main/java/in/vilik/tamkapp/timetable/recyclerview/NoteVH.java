@@ -1,5 +1,7 @@
 package in.vilik.tamkapp.timetable.recyclerview;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,11 +56,22 @@ class NoteVH extends TimetableViewHolder {
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                NoteStorage.removeNote(itemView.getContext(), note);
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.note_remove_confirm_title)
+                        .setMessage(context.getString(R.string.note_remove_confirm_message, note.getName()))
+                        .setPositiveButton(R.string.note_remove_confirm_button,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        NoteStorage.removeNote(itemView.getContext(), note);
 
-                if (note.getTimetable() != null) {
-                    note.getTimetable().loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
-                }
+                                        if (note.getTimetable() != null) {
+                                            note.getTimetable().loadData(DataLoader.LoadingStrategy.CACHE_FIRST);
+                                        }
+                                    }
+                                })
+                        .setNegativeButton(R.string.note_remove_cancel_button, null)
+                        .show();
 
                 return true;
             }

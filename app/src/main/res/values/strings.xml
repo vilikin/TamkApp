@@ -94,4 +94,8 @@
     <string name="note_activity_hint_select_date">Select date</string>
     <string name="note_description">Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa. Pystyt myös lisäämään merkintöjä suoraan oikealle päivälle painamalla päivän otsikkoa hetken aikaa.</string>
     <string name="bottom_sheet_show_reservation_details">Show reservation details</string>
+    <string name="note_remove_confirm_title">Remove note</string>
+    <string name="note_remove_confirm_button">Remove</string>
+    <string name="note_remove_cancel_button">Cancel</string>
+    <string name="note_remove_confirm_message">Do you really want to remove note "%1$s"?</string>
 </resources>
