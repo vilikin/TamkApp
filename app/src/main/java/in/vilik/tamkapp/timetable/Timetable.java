@@ -15,6 +15,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -229,6 +231,13 @@ public class Timetable extends DataLoader implements API {
         }
 
         List<Note> notes = NoteStorage.getNotes(context);
+
+        Collections.sort(notes, new Comparator<Note>() {
+            @Override
+            public int compare(Note note1, Note note2) {
+                return note1.getDate().compareTo(note2.getDate());
+            }
+        });
 
         Calendar calendar = Calendar.getInstance();
 

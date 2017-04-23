@@ -274,13 +274,19 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void saveNote() {
+        if (fullDay) {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+        }
+
         Note note = new Note();
 
         note.setName(nameField.getText().toString());
         note.setFullDay(fullDay);
+
         note.setDate(calendar.getTime());
         note.setNoteType(type);
 
-        boolean success = NoteStorage.addNote(this, note);
+        NoteStorage.addNote(this, note);
     }
 }
