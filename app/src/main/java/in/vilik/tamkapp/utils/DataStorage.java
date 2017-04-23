@@ -1,8 +1,6 @@
 package in.vilik.tamkapp.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Date;
 
 import in.vilik.tamkapp.Debug;
 

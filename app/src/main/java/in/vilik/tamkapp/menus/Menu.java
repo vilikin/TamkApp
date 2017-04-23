@@ -1,18 +1,13 @@
 package in.vilik.tamkapp.menus;
 
-import android.content.Context;
-import android.content.res.Resources;
-
 import com.bignerdranch.expandablerecyclerview.model.Parent;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DateUtil;
 

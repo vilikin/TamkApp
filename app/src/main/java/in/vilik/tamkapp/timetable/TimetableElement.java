@@ -1,7 +1,5 @@
 package in.vilik.tamkapp.timetable;
 
-import in.vilik.tamkapp.timetable.notes.Note;
-
 /**
  * Created by vili on 16/04/2017.
  */

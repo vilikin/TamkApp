@@ -2,8 +2,6 @@ package in.vilik.tamkapp.bottomsheet;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
@@ -19,7 +17,6 @@ import java.util.List;
 
 import in.vilik.tamkapp.NoteActivity;
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.menus.Campusravita;
 import in.vilik.tamkapp.timetable.Day;
 import in.vilik.tamkapp.timetable.notes.Note;
 import in.vilik.tamkapp.utils.DateUtil;

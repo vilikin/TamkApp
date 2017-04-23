@@ -3,14 +3,12 @@ package in.vilik.tamkapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.os.Build;
 import android.preference.PreferenceManager;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 
 /**

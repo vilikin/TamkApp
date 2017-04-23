@@ -1,8 +1,6 @@
 package in.vilik.tamkapp;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Created by vili on 06/03/2017.

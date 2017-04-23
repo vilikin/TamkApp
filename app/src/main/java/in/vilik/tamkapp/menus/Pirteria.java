@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import in.vilik.tamkapp.Debug;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.recyclerview.Diet;
 import in.vilik.tamkapp.utils.API;

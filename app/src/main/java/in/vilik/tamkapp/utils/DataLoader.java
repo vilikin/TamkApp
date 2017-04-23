@@ -6,7 +6,6 @@ import android.content.Context;
 import java.io.IOException;
 
 import in.vilik.tamkapp.Debug;
-import in.vilik.tamkapp.menus.MenuList;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
