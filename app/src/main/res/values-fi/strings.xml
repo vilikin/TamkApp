@@ -58,6 +58,11 @@
     <string name="note_activity_title">Uusi merkintä</string>
     <string name="exam_activity_title">Uusi tentti</string>
 
+    <string name="deadline_bottom_sheet_title">Lisää uusi deadline</string>
+    <string name="event_bottom_sheet_title">Lisää uusi tapahtuma</string>
+    <string name="note_bottom_sheet_title">Lisää uusi merkintä</string>
+    <string name="exam_bottom_sheet_title">Lisää uusi tentti</string>
+
     <string name="deadline_activity_input_time_all_day">--:--</string>
     <string name="deadline_activity_dialog_time_all_day">Ei aikaa</string>
     <string name="note_activity_hint_input_name">Nimi</string>

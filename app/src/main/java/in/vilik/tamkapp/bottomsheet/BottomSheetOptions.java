@@ -1,6 +1,8 @@
 package in.vilik.tamkapp.bottomsheet;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
@@ -10,10 +12,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import in.vilik.tamkapp.NoteActivity;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.Campusravita;
+import in.vilik.tamkapp.timetable.Day;
+import in.vilik.tamkapp.timetable.notes.Note;
+import in.vilik.tamkapp.utils.DateUtil;
 
 /**
  * Created by vili on 23/04/2017.
@@ -33,6 +42,95 @@ public class BottomSheetOptions extends BottomSheetDialog {
         rootView = (LinearLayout) inflater.inflate(R.layout.bottom_sheet_dialog, null);
 
         setContentView(rootView);
+    }
+
+    public List<Category> getCategoriesForDate(final Day day) {
+        List<Category> categories = new ArrayList<>();
+
+        Category dayCategory = new Category();
+        dayCategory.setName(day.getFormattedDate(DateUtil.DateFormat.DAY));
+        List<Option> options = new ArrayList<>();
+        Option deadline = new Option();
+
+        deadline.setName(context.getString(R.string.deadline_bottom_sheet_title));
+        deadline.setIcon(getDrawable(R.drawable.ic_whatshot_black_24px));
+        deadline.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.DEADLINE);
+                BottomSheetOptions.this.dismiss();
+            }
+        });
+
+        options.add(deadline);
+
+        Option exam = new Option();
+
+        exam.setName(context.getString(R.string.exam_bottom_sheet_title));
+        exam.setIcon(getDrawable(R.drawable.ic_school_black_24px));
+        exam.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.EXAM);
+                BottomSheetOptions.this.dismiss();
+            }
+        });
+
+        options.add(exam);
+
+        Option event = new Option();
+
+        event.setName(context.getString(R.string.event_bottom_sheet_title));
+        event.setIcon(getDrawable(R.drawable.ic_event_available_black_24px));
+        event.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.EVENT);
+                BottomSheetOptions.this.dismiss();
+            }
+        });
+
+        options.add(event);
+
+        Option note = new Option();
+
+        note.setName(context.getString(R.string.note_bottom_sheet_title));
+        note.setIcon(getDrawable(R.drawable.ic_toc_black_24px));
+        note.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.NOTE);
+                BottomSheetOptions.this.dismiss();
+            }
+        });
+
+        options.add(note);
+
+        dayCategory.setOptions(options);
+
+        categories.add(dayCategory);
+
+        return categories;
+    }
+
+    private void createNewNote(Date date, Note.NoteType type) {
+        Intent intent = new Intent(context, NoteActivity.class);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        intent.putExtra("date", calendar);
+        intent.putExtra("fullDay", true);
+        intent.putExtra("type", type.ordinal());
+
+        context.startActivity(intent);
+    }
+
+    public Drawable getDrawable(int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return context.getDrawable(id);
+        } else {
+            return context.getResources().getDrawable(id, null);
+        }
     }
 
     public void setCategories(List<Category> categories) {

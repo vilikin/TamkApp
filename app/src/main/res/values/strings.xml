@@ -82,6 +82,11 @@
     <string name="note_activity_title">New note</string>
     <string name="exam_activity_title">New exam</string>
 
+    <string name="deadline_bottom_sheet_title">Add new deadline</string>
+    <string name="event_bottom_sheet_title">Add new event</string>
+    <string name="note_bottom_sheet_title">Add new note</string>
+    <string name="exam_bottom_sheet_title">Add new exam</string>
+
     <string name="deadline_activity_input_time_all_day">--:--</string>
     <string name="deadline_activity_dialog_time_all_day">No time</string>
     <string name="note_activity_hint_input_name">Name</string>

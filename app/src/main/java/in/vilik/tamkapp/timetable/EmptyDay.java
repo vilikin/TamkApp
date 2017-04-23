@@ -17,10 +17,10 @@ public class EmptyDay extends Day {
     }
 
     @Override
-    public String getFormattedDate() {
+    public String getFormattedDate(DateUtil.DateFormat format) {
         Context context = getParent().getContext();
 
-        String formatted = DateUtil.formatDate(context, getDate());
+        String formatted = DateUtil.formatDate(context, getDate(), format);
 
         return context
                 .getResources()

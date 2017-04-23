@@ -17,6 +17,10 @@ import static java.util.Calendar.DAY_OF_YEAR;
  * Created by vili on 16/04/2017.
  */
 public class DateUtil {
+    public enum DateFormat {
+        DAY, ON_DAY
+    }
+
     public static boolean areOnSameDay(Date first, Date second) {
         Calendar firstCalendar = Calendar.getInstance();
         firstCalendar.setTime(first);
@@ -75,7 +79,7 @@ public class DateUtil {
         return days;
     }
 
-    public static String formatDate(Context context, Date date) {
+    public static String formatDate(Context context, Date date, DateFormat format) {
         Resources resources = context.getResources();
 
         Calendar now = Calendar.getInstance();
@@ -95,7 +99,18 @@ public class DateUtil {
             int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
             int month = calendar.get(Calendar.MONTH);
 
-            String[] weekdays = resources.getStringArray(R.array.weekdays);
+            String[] weekdays;
+
+            switch (format) {
+                case DAY:
+                    weekdays = resources.getStringArray(R.array.weekdays_normal);
+                    break;
+                case ON_DAY:
+                    weekdays = resources.getStringArray(R.array.weekdays);
+                    break;
+                default:
+                    weekdays = resources.getStringArray(R.array.weekdays_normal);
+            }
 
             return weekdays[dayOfWeek - 1] + " " + dayOfMonth + "." + (month + 1);
         }

@@ -31,8 +31,8 @@ public class Day implements TimetableElement {
         return date;
     }
 
-    public String getFormattedDate() {
-        return DateUtil.formatDate(parent.getContext(), date);
+    public String getFormattedDate(DateUtil.DateFormat format) {
+        return DateUtil.formatDate(parent.getContext(), date, format);
     }
 
     public void setDate(Date date) {

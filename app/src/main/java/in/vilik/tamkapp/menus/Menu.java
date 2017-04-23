@@ -94,7 +94,7 @@ public class Menu implements MenuListItem, Parent<MenuListItem> {
 
     @Override
     public String getPrimaryText() {
-        return DateUtil.formatDate(parentMenuList.getContext(), date);
+        return DateUtil.formatDate(parentMenuList.getContext(), date, DateUtil.DateFormat.ON_DAY);
     }
 
     @Override

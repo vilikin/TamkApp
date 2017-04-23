@@ -204,7 +204,7 @@ public class NoteActivity extends AppCompatActivity {
 
     private void updateInputFields() {
         if (calendar != null) {
-            String dateFormatted = DateUtil.formatDate(this, calendar.getTime());
+            String dateFormatted = DateUtil.formatDate(this, calendar.getTime(), DateUtil.DateFormat.DAY);
             dateField.setText(dateFormatted);
         } else {
             dateField.setText(null);
