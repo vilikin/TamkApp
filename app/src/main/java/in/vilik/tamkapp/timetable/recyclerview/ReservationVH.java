@@ -76,6 +76,23 @@ class ReservationVH extends TimetableViewHolder {
 
                 List<Category> categories = optionsDialog.getCategoriesForDate(reservation.getParent());
 
+                Category reservationCategory = new Category();
+
+                reservationCategory.setName(reservation.getViewHeader());
+
+                List<Option> options = new ArrayList<>();
+
+                Option viewDetails = new Option();
+
+                viewDetails.setName(context.getString(R.string.bottom_sheet_show_reservation_details));
+                viewDetails.setIcon(optionsDialog.getDrawable(R.drawable.ic_info_black_24dp));
+
+                options.add(viewDetails);
+
+                reservationCategory.setOptions(options);
+
+                categories.add(0, reservationCategory);
+
                 optionsDialog.setCategories(categories);
 
                 optionsDialog.show();

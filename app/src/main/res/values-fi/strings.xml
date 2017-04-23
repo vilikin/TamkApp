@@ -69,4 +69,5 @@
     <string name="deadline_activity_action_save">Tallenna</string>
     <string name="note_activity_hint_select_date">Valitse päivä</string>
     <string name="note_description">Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa. Pystyt myös lisäämään merkintöjä suoraan oikealle päivälle painamalla päivän otsikkoa hetken aikaa.</string>
+    <string name="bottom_sheet_show_reservation_details">Näytä tilavarauksen tiedot</string>
 </resources>
