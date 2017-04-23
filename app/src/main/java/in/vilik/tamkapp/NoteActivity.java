@@ -262,12 +262,11 @@ public class NoteActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                finish();
                 return true;
             case R.id.action_save:
                 saveNote();
-
-                NavUtils.navigateUpFromSameTask(this);
+                finish();
                 return true;
         }
 

@@ -135,11 +135,4 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("fullDay", true);
         startActivity(intent);
     }
-
-    private void addDeadline(Calendar calendar) {
-        Intent intent = new Intent(this, NoteActivity.class);
-        intent.putExtra("date", calendar);
-        intent.putExtra("fullDay", true);
-        startActivity(intent);
-    }
 }
