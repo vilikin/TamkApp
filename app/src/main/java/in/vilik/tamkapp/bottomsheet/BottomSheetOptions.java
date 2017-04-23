@@ -48,7 +48,7 @@ public class BottomSheetOptions extends BottomSheetDialog {
         List<Category> categories = new ArrayList<>();
 
         Category dayCategory = new Category();
-        dayCategory.setName(day.getFormattedDate(DateUtil.DateFormat.DAY));
+        dayCategory.setName(DateUtil.formatDate(context, day.getDate(), DateUtil.DateFormat.DAY));
         List<Option> options = new ArrayList<>();
         Option deadline = new Option();
 

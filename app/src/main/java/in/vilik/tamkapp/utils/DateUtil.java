@@ -90,9 +90,9 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
-        if (now.get(DAY_OF_YEAR) == calendar.get(DAY_OF_YEAR)) {
+        if (format == DateFormat.ON_DAY && now.get(DAY_OF_YEAR) == calendar.get(DAY_OF_YEAR)) {
             return resources.getString(R.string.date_today);
-        } else if (tomorrow.get(DAY_OF_YEAR) == calendar.get(DAY_OF_YEAR)) {
+        } else if (format == DateFormat.ON_DAY && tomorrow.get(DAY_OF_YEAR) == calendar.get(DAY_OF_YEAR)) {
             return resources.getString(R.string.date_tomorrow);
         } else {
             int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
