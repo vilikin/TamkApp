@@ -68,7 +68,7 @@
     <string name="note_activity_hint_input_name">Nimi</string>
     <string name="deadline_activity_action_save">Tallenna</string>
     <string name="note_activity_hint_select_date">Valitse päivä</string>
-    <string name="note_description">Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa. Pystyt myös lisäämään merkintöjä suoraan oikealle päivälle painamalla päivän otsikkoa hetken aikaa.</string>
+    <string name="note_description"><b>Tiesitkö?</b>\n\nMerkintöjä voi lisätä suoraan tietylle päivälle painamalla päivän otsikkoa hetken aikaa. Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa.</string>
     <string name="bottom_sheet_show_reservation_details">Näytä tilavarauksen tiedot</string>
     <string name="note_remove_confirm_title">Poista merkintä</string>
     <string name="note_remove_confirm_button">Poista</string>
