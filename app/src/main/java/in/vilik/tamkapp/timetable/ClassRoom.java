@@ -5,21 +5,9 @@ package in.vilik.tamkapp.timetable;
  */
 
 public class ClassRoom {
-    private Reservation parent;
     private String code;
     private String name;
     private String building;
-
-    public ClassRoom() {
-    }
-
-    public Reservation getParent() {
-        return parent;
-    }
-
-    public void setParent(Reservation parent) {
-        this.parent = parent;
-    }
 
     public String getCode() {
         return code;
@@ -43,14 +31,5 @@ public class ClassRoom {
 
     public void setBuilding(String building) {
         this.building = building;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassRoom {" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", building='" + building + '\'' +
-                '}';
     }
 }

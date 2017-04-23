@@ -4,16 +4,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.bottomsheet.BottomSheetOptions;
 import in.vilik.tamkapp.bottomsheet.Category;
-import in.vilik.tamkapp.bottomsheet.Option;
 import in.vilik.tamkapp.timetable.Reservation;
 import in.vilik.tamkapp.timetable.TimetableElement;
-import in.vilik.tamkapp.utils.UtilCompat;
 
 /**
  * Created by vili on 16/04/2017.
@@ -71,24 +68,6 @@ class ReservationVH extends TimetableViewHolder {
                 final BottomSheetOptions optionsDialog = new BottomSheetOptions(context);
 
                 List<Category> categories = optionsDialog.getCategoriesForDate(reservation.getParent());
-
-                Category reservationCategory = new Category();
-
-                reservationCategory.setName(reservation.getViewHeader());
-
-                List<Option> options = new ArrayList<>();
-
-                Option viewDetails = new Option();
-
-                viewDetails.setName(context.getString(R.string.bottom_sheet_show_reservation_details));
-                viewDetails.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_info_black_24dp));
-
-                options.add(viewDetails);
-
-                reservationCategory.setOptions(options);
-
-                categories.add(0, reservationCategory);
-
                 optionsDialog.setCategories(categories);
 
                 optionsDialog.show();

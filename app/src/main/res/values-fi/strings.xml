@@ -74,4 +74,5 @@
     <string name="note_remove_confirm_button">Poista</string>
     <string name="note_remove_cancel_button">Peruuta</string>
     <string name="note_remove_confirm_message">Haluatko varmasti poistaa merkinnän "%1$s"?</string>
+    <string name="reservation_details">Tilavarauksen tiedot</string>
 </resources>

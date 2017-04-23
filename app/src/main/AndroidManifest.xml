@@ -22,14 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/settings_activity">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_activity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".NoteActivity"
+        <activity
+            android:name=".NoteActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateVisible">
             <meta-data

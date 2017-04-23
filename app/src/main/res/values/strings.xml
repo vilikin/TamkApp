@@ -98,4 +98,5 @@
     <string name="note_remove_confirm_button">Remove</string>
     <string name="note_remove_cancel_button">Cancel</string>
     <string name="note_remove_confirm_message">Do you really want to remove note "%1$s"?</string>
+    <string name="reservation_details">Reservation details</string>
 </resources>
