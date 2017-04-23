@@ -23,6 +23,7 @@ import in.vilik.tamkapp.menus.Campusravita;
 import in.vilik.tamkapp.timetable.Day;
 import in.vilik.tamkapp.timetable.notes.Note;
 import in.vilik.tamkapp.utils.DateUtil;
+import in.vilik.tamkapp.utils.UtilCompat;
 
 /**
  * Created by vili on 23/04/2017.
@@ -53,7 +54,7 @@ public class BottomSheetOptions extends BottomSheetDialog {
         Option deadline = new Option();
 
         deadline.setName(context.getString(R.string.deadline_bottom_sheet_title));
-        deadline.setIcon(getDrawable(R.drawable.ic_whatshot_black_24px));
+        deadline.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_whatshot_black_24px));
         deadline.setListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +68,7 @@ public class BottomSheetOptions extends BottomSheetDialog {
         Option exam = new Option();
 
         exam.setName(context.getString(R.string.exam_bottom_sheet_title));
-        exam.setIcon(getDrawable(R.drawable.ic_school_black_24px));
+        exam.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_school_black_24px));
         exam.setListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +82,7 @@ public class BottomSheetOptions extends BottomSheetDialog {
         Option event = new Option();
 
         event.setName(context.getString(R.string.event_bottom_sheet_title));
-        event.setIcon(getDrawable(R.drawable.ic_event_available_black_24px));
+        event.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_event_available_black_24px));
         event.setListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +96,7 @@ public class BottomSheetOptions extends BottomSheetDialog {
         Option note = new Option();
 
         note.setName(context.getString(R.string.note_bottom_sheet_title));
-        note.setIcon(getDrawable(R.drawable.ic_toc_black_24px));
+        note.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_toc_black_24px));
         note.setListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,14 +124,6 @@ public class BottomSheetOptions extends BottomSheetDialog {
         intent.putExtra("type", type.ordinal());
 
         context.startActivity(intent);
-    }
-
-    public Drawable getDrawable(int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return context.getDrawable(id);
-        } else {
-            return context.getResources().getDrawable(id, null);
-        }
     }
 
     public void setCategories(List<Category> categories) {

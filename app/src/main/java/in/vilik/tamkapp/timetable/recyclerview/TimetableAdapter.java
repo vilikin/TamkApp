@@ -47,7 +47,7 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_reservation, parent, false);
                 return new ReservationVH(view);
             case NOTE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_deadline, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_note, parent, false);
                 return new NoteVH(view);
         }
 

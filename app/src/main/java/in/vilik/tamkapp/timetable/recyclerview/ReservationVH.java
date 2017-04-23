@@ -1,23 +1,19 @@
 package in.vilik.tamkapp.timetable.recyclerview;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import in.vilik.tamkapp.NoteActivity;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.bottomsheet.BottomSheetOptions;
 import in.vilik.tamkapp.bottomsheet.Category;
 import in.vilik.tamkapp.bottomsheet.Option;
 import in.vilik.tamkapp.timetable.Reservation;
 import in.vilik.tamkapp.timetable.TimetableElement;
-import in.vilik.tamkapp.timetable.notes.Note;
+import in.vilik.tamkapp.utils.UtilCompat;
 
 /**
  * Created by vili on 16/04/2017.
@@ -85,7 +81,7 @@ class ReservationVH extends TimetableViewHolder {
                 Option viewDetails = new Option();
 
                 viewDetails.setName(context.getString(R.string.bottom_sheet_show_reservation_details));
-                viewDetails.setIcon(optionsDialog.getDrawable(R.drawable.ic_info_black_24dp));
+                viewDetails.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_info_black_24dp));
 
                 options.add(viewDetails);
 
