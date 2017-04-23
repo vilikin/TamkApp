@@ -84,7 +84,7 @@ public class Timetable extends DataLoader implements API {
         });
     }
 
-    public void setLanguage(String language) {
+    private void setLanguage(String language) {
         if (!language.equals("fi")) {
             this.language = "en";
         } else {
@@ -176,26 +176,6 @@ public class Timetable extends DataLoader implements API {
         return elements;
     }
 
-    /*  ----------------------- PARSING ------------------------------ */
-
-    private boolean parseTimetable(String data) {
-        try {
-            JSONObject json = new JSONObject(data);
-
-            JSONArray reservationsJson = json.getJSONArray("reservations");
-
-            List<Reservation> reservations = parseReservations(reservationsJson);
-
-            generateDays();
-            addReservationsToDays(reservations);
-
-            return true;
-        } catch (JSONException | ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     private void addReservationsToDays(List<Reservation> reservations) {
         for (final Reservation reservation : reservations) {
             for (Day day : days) {
@@ -216,10 +196,10 @@ public class Timetable extends DataLoader implements API {
                 Reservation last = firstDayReservations
                         .get(firstDayReservations.size() - 1);
 
-                if (now.after(last.getEndDate())) {
+                if (now.after(last.getEndDate()) && days.get(0).getNotes().isEmpty()) {
                     days.remove(0);
                 }
-            } else {
+            } else if (days.get(0).getNotes().isEmpty()) {
                 days.remove(0);
             }
         }
@@ -278,8 +258,26 @@ public class Timetable extends DataLoader implements API {
                 days.add(day);
             }
         }
+    }
 
-        Debug.log("generateDays()", "There are now " + days.size() + " days in timetable");
+    /*  ----------------------- PARSING ------------------------------ */
+
+    private boolean parseTimetable(String data) {
+        try {
+            JSONObject json = new JSONObject(data);
+
+            JSONArray reservationsJson = json.getJSONArray("reservations");
+
+            List<Reservation> reservations = parseReservations(reservationsJson);
+
+            generateDays();
+            addReservationsToDays(reservations);
+
+            return true;
+        } catch (JSONException | ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private List<Reservation> parseReservations(JSONArray reservationsJson) throws JSONException, ParseException {
