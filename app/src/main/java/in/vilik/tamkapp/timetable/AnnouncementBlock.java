@@ -1,6 +1,5 @@
 package in.vilik.tamkapp.timetable;
 
-import android.content.Intent;
 import android.view.View;
 
 /**

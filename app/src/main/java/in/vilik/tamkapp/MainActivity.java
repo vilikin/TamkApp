@@ -1,45 +1,22 @@
 package in.vilik.tamkapp;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-import in.vilik.tamkapp.menus.Campusravita;
-import in.vilik.tamkapp.menus.MenuList;
-import in.vilik.tamkapp.menus.Pirteria;
 import in.vilik.tamkapp.utils.AppPreferences;
-
-import static android.R.id.input;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -154,13 +131,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addDeadline(View view) {
-        Intent intent = new Intent(this, DeadlineActivity.class);
+        Intent intent = new Intent(this, NoteActivity.class);
         intent.putExtra("fullDay", true);
         startActivity(intent);
     }
 
     private void addDeadline(Calendar calendar) {
-        Intent intent = new Intent(this, DeadlineActivity.class);
+        Intent intent = new Intent(this, NoteActivity.class);
         intent.putExtra("date", calendar);
         intent.putExtra("fullDay", true);
         startActivity(intent);

@@ -2,9 +2,7 @@ package in.vilik.tamkapp.timetable;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
 import android.view.View;
 
 import org.json.JSONArray;
@@ -21,11 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 import in.vilik.tamkapp.Debug;
-import in.vilik.tamkapp.MainActivity;
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.SettingsActivity;
-import in.vilik.tamkapp.timetable.deadlines.Deadline;
-import in.vilik.tamkapp.timetable.deadlines.DeadlineStorage;
+import in.vilik.tamkapp.timetable.notes.Note;
+import in.vilik.tamkapp.timetable.notes.NoteStorage;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
@@ -165,8 +162,8 @@ public class Timetable extends DataLoader implements API {
                 elements.add(new EmptyDay(day));
             }
 
-            for (Deadline deadline : day.getDeadlines()) {
-                elements.add(deadline);
+            for (Note note : day.getNotes()) {
+                elements.add(note);
             }
         }
 
@@ -203,6 +200,7 @@ public class Timetable extends DataLoader implements API {
         for (final Reservation reservation : reservations) {
             for (Day day : days) {
                 if (DateUtil.areOnSameDay(day.getDate(), reservation.getStartDate())) {
+                    reservation.setParent(day);
                     day.getReservations().add(reservation);
                 }
             }
@@ -221,6 +219,8 @@ public class Timetable extends DataLoader implements API {
                 if (now.after(last.getEndDate())) {
                     days.remove(0);
                 }
+            } else {
+                days.remove(0);
             }
         }
     }
@@ -248,7 +248,7 @@ public class Timetable extends DataLoader implements API {
                 dates = DateUtil.getDays(0);
         }
 
-        List<Deadline> deadlines = DeadlineStorage.getDeadlines(context);
+        List<Note> notes = NoteStorage.getNotes(context);
 
         Calendar calendar = Calendar.getInstance();
 
@@ -268,10 +268,10 @@ public class Timetable extends DataLoader implements API {
                 Day day = new Day(this);
                 day.setDate(date);
 
-                for (Deadline deadline : deadlines) {
-                    if (DateUtil.areOnSameDay(date, deadline.getDate())) {
-                        deadline.setTimetable(this);
-                        day.getDeadlines().add(deadline);
+                for (Note note : notes) {
+                    if (DateUtil.areOnSameDay(date, note.getDate())) {
+                        note.setTimetable(this);
+                        day.getNotes().add(note);
                     }
                 }
 

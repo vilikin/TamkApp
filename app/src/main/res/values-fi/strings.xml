@@ -53,10 +53,15 @@
     <string name="menulist_error_block_title">Ei mitään nähtävää</string>
     <string name="menulist_error_block_body">Ruokaa ei näytä olevan tarjolla? Kokeile myöhemmin uudelleen!</string>
 
-    <string name="deadline_activity_title">Lisää deadline</string>
+    <string name="deadline_activity_title">Uusi deadline</string>
+    <string name="event_activity_title">Uusi tapahtuma</string>
+    <string name="note_activity_title">Uusi merkintä</string>
+    <string name="exam_activity_title">Uusi tentti</string>
+
     <string name="deadline_activity_input_time_all_day">--:--</string>
     <string name="deadline_activity_dialog_time_all_day">Ei aikaa</string>
-    <string name="deadline_activity_input_name">Nimi</string>
+    <string name="note_activity_hint_input_name">Nimi</string>
     <string name="deadline_activity_action_save">Tallenna</string>
-    <string name="deadline_activity_hint_select_date">Valitse päivä</string>
+    <string name="note_activity_hint_select_date">Valitse päivä</string>
+    <string name="note_description">Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa. Pystyt myös lisäämään merkintöjä suoraan oikealle päivälle painamalla päivän otsikkoa hetken aikaa.</string>
 </resources>

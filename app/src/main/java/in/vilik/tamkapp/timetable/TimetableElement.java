@@ -1,12 +1,14 @@
 package in.vilik.tamkapp.timetable;
 
+import in.vilik.tamkapp.timetable.notes.Note;
+
 /**
  * Created by vili on 16/04/2017.
  */
 
 public interface TimetableElement {
     enum Type {
-        NOW_BLOCK, DAY_HEADER, DAY_HEADER_EMPTY, RESERVATION, ANNOUNCEMENT_BLOCK, DEADLINE
+        NOW_BLOCK, DAY_HEADER, DAY_HEADER_EMPTY, RESERVATION, ANNOUNCEMENT_BLOCK, NOTE
     }
 
     Type getType();

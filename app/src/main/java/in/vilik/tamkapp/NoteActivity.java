@@ -11,26 +11,30 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import in.vilik.tamkapp.timetable.deadlines.Deadline;
-import in.vilik.tamkapp.timetable.deadlines.DeadlineStorage;
+import in.vilik.tamkapp.timetable.notes.Note;
+import in.vilik.tamkapp.timetable.notes.NoteStorage;
 import in.vilik.tamkapp.utils.DateUtil;
 
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
-
-public class DeadlineActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity {
     Calendar calendar;
     EditText nameField;
     EditText timeField;
     EditText dateField;
+
+    Note.NoteType type;
+
+    Spinner spinner;
 
     boolean inputValid;
 
@@ -46,21 +50,46 @@ public class DeadlineActivity extends AppCompatActivity {
             calendar = (Calendar) extras.getSerializable("date");
 
             fullDay = extras.getBoolean("fullDay", true);
+
+            type = Note.NoteType.values()[extras.getInt("type")];
         }
 
         inputValid = false;
 
-        setContentView(R.layout.activity_deadline);
+        setContentView(R.layout.activity_note);
+
+        spinner = (Spinner) findViewById(R.id.noteTypeSpinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.noteTypes, R.layout.spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = Note.NoteType.values()[position];
+                updateType();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        nameField = (EditText) findViewById(R.id.deadline_input_name);
-        dateField = (EditText) findViewById(R.id.deadline_input_date);
-        timeField = (EditText) findViewById(R.id.deadline_input_time);
+        nameField = (EditText) findViewById(R.id.note_input_name);
+        dateField = (EditText) findViewById(R.id.note_input_date);
+        timeField = (EditText) findViewById(R.id.note_input_time);
 
         updateInputFields();
+        updateType();
 
         nameField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,6 +107,25 @@ public class DeadlineActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updateType() {
+        spinner.setSelection(type.ordinal());
+
+        switch (type) {
+            case DEADLINE:
+                setTitle(R.string.deadline_activity_title);
+                break;
+            case NOTE:
+                setTitle(R.string.note_activity_title);
+                break;
+            case EXAM:
+                setTitle(R.string.exam_activity_title);
+                break;
+            case EVENT:
+                setTitle(R.string.event_activity_title);
+                break;
+        }
     }
 
     public void selectDate(View view) {
@@ -217,7 +265,7 @@ public class DeadlineActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_save:
-                saveDeadline();
+                saveNote();
 
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
@@ -226,14 +274,14 @@ public class DeadlineActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveDeadline() {
-        Deadline deadline = new Deadline();
+    private void saveNote() {
+        Note note = new Note();
 
-        deadline.setName(nameField.getText().toString());
-        deadline.setFullDay(fullDay);
-        deadline.setDate(calendar.getTime());
+        note.setName(nameField.getText().toString());
+        note.setFullDay(fullDay);
+        note.setDate(calendar.getTime());
+        note.setNoteType(type);
 
-        boolean success = DeadlineStorage.addDeadline(this, deadline);
-        Toast.makeText(this, "Added deadline: " + success, Toast.LENGTH_LONG).show();
+        boolean success = NoteStorage.addNote(this, note);
     }
 }

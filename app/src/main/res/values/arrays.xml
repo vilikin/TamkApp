@@ -75,4 +75,11 @@
         <item>Friday</item>
         <item>Saturday</item>
     </string-array>
+
+    <string-array name="noteTypes">
+        <item>Deadline</item>
+        <item>Exam</item>
+        <item>Event</item>
+        <item>Note</item>
+    </string-array>
 </resources>

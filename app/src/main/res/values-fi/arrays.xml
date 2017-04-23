@@ -46,4 +46,11 @@
         <item>Perjantaina</item>
         <item>Lauantaina</item>
     </string-array>
+
+    <string-array name="noteTypes">
+        <item>Deadline</item>
+        <item>Tentti</item>
+        <item>Tapahtuma</item>
+        <item>Merkintä</item>
+    </string-array>
 </resources>

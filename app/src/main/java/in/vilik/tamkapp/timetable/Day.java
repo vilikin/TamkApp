@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import in.vilik.tamkapp.timetable.deadlines.Deadline;
+import in.vilik.tamkapp.timetable.notes.Note;
 import in.vilik.tamkapp.utils.DateUtil;
 
 /**
@@ -15,12 +15,12 @@ public class Day implements TimetableElement {
     private Timetable parent;
     private Date date;
     private List<Reservation> reservations;
-    private List<Deadline> deadlines;
+    private List<Note> notes;
 
     public Day(Timetable parent) {
         this.parent = parent;
         this.reservations = new ArrayList<>();
-        this.deadlines = new ArrayList<>();
+        this.notes = new ArrayList<>();
     }
 
     public Timetable getParent() {
@@ -43,8 +43,8 @@ public class Day implements TimetableElement {
         return reservations;
     }
 
-    public List<Deadline> getDeadlines() {
-        return deadlines;
+    public List<Note> getNotes() {
+        return notes;
     }
 
     @Override

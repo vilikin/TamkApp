@@ -1,4 +1,4 @@
-package in.vilik.tamkapp.timetable.deadlines;
+package in.vilik.tamkapp.timetable.notes;
 
 import java.util.Date;
 
@@ -9,12 +9,25 @@ import in.vilik.tamkapp.timetable.TimetableElement;
  * Created by vili on 22/04/2017.
  */
 
-public class Deadline implements TimetableElement {
+public class Note implements TimetableElement {
+    public enum NoteType {
+        DEADLINE, EXAM, EVENT, NOTE
+    }
+
     private Date date;
     private boolean fullDay;
     private String name;
+    private NoteType noteType;
 
     private Timetable timetable;
+
+    public void setNoteType(NoteType noteType) {
+        this.noteType = noteType;
+    }
+
+    public NoteType getNoteType() {
+        return noteType;
+    }
 
     public Timetable getTimetable() {
         return timetable;
@@ -50,6 +63,6 @@ public class Deadline implements TimetableElement {
 
     @Override
     public Type getType() {
-        return Type.DEADLINE;
+        return Type.NOTE;
     }
 }

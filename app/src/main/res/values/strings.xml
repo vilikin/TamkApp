@@ -77,10 +77,15 @@
     <string name="menulist_no_localization_title">No localization</string>
     <string name="menulist_no_localization_body">This menu is not available in English.\nTo see the menu in Finnish, tap this message.</string>
 
-    <string name="deadline_activity_title">Add deadline</string>
+    <string name="deadline_activity_title">New deadline</string>
+    <string name="event_activity_title">New event</string>
+    <string name="note_activity_title">New note</string>
+    <string name="exam_activity_title">New exam</string>
+
     <string name="deadline_activity_input_time_all_day">--:--</string>
     <string name="deadline_activity_dialog_time_all_day">No time</string>
-    <string name="deadline_activity_input_name">Name</string>
+    <string name="note_activity_hint_input_name">Name</string>
     <string name="deadline_activity_action_save">Save</string>
-    <string name="deadline_activity_hint_select_date">Select date</string>
+    <string name="note_activity_hint_select_date">Select date</string>
+    <string name="note_description">Merkinnän voi poistaa lukkarista painamalla sitä sormella hetken aikaa. Pystyt myös lisäämään merkintöjä suoraan oikealle päivälle painamalla päivän otsikkoa hetken aikaa.</string>
 </resources>

@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.timetable.Timetable;
 import in.vilik.tamkapp.timetable.TimetableElement;
@@ -48,9 +46,9 @@ public class TimetableAdapter extends RecyclerView.Adapter<TimetableViewHolder>{
             case RESERVATION:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_reservation, parent, false);
                 return new ReservationVH(view);
-            case DEADLINE:
+            case NOTE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_deadline, parent, false);
-                return new DeadlineVH(view);
+                return new NoteVH(view);
         }
 
         return null;

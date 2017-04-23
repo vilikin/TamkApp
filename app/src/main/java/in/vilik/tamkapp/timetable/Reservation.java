@@ -1,14 +1,9 @@
 package in.vilik.tamkapp.timetable;
 
-import android.content.Context;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DateUtil;
 
 /**

@@ -29,8 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".DeadlineActivity"
-            android:label="@string/deadline_activity_title"
+        <activity android:name=".NoteActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateVisible">
             <meta-data
