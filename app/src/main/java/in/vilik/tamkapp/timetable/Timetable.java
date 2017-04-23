@@ -218,7 +218,7 @@ public class Timetable extends DataLoader implements API {
 
         switch (period) {
             case "this_week":
-                dates = DateUtil.getThisWeek();
+                dates = DateUtil.getDays(7);
                 break;
             case "one_month":
                 dates = DateUtil.getDays(30);

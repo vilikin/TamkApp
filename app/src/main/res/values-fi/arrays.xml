@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="timetable_periods_readable">
-        <item>Tämä viikko</item>
+        <item>Viikko</item>
         <item>Kuukausi</item>
         <item>Puoli vuotta</item>
     </string-array>
 
     <string-array name="timetable_periods_summary">
-        <item>Näytetään tämä viikko</item>
+        <item>Näytetään viikko</item>
         <item>Näytetään kuukausi</item>
         <item>Näytetään puoli vuotta</item>
     </string-array>

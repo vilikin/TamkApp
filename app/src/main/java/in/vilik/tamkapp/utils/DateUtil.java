@@ -36,6 +36,7 @@ public class DateUtil {
         return date.after(rangeStart) && date.before(rangeEnd);
     }
 
+    /*
     public static List<Date> getThisWeek() {
         List<Date> days = new ArrayList<>();
 
@@ -60,6 +61,7 @@ public class DateUtil {
 
         return days;
     }
+    */
 
     public static List<Date> getDays(int amount) {
         List<Date> days = new ArrayList<>();

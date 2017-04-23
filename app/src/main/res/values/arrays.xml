@@ -7,13 +7,13 @@
     </string-array>
 
     <string-array name="timetable_periods_readable">
-        <item>This week</item>
+        <item>Week</item>
         <item>Month</item>
         <item>Half year</item>
     </string-array>
 
     <string-array name="timetable_periods_summary">
-        <item>Showing this week</item>
+        <item>Showing one week</item>
         <item>Showing one month</item>
         <item>Showing half year</item>
     </string-array>
