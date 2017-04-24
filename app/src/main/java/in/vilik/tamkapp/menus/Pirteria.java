@@ -84,7 +84,7 @@ public class Pirteria extends MenuList {
     private Menu parseMenu(JSONObject json) throws JSONException, ParseException {
         Menu menu = new Menu(this);
 
-        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.ENGLISH);
+        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
         Date date = df1.parse(json.getString("Date"));
 
         Calendar c = Calendar.getInstance();
