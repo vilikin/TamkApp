@@ -14,6 +14,13 @@ import android.view.View;
 
 import in.vilik.tamkapp.utils.AppPreferences;
 
+/**
+ * Implements main activity of the application containing all the major views.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0425
+ * @since 1.7
+ */
 public class MainActivity extends AppCompatActivity {
     /**
      * An intent that leads to the settings activity.
@@ -33,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Bootstraps the application.
-     * Setups tab manager, action bar and opens settings on first launch.
+     * Setups tab manager, action bar and controls fab visibility.
      *
      * @param savedInstanceState Saved instance state
      */
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Opens settings activity when corresponding menu option is selected.
+     *
      * @param item      Item that was selected
      * @return          Boolean
      */
@@ -126,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Starts note activity.
+     *
+     * @param view View that triggered this action
+     */
     public void addDeadline(View view) {
         Intent intent = new Intent(this, NoteActivity.class);
         intent.putExtra("fullDay", true);

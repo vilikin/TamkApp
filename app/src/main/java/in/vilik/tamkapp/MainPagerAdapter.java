@@ -10,17 +10,35 @@ import in.vilik.tamkapp.fragments.TimetableFragment;
 import in.vilik.tamkapp.utils.API;
 
 /**
- * Created by vili on 10/04/2017.
+ * Implements pager adapter to enable swiping between views.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0425
+ * @since 1.7
  */
-
 public class MainPagerAdapter extends FragmentPagerAdapter {
-    Context context;
+    /**
+     * Context of the adapter.
+     */
+    private Context context;
 
+    /**
+     * Constructs the object.
+     *
+     * @param fm        FragmentManager
+     * @param context   Context
+     */
     public MainPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
 
+    /**
+     * Determines which view to display in which tab.
+     *
+     * @param position  Tab index
+     * @return          Fragment to display in the specified tab
+     */
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -35,12 +53,23 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    /**
+     * Gets total number of tabs.
+     *
+     * @return  Total number of tabs
+     */
     @Override
     public int getCount() {
         // Total amount of pages.
         return 3;
     }
 
+    /**
+     * Determines titles for each tab.
+     *
+     * @param position  Tab index
+     * @return          Title for the specified tab
+     */
     @Override
     public CharSequence getPageTitle(int position) {
         // Tab titles
@@ -52,6 +81,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return context.getString(R.string.tab_header_pirteria);
         }
+
         return null;
     }
 }

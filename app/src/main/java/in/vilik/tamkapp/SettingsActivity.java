@@ -6,8 +6,20 @@ import android.view.MenuItem;
 
 import in.vilik.tamkapp.fragments.SettingsFragment;
 
+/**
+ * Implements settings activity containing all preferences.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0425
+ * @since 1.7
+ */
 public class SettingsActivity extends AppCompatActivity {
 
+    /**
+     * Creates activity and inflates it with settings fragment.
+     *
+     * @param savedInstanceState Saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +33,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Handles menu item actions. (back button)
+     *
+     * @param item  Item that was selected
+     * @return      Boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

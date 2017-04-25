@@ -24,20 +24,61 @@ import in.vilik.tamkapp.timetable.notes.Note;
 import in.vilik.tamkapp.timetable.notes.NoteStorage;
 import in.vilik.tamkapp.utils.DateUtil;
 
+/**
+ * Implements an activity for adding new notes to the timetable.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0425
+ * @since 1.7
+ */
 public class NoteActivity extends AppCompatActivity {
-    Calendar calendar;
-    EditText nameField;
-    EditText timeField;
-    EditText dateField;
-
+    /**
+     * Type of the note.
+     */
     Note.NoteType type;
 
-    Spinner spinner;
-
-    boolean inputValid;
-
+    /**
+     * If note has a specific time or not.
+     */
     boolean fullDay;
 
+    /**
+     * Calendar that holds date (and possibly time) for the note.
+     */
+    Calendar calendar;
+
+    /**
+     * EditText field for name of the note.
+     */
+    EditText nameField;
+
+    /**
+     * EditText field for time of the note.
+     */
+    EditText timeField;
+
+    /**
+     * EditText field for date of the note.
+     */
+    EditText dateField;
+
+    /**
+     * Spinner for type of the note.
+     */
+    Spinner spinner;
+
+    /**
+     * State of the input: is it currently valid or not.
+     *
+     * Used to determine if note can be saved.
+     */
+    boolean inputValid;
+
+    /**
+     * Creates activity with default values from intent extras. Setups listeners for all fields.
+     *
+     * @param savedInstanceState Saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +148,9 @@ public class NoteActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates activity title and spinner selection based on current type selected.
+     */
     private void updateType() {
         spinner.setSelection(type.ordinal());
 
@@ -126,6 +170,11 @@ public class NoteActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Prompts user with date picker to determine date for the note.
+     *
+     * @param view  View that triggered this action
+     */
     public void selectDate(View view) {
         DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -160,6 +209,13 @@ public class NoteActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    /**
+     * Prompts user with time picker to determine time for the note.
+     *
+     * Also provides ability to not choose time, which toggles fullDay flag.
+     *
+     * @param view View that triggered this action
+     */
     public void selectTime(View view) {
         TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -200,6 +256,9 @@ public class NoteActivity extends AppCompatActivity {
         timePicker.show();
     }
 
+    /**
+     * Updates date and time input fields based on current state of the note.
+     */
     private void updateInputFields() {
         if (calendar != null) {
             String dateFormatted = DateUtil.formatDate(this, calendar.getTime(), DateUtil.DateFormat.DAY);
@@ -230,6 +289,12 @@ public class NoteActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Sets state of the save button (enabled/disabled) based on validity of input.
+     *
+     * @param menu  Menu
+     * @return      Boolean
+     */
     @Override
     public boolean onPrepareOptionsMenu (Menu menu) {
         MenuItem save = menu.findItem(R.id.action_save);
@@ -237,6 +302,9 @@ public class NoteActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Validates user input and invalidates menu if validity changes.
+     */
     private void validateInput() {
         boolean inputWasValid = inputValid;
         boolean nameValid = !nameField.getText().toString().trim().isEmpty();
@@ -251,7 +319,8 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     /**
-     * Opens settings activity when corresponding menu option is selected.
+     * Handles actions for menu items.
+     *
      * @param item      Item that was selected
      * @return          Boolean
      */
@@ -271,6 +340,9 @@ public class NoteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Saves a new note based on user input.
+     */
     private void saveNote() {
         if (fullDay) {
             calendar.set(Calendar.HOUR_OF_DAY, 0);
