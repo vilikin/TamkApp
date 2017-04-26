@@ -5,10 +5,21 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 
 /**
- * Created by vili on 23/04/2017.
+ * Provides utilities that handle backwards compatibility issues with some Android methods.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 public class UtilCompat {
+
+    /**
+     * Gets drawable from resources.
+     *
+     * @param context Context
+     * @param id      Id of the drawable
+     * @return        Drawable object
+     */
     public static  Drawable getDrawable(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return context.getDrawable(id);
