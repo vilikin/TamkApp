@@ -12,10 +12,21 @@ import java.io.OutputStreamWriter;
 import in.vilik.tamkapp.Debug;
 
 /**
- * Created by vili on 22/04/2017.
+ * Implements methods to read and write files.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 public class DataStorage {
+
+    /**
+     * Writes data to a file. Creates file if it doesn't exist.
+     *
+     * @param context   Context
+     * @param filename  File to write the data in
+     * @param data      Data to write to the file
+     */
     public static void write(Context context, String filename, String data) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context
@@ -31,6 +42,13 @@ public class DataStorage {
         }
     }
 
+    /**
+     * Reads data from a file.
+     *
+     * @param context   Context
+     * @param filename  Filename
+     * @return          Content of the file, null if file is not found
+     */
     public static String read(Context context, String filename) {
         String content = null;
 
