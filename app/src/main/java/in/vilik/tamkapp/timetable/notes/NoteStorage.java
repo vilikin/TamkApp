@@ -13,13 +13,36 @@ import java.util.List;
 import in.vilik.tamkapp.utils.DataStorage;
 
 /**
- * Created by vili on 22/04/2017.
+ * Implements persisting of users notes.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 public class NoteStorage {
+
+    /**
+     * Variable that contains "cache" of user notes.
+     *
+     * This is retrieved first time from file and after that
+     * all modifications go to the real file through this variable.
+     */
     private static List<Note> cache = null;
+
+    /**
+     * Name of the file used for storing users notes.
+     */
     private static final String NOTE_FILENAME = "notes.json";
 
+    /**
+     * Gets list of users notes, preferably from static cache variable.
+     *
+     * If cache is not available, parses JSON from the specified file
+     * and saves it in cache variable.
+     *
+     * @param context   Context
+     * @return          List of users notes
+     */
     public static List<Note> getNotes(Context context) {
         if (cache == null) {
             ArrayList<Note> notes = new ArrayList<>();
@@ -53,6 +76,13 @@ public class NoteStorage {
         return new ArrayList<>(cache);
     }
 
+    /**
+     * Inserts new note to the list and persists modified list to a file.
+     *
+     * @param context   Context
+     * @param note      Note to add to the list
+     * @return          If the operation was successful or not
+     */
     public static boolean addNote(Context context, Note note) {
         List<Note> notes = getNotes(context);
 
@@ -70,6 +100,13 @@ public class NoteStorage {
         }
     }
 
+    /**
+     * Removes note from the list and persists modified list to a file.
+     *
+     * @param context   Context
+     * @param note      Note to remove from the list
+     * @return          If the operation was successful or not
+     */
     public static boolean removeNote(Context context, Note note) {
         List<Note> notes = getNotes(context);
 
@@ -89,7 +126,13 @@ public class NoteStorage {
         return false;
     }
 
-
+    /**
+     * Serializes list of notes into a JSON string.
+     *
+     * @param notes             List of notes to serialize
+     * @return                  Notes in a JSON format
+     * @throws JSONException    An exception indicating that serialization failed
+     */
     private static String notesToJson(List<Note> notes) throws JSONException {
         JSONArray array = new JSONArray();
 
