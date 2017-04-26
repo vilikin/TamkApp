@@ -1,9 +1,12 @@
 package in.vilik.tamkapp.timetable;
 
 /**
- * Created by vili on 16/04/2017.
+ * Implements interface for all timetable UI components.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 public interface TimetableElement {
     /**
      * Defines available types for timetable elements.
