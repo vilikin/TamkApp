@@ -12,10 +12,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 /**
- * Created by vili on 16/04/2017.
- */
-
-/**
  * Implements a base class for all API handlers.
  *
  * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
