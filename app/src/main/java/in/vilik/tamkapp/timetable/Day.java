@@ -47,6 +47,14 @@ public class Day implements TimetableElement {
         return notes;
     }
 
+    /**
+     * Gets type of the timetable element.
+     *
+     * This information is used by recycler view of the timetable
+     * to choose correct ViewHolder for the item.
+     *
+     * @return  Type.DAY_HEADER
+     */
     @Override
     public Type getType() {
         return Type.DAY_HEADER;

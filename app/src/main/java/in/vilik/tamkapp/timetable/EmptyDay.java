@@ -27,6 +27,14 @@ public class EmptyDay extends Day {
                 .getString(R.string.timetable_no_reservations, formatted);
     }
 
+    /**
+     * Gets type of the timetable element.
+     *
+     * This information is used by recycler view of the timetable
+     * to choose correct ViewHolder for the item.
+     *
+     * @return  Type.DAY_HEADER_EMPTY
+     */
     @Override
     public Type getType() {
         return Type.DAY_HEADER_EMPTY;

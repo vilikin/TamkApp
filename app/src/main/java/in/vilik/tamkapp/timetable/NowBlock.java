@@ -20,6 +20,14 @@ public class NowBlock implements TimetableElement {
         this.reservation = reservation;
     }
 
+    /**
+     * Gets type of the timetable element.
+     *
+     * This information is used by recycler view of the timetable
+     * to choose correct ViewHolder for the item.
+     *
+     * @return  Type.NOW_BLOCK
+     */
     @Override
     public Type getType() {
         return Type.NOW_BLOCK;

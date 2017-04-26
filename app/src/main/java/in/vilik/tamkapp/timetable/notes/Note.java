@@ -142,7 +142,7 @@ public class Note implements TimetableElement {
      * This information is used by recycler view of the timetable
      * to choose correct ViewHolder for the item.
      *
-     * @return  NOTE type
+     * @return  Type.NOTE
      */
     @Override
     public Type getType() {

@@ -103,11 +103,6 @@ public class Reservation implements TimetableElement {
         this.studentGroups = studentGroups;
     }
 
-    @Override
-    public Type getType() {
-        return Type.RESERVATION;
-    }
-
     public String getViewHeader() {
         if (subjectHasRealizationString()) {
             StringBuilder sb = new StringBuilder();
@@ -165,5 +160,18 @@ public class Reservation implements TimetableElement {
 
             return realizationsFound == realizations.size();
         }
+    }
+
+    /**
+     * Gets type of the timetable element.
+     *
+     * This information is used by recycler view of the timetable
+     * to choose correct ViewHolder for the item.
+     *
+     * @return  Type.RESERVATION
+     */
+    @Override
+    public Type getType() {
+        return Type.RESERVATION;
     }
 }
