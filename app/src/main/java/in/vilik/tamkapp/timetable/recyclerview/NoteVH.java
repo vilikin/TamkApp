@@ -15,14 +15,30 @@ import in.vilik.tamkapp.utils.DateUtil;
 import in.vilik.tamkapp.utils.UtilCompat;
 
 /**
- * Created by vili on 16/04/2017.
+ * Implements ViewHolder for a note.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 class NoteVH extends TimetableViewHolder {
+
+    /**
+     * Initializes view holder.
+     *
+     * @param itemView  View of the ViewHolder
+     */
     public NoteVH(View itemView) {
         super(itemView);
     }
 
+    /**
+     * Binds note to this view holder.
+     *
+     * Fills text elements with data from the note object.
+     *
+     * @param element   Timetable element representing the note item
+     */
     @Override
     public void bind(TimetableElement element) {
         final Note note = (Note) element;

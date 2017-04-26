@@ -9,14 +9,30 @@ import in.vilik.tamkapp.timetable.Reservation;
 import in.vilik.tamkapp.timetable.TimetableElement;
 
 /**
- * Created by vili on 16/04/2017.
+ * Implements ViewHolder for now block.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 class NowBlockVH extends TimetableViewHolder {
+
+    /**
+     * Initializes view holder.
+     *
+     * @param itemView  View of the ViewHolder
+     */
     public NowBlockVH(View itemView) {
         super(itemView);
     }
 
+    /**
+     * Binds now block to this view holder.
+     *
+     * Fills text elements with data from the now block object.
+     *
+     * @param element   Timetable element representing now block item
+     */
     @Override
     public void bind(TimetableElement element) {
         NowBlock nowBlock = (NowBlock) element;
