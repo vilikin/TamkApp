@@ -26,7 +26,6 @@ import in.vilik.tamkapp.menus.recyclerview.MenuListAdapter;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
-import in.vilik.tamkapp.utils.ErrorToaster;
 
 /**
  * Created by vili on 10/04/2017.
@@ -144,8 +143,6 @@ public class MenuFragment extends Fragment {
             @Override
             public void onError() {
                 refreshMenuContent();
-
-                ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD_MENU);
             }
         });
 

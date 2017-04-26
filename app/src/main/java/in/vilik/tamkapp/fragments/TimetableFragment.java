@@ -17,7 +17,6 @@ import in.vilik.tamkapp.timetable.OnTimetableUpdatedListener;
 import in.vilik.tamkapp.timetable.Timetable;
 import in.vilik.tamkapp.timetable.recyclerview.TimetableAdapter;
 import in.vilik.tamkapp.utils.DataLoader;
-import in.vilik.tamkapp.utils.ErrorToaster;
 
 /**
  * Created by vili on 10/04/2017.
@@ -69,7 +68,6 @@ public class TimetableFragment extends Fragment {
 
             @Override
             public void onError() {
-                ErrorToaster.show(getActivity(), ErrorToaster.ERROR_FAILED_TO_LOAD_TIMETABLE);
                 refresh();
             }
         });
