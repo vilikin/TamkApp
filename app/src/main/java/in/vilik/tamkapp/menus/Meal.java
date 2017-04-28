@@ -42,12 +42,8 @@ public class Meal implements MenuListItem {
     }
 
     public void setOptions(ArrayList<MealOption> options) {
-        if (options.size() < 2) {
-            for (MealOption option : options) {
-                if (option.getName().toLowerCase().contains("suljettu")) {
-                    this.empty = true;
-                }
-            }
+        if (options.isEmpty()) {
+            this.empty = true;
         }
 
         this.options = options;
