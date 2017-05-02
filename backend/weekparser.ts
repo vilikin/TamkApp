@@ -12,7 +12,7 @@ interface Diet {
 interface Option {
     name: string;
     details?: string;
-    diets?: Array<Diet>;
+    diets: Array<Diet>;
     priceForStudent: number;
     priceForStaff: number;
     priceForOthers: number;
@@ -63,7 +63,7 @@ export class WeekParser {
                     optionsRaw.splice(0, 1);
 
                     let options: Array<Option> = optionsRaw.map((rawOption) => {
-                        let name = rawOption.split("</div>")[0];
+                        let name = rawOption.split("</div>")[0].replace("&#039;", "'");
                         let details;
 
                         if (rawOption.indexOf('<div class="field field-name-field-lisatiedot field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">') !== -1) {
