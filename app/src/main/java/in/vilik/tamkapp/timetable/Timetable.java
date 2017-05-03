@@ -36,24 +36,55 @@ import okhttp3.RequestBody;
 import okio.BufferedSink;
 
 /**
- * Created by vili on 16/04/2017.
+ * Implements a timetable.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0426
+ * @since 1.7
  */
-
 public class Timetable extends DataLoader implements API {
+
+    /**
+     * List of days in the timetable.
+     */
     private List<Day> days;
 
+    /**
+     * List of timetable elements for the RecyclerView.
+     */
     private List<TimetableElement> elements;
 
+    /**
+     * API request to use when refreshing data.
+     */
     private Request request;
 
+    /**
+     * Context.
+     */
     private Context context;
 
+    /**
+     * Preferences of the app.
+     */
     private AppPreferences preferences;
 
+    /**
+     * Listener that is called when timetable data is refreshed.
+     */
     private OnTimetableUpdatedListener listener;
 
+    /**
+     * Language of the timetable.
+     */
     private String language;
 
+    /**
+     * Initializes timetable with default values.
+     *
+     * @param context   Context
+     * @param language  Language of the timetable
+     */
     public Timetable(Context context, String language) {
         super(context);
 
@@ -86,6 +117,11 @@ public class Timetable extends DataLoader implements API {
         });
     }
 
+    /**
+     * Sets language for the timetable.
+     *
+     * @param language  Language for the timetable
+     */
     private void setLanguage(String language) {
         if (!language.equals("fi")) {
             this.language = "en";
@@ -94,6 +130,11 @@ public class Timetable extends DataLoader implements API {
         }
     }
 
+    /**
+     * Triggers OnTimetableUpdatedListener.
+     *
+     * @param success   Was update successful or not
+     */
     private void triggerOnTimetableUpdatedListener(boolean success) {
         if (success && listener != null) {
             listener.onSuccess();
@@ -102,18 +143,45 @@ public class Timetable extends DataLoader implements API {
         }
     }
 
+    /**
+     * Sets OnTimetableUpdatedListener for the timetable.
+     *
+     * @param listener  OnTimetableUpdatedListener for the timetable
+     */
     public void setOnTimetableUpdatedListener(OnTimetableUpdatedListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Removes OnTimetableUpdatedListener from the timetable.
+     */
     public void removeOnTimetableUpdatedListener() {
         this.listener = null;
     }
 
+    /**
+     * Gets context.
+     *
+     * @return  Context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Refreshes list of timetable elements visible in the RecyclerView.
+     *
+     * If an error occurred, displays an error announcement and nothing else.
+     *
+     * Else if no student group is set, displays a welcome message with instructions on how
+     * to set student group.
+     *
+     * Else displays all reservations and notes associated with the day elements of the timetable.
+     * If current time is on range of some reservation, inserts an announcement block
+     * with information on the reservation to the top of the view.
+     *
+     * @param loadError If an error occurred while updating data or not
+     */
     private void refreshVisibleElementsList(boolean loadError) {
         elements.clear();
 
@@ -174,10 +242,23 @@ public class Timetable extends DataLoader implements API {
         }
     }
 
+    /**
+     * Gets visible elements of the timetable for the Recycler View.
+     *
+     * @return Visible elements of the timetable
+     */
     public List<TimetableElement> getElements() {
         return elements;
     }
 
+    /**
+     * Inserts parsed reservations to the corresponding day elements of the timetable.
+     *
+     * Also takes care of removing current day from timetable when there is no more
+     * relevant reservations on that day and it's past 18:00.
+     *
+     * @param reservations  Reservations to insert to the timetable
+     */
     private void addReservationsToDays(List<Reservation> reservations) {
         for (final Reservation reservation : reservations) {
             for (Day day : days) {
@@ -207,6 +288,15 @@ public class Timetable extends DataLoader implements API {
         }
     }
 
+    /**
+     * Generates day elements for the timetable.
+     *
+     * Based on user preferences, uses DateUtil to get next 7, 30 or 182 days.
+     * Day elements are generated for those dates. If user has chosen not to include weekends,
+     * saturdays and sundays are not converted to day elements.
+     *
+     * User generated notes are also added to the corresponding day elements.
+     */
     private void generateDays() {
         days.clear();
 
@@ -271,6 +361,14 @@ public class Timetable extends DataLoader implements API {
 
     /*  ----------------------- PARSING ------------------------------ */
 
+    /**
+     * Parses timetable JSON from TAMK API.
+     *
+     * Generates day elements and inserts parsed reservations to the days.
+     *
+     * @param data  Timetable JSON
+     * @return      If parsing was successful or not
+     */
     private boolean parseTimetable(String data) {
         try {
             JSONObject json = new JSONObject(data);
@@ -289,6 +387,14 @@ public class Timetable extends DataLoader implements API {
         }
     }
 
+    /**
+     * Parses JSON representation of reservations.
+     *
+     * @param reservationsJson  JSON array of reservations
+     * @return                  List of reservation objects
+     * @throws JSONException    Thrown when JSON parsing fails
+     * @throws ParseException   Thrown when date parsing fails
+     */
     private List<Reservation> parseReservations(JSONArray reservationsJson) throws JSONException, ParseException {
         List<Reservation> reservations = new ArrayList<>();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -340,6 +446,13 @@ public class Timetable extends DataLoader implements API {
         return reservations;
     }
 
+    /**
+     * Parses JSON representation of ClassRoom.
+     *
+     * @param resource          JSON representation of ClassRoom
+     * @return                  ClassRoom object
+     * @throws JSONException    Thrown when JSON parsing fails
+     */
     private ClassRoom parseClassRoom(JSONObject resource) throws JSONException {
         ClassRoom classRoom = new ClassRoom();
         classRoom.setName(resource.getString("name"));
@@ -352,6 +465,13 @@ public class Timetable extends DataLoader implements API {
         return classRoom;
     }
 
+    /**
+     * Parses JSON representation of Realization.
+     *
+     * @param resource          JSON representation of Realization
+     * @return                  Realization object
+     * @throws JSONException    Thrown when JSON parsing fails
+     */
     private Realization parseRealization(JSONObject resource) throws JSONException {
         Realization realization = new Realization();
         realization.setName(resource.getString("name"));
@@ -362,21 +482,44 @@ public class Timetable extends DataLoader implements API {
 
     /*  ----------------------- API ------------------------------ */
 
+    /**
+     * Gets okhttp request object to call the API with.
+     *
+     * @return Request to call the API with it
+     */
     @Override
     public Request getRequest() {
         return request;
     }
 
+    /**
+     * Gets type of the API.
+     *
+     * @return Type of the API
+     */
     @Override
     public Type getType() {
         return Type.TIMETABLE;
     }
 
+    /**
+     * Gets cache key of the API.
+     *
+     * Cache key is used by DataCache so it knows which file to use
+     * when caching responses from this API.
+     *
+     * @return Cache key of the API
+     */
     @Override
     public String getCacheKey() {
         return "timetable_" + preferences.getTimetableStudentGroup() + "_" + language;
     }
 
+    /**
+     * Generates request body.
+     *
+     * @return  Body for the request
+     */
     private RequestBody generateRequestBody() {
         return new RequestBody() {
             @Override
@@ -411,6 +554,11 @@ public class Timetable extends DataLoader implements API {
         };
     }
 
+    /**
+     * Sets body for the request.
+     *
+     * @param body  Body for the request
+     */
     private void setRequestBody(RequestBody body) {
         request = new Request.Builder()
                 .post(body)
