@@ -11,13 +11,29 @@ import in.vilik.tamkapp.R;
 import in.vilik.tamkapp.menus.MenuListItem;
 
 /**
- * Created by vili on 13/04/2017.
+ * Implements a ViewHolder for parent components of the menu list.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0503
+ * @since 1.7
  */
-
 class MenuHeaderViewHolder extends ParentViewHolder {
+
+    /**
+     * Primary text view of the ViewHolder.
+     */
     private TextView primaryTextView;
+
+    /**
+     * Expand icon.
+     */
     private ImageView expandIcon;
 
+    /**
+     * Initializes ViewHolder with an item view.
+     *
+     * @param itemView  Item view
+     */
     public MenuHeaderViewHolder(View itemView) {
         super(itemView);
 
@@ -25,6 +41,11 @@ class MenuHeaderViewHolder extends ParentViewHolder {
         expandIcon = (ImageView)itemView.findViewById(R.id.expandIcon);
     }
 
+    /**
+     * Toggles expand icon rotation based on whether parent is expanded or not.
+     *
+     * @param expanded  If parent is expanded or not
+     */
     @Override
     public void onExpansionToggled(boolean expanded) {
         super.onExpansionToggled(expanded);
@@ -41,6 +62,11 @@ class MenuHeaderViewHolder extends ParentViewHolder {
         animator.start();
     }
 
+    /**
+     * Binds MenuListItem to the view.
+     *
+     * @param menuListItem  MenuListItem to bind to the view
+     */
     void bind(MenuListItem menuListItem) {
         primaryTextView.setText(menuListItem.getPrimaryText());
     }

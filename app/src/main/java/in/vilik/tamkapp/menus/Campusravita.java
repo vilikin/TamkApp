@@ -21,12 +21,25 @@ import in.vilik.tamkapp.utils.AppPreferences;
 import okhttp3.Request;
 
 /**
- * Created by vili on 10/04/2017.
+ * Implements a MenuList for Campusravita.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0503
+ * @since 1.7
  */
-
 public class Campusravita extends MenuList {
+
+    /**
+     * Preferences of the app.
+     */
     private AppPreferences preferences;
 
+    /**
+     * Initializes MenuList to interact with Campusravita API.
+     *
+     * @param context   Context
+     * @param language  Language for the MenuList
+     */
     public Campusravita(Context context, final String language) {
         super(context, new API() {
             @Override
@@ -49,6 +62,12 @@ public class Campusravita extends MenuList {
         this.preferences = new AppPreferences(context);
     }
 
+    /**
+     * Parses received response and converts it to a list of menus.
+     *
+     * @param response  Response body
+     * @return          If parsing succeeded or not
+     */
     boolean handleSuccessfulResponse(String response) {
         ArrayList<Menu> menus = getMenus();
 
@@ -75,6 +94,14 @@ public class Campusravita extends MenuList {
         }
     }
 
+    /**
+     * Parses JSON representation of a Menu.
+     *
+     * @param json              JSON representation of a Menu
+     * @return                  Menu object
+     * @throws JSONException    Thrown when parsing of JSON fails
+     * @throws ParseException   Thrown when parsing of a date fails
+     */
     private Menu parseMenu(JSONObject json) throws JSONException, ParseException {
         Menu menu = new Menu(this);
 
@@ -103,6 +130,13 @@ public class Campusravita extends MenuList {
         return menu;
     }
 
+    /**
+     * Parses JSON representation of a Meal.
+     *
+     * @param json              JSON representation of a meal
+     * @return                  Meal object
+     * @throws JSONException    Thrown when parsing of JSON fails
+     */
     private Meal parseMeal(JSONObject json) throws JSONException {
         Meal meal = new Meal();
 
@@ -130,6 +164,13 @@ public class Campusravita extends MenuList {
         return meal;
     }
 
+    /**
+     * Parses JSON representation of a MealOption.
+     *
+     * @param json              JSON representation of a MealOption
+     * @return                  MealOption object
+     * @throws JSONException    Thrown when parsing of JSON fails
+     */
     private MealOption parseOption(JSONObject json) throws JSONException {
         MealOption option = new MealOption(json.getString("name"));
 
@@ -145,12 +186,6 @@ public class Campusravita extends MenuList {
 
         option.setDietsShown(preferences.areDietsShown());
 
-        /*
-        option.setPriceForStudent(json.getDouble("priceForStudent"));
-        option.setPriceForStaff(json.getDouble("priceForStaff"));
-        option.setPriceForOther(json.getDouble("priceForOthers"));
-        */
-
         if (json.has("details")) {
             option.setDetails(json.getString("details"));
         }
@@ -158,6 +193,13 @@ public class Campusravita extends MenuList {
         return option;
     }
 
+    /**
+     * Parses JSON representation of a Diet.
+     *
+     * @param json              JSON representation of a Diet
+     * @return                  Diet object
+     * @throws JSONException    Thrown when parsing of JSON fails
+     */
     private Diet parseDiet(JSONObject json) throws JSONException {
         Diet diet = new Diet();
         diet.setName(json.getString("name"));

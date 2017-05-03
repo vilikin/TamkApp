@@ -9,14 +9,40 @@ import in.vilik.tamkapp.utils.DataLoader;
 import in.vilik.tamkapp.utils.OnDataLoadedListener;
 
 /**
- * Created by vili on 10/04/2017.
+ * Implements an abstract class representing a list of menus.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0503
+ * @since 1.7
  */
 public abstract class MenuList extends DataLoader {
+
+    /**
+     * List of all menus.
+     */
     private ArrayList<Menu> menus;
+
+    /**
+     * Context.
+     */
     private Context context;
+
+    /**
+     * API Type.
+     */
     private API.Type apiType;
+
+    /**
+     * Listener for menu updates.
+     */
     private OnMenuUpdatedListener listener;
 
+    /**
+     * Initializes MenuList with context and API details.
+     *
+     * @param context   Context
+     * @param api       API to use for fetching menu
+     */
     public MenuList(Context context, API api) {
         super(context, api);
 
@@ -38,6 +64,11 @@ public abstract class MenuList extends DataLoader {
         });
     }
 
+    /**
+     * Triggers OnMenuUpdatedListener based on whether update succeeded or not.
+     *
+     * @param success   If update succeeded or not
+     */
     private void triggerOnMenuUpdatedListener(boolean success) {
         if (success && listener != null) {
             listener.onSuccess();
@@ -46,60 +77,66 @@ public abstract class MenuList extends DataLoader {
         }
     }
 
+    /**
+     * Sets OnMenuUpdatedListener for the MenuList.
+     *
+     * @param listener  OnMenuUpdatedListener for the MenuList
+     */
     public void setOnMenuUpdatedListener(OnMenuUpdatedListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Removes OnMenuUpdatedListener from the MenuList.
+     */
     public void removeOnMenuUpdatedListener() {
         this.listener = null;
     }
 
+    /**
+     * Handles successful responses from the server.
+     *
+     * This method should be implemented by all menu lists to parse the server response
+     * and refresh the list of menus.
+     *
+     * @param response  Response body
+     * @return          If parsing succeeded or not
+     */
     abstract boolean handleSuccessfulResponse(String response);
 
+    /**
+     * Gets context.
+     *
+     * @return Context
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Sets context.
+     *
+     * @param context Context
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * Gets the list of menus.
+     *
+     * @return List of menus
+     */
     public ArrayList<Menu> getMenus() {
         return menus;
     }
 
+    /**
+     * Gets the API type of the MenuList.
+     *
+     * @return  API Type of the MenuList
+     */
     public API.Type getApiType() {
         return apiType;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Menu menu : menus) {
-            sb.append(menu.getDate());
-            sb.append("\n--------------------------------\n");
-
-            for (Meal meal : menu.getMeals()) {
-                sb.append(meal.getReadableType());
-                sb.append("\n");
-
-                for (MealOption mealOption : meal.getOptions()) {
-                    sb.append("--- ");
-                    sb.append(mealOption.getName());
-                    sb.append("\n");
-
-                    if (mealOption.getDetails() != null) {
-                        sb.append("------ ");
-                        sb.append(mealOption.getDetails());
-                        sb.append("\n");
-                    }
-                }
-            }
-
-            sb.append("--------------------------------\n\n");
-
-        }
-
-        return sb.toString();
     }
 }

@@ -21,13 +21,24 @@ import in.vilik.tamkapp.utils.AppPreferences;
 import okhttp3.Request;
 
 /**
- * Created by vili on 10/04/2017.
+ * Implements a MenuList for Pirteria.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0503
+ * @since 1.7
  */
-
 public class Pirteria extends MenuList {
 
+    /**
+     * Preferences of the app.
+     */
     private AppPreferences preferences;
 
+    /**
+     * Initializes MenuList to interact with Pirteria API.
+     *
+     * @param context   Context
+     */
     public Pirteria(Context context) {
         super(context, new API() {
             @Override
@@ -52,6 +63,12 @@ public class Pirteria extends MenuList {
         preferences = new AppPreferences(context);
     }
 
+    /**
+     * Parses received response and converts it to a list of menus.
+     *
+     * @param response  Response body
+     * @return          If parsing succeeded or not
+     */
     @Override
     boolean handleSuccessfulResponse(String response) {
         ArrayList<Menu> menus = getMenus();
@@ -80,6 +97,14 @@ public class Pirteria extends MenuList {
         }
     }
 
+    /**
+     * Parses JSON representation of a Menu.
+     *
+     * @param json              JSON representation of a Menu
+     * @return                  Menu object
+     * @throws JSONException    Thrown when parsing of JSON fails
+     * @throws ParseException   Thrown when parsing of a date fails
+     */
     private Menu parseMenu(JSONObject json) throws JSONException, ParseException {
         Menu menu = new Menu(this);
 
@@ -119,6 +144,13 @@ public class Pirteria extends MenuList {
         return menu;
     }
 
+    /**
+     * Parses JSON representation of a Meal.
+     *
+     * @param json              JSON representation of a meal
+     * @return                  Meal object
+     * @throws JSONException    Thrown when parsing of JSON fails
+     */
     private Meal parseMeal(JSONObject json) throws JSONException {
         Meal meal = new Meal();
 
@@ -172,10 +204,22 @@ public class Pirteria extends MenuList {
         return meal;
     }
 
+    /**
+     * Removes diets from a name of a MealOption.
+     *
+     * @param name  Name of a MealOption
+     * @return      Name of a MealOption without diets
+     */
     private String removeDietsFromName(String name) {
         return name.split("[(]")[0].trim();
     }
 
+    /**
+     * Parses diets from name of a MealOption.
+     *
+     * @param name  Name of the MealOption
+     * @return      List of diets contained in the MealOption
+     */
     private List<Diet> getDietsFromName(String name) {
         List<Diet> diets = new ArrayList<>();
 
