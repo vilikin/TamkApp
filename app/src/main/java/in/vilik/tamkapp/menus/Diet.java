@@ -5,6 +5,10 @@ public class Diet {
     private String abbreviation;
     private String name;
 
+    public Diet() {
+
+    }
+
     public Diet(String abbreviation, String name) {
         this.abbreviation = abbreviation;
         this.name = name;
