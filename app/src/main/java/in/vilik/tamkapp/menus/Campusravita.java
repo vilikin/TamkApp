@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.menus.recyclerview.Diet;
 import in.vilik.tamkapp.utils.API;
 import in.vilik.tamkapp.utils.AppPreferences;
 import okhttp3.Request;

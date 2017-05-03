@@ -1,15 +1,9 @@
-package in.vilik.tamkapp.menus.recyclerview;
+package in.vilik.tamkapp.menus;
 
-/**
- * Created by vili on 20/04/2017.
- */
 
 public class Diet {
     private String abbreviation;
     private String name;
-
-    public Diet() {
-    }
 
     public Diet(String abbreviation, String name) {
         this.abbreviation = abbreviation;

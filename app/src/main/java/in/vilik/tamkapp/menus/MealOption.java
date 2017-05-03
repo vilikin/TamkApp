@@ -2,8 +2,6 @@ package in.vilik.tamkapp.menus;
 
 import java.util.List;
 
-import in.vilik.tamkapp.menus.recyclerview.Diet;
-
 /**
  * Created by vili on 10/04/2017.
  */
