@@ -19,25 +19,54 @@ import in.vilik.tamkapp.timetable.recyclerview.TimetableAdapter;
 import in.vilik.tamkapp.utils.DataLoader;
 
 /**
- * Created by vili on 10/04/2017.
+ * Implements a fragment containing a timetable.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0504
+ * @since 1.7
  */
-
 public class TimetableFragment extends Fragment {
-    View rootView;
+
+    /**
+     * Timetable instance to display in the fragment.
+     */
     Timetable timetable;
+
+    /**
+     * Flag: is fragment initialized.
+     */
     boolean initialized;
+
+    /**
+     * RecyclerView that holds the timetable.
+     */
     RecyclerView recyclerView;
+
+    /**
+     * Adapter for the RecyclerView.
+     */
     TimetableAdapter adapter;
+
+    /**
+     * Swipe refresh layout.
+     */
     SwipeRefreshLayout swipeRefreshLayout;
 
     /**
-     * Returns a new instance of this fragment for the given section
-     * number.
+     * Returns a new instance of TimetableFragment.
      */
     public static Fragment newInstance() {
         return new TimetableFragment();
     }
 
+    /**
+     * Creates view for the fragment.
+     *
+     * @param inflater              Inflater
+     * @param container             Container
+     * @param savedInstanceState    Saved instance state
+     * @return                      View for the fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,6 +113,9 @@ public class TimetableFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Resumes fragment.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -94,6 +126,9 @@ public class TimetableFragment extends Fragment {
         }
     }
 
+    /**
+     * Refreshes contents of the RecyclerView.
+     */
     private void refresh() {
         initialized = true;
 

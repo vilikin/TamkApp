@@ -13,15 +13,33 @@ import in.vilik.tamkapp.menus.MealTypes;
 import in.vilik.tamkapp.utils.AppPreferences;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Implements a settings fragment.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0504
+ * @since 1.7
  */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    /**
+     * Separator to use with included meals.
+     */
     final String INCLUDED_MEALS_SEPARATOR = ", ";
+
+    /**
+     * Preferences of the app.
+     */
     private AppPreferences preferences;
 
+    /**
+     * Constructs SettingsFragment.
+     */
     public SettingsFragment() {
     }
 
+    /**
+     * Resumes fragment.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -29,6 +47,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 .registerOnSharedPreferenceChangeListener(this);
     }
 
+    /**
+     * Pauses fragment.
+     */
     @Override
     public void onPause() {
         super.onPause();
@@ -36,6 +57,11 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    /**
+     * Creates fragment.
+     *
+     * @param savedInstanceState    Saved instance state
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +74,20 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         updateSummaries();
     }
 
+    /**
+     * Triggers when preferences are changed. Updates summaries.
+     *
+     * @param sharedPreferences     Shared preferences
+     * @param key                   Key that was changed
+     */
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         updateSummaries();
     }
 
+    /**
+     * Updates summaries based on preferences.
+     */
     private void updateSummaries() {
 
         findPreference(preferences.getKeyCampusravitaMeals())
@@ -83,6 +118,12 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 .setSummary(timetablePeriodSummary);
     }
 
+    /**
+     * Gets summary for selected timetable period.
+     *
+     * @param selectedTimetablePeriod   Selected timetable period
+     * @return                          Summary for period
+     */
     private String getSummaryForSelectedPeriod(String selectedTimetablePeriod) {
         String[] periods = getResources().getStringArray(R.array.timetable_periods);
         String[] summaries = getResources().getStringArray(R.array.timetable_periods_summary);
@@ -96,6 +137,14 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         return null;
     }
 
+    /**
+     * Gets summary for selected meal types.
+     *
+     * @param selectedItems     Selected meal types
+     * @param normalArrayId     String array resource for meal types
+     * @param readableArrayId   String array resource for readable meal types
+     * @return                  Summary for selected meal types
+     */
     private String getSummaryForSelectedListItems(Set<String> selectedItems,
                                                   int normalArrayId, int readableArrayId) {
         if (selectedItems.size() > 0) {

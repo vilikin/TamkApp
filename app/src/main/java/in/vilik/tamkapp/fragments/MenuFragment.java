@@ -28,23 +28,53 @@ import in.vilik.tamkapp.utils.AppPreferences;
 import in.vilik.tamkapp.utils.DataLoader;
 
 /**
- * Created by vili on 10/04/2017.
+ * Implements a fragment containing a list of menus.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0504
+ * @since 1.7
  */
-
 public class MenuFragment extends Fragment {
+
+    /**
+     * Root view of the fragment.
+     */
     View rootView;
+
+    /**
+     * MenuList displayed on this fragment.
+     */
     MenuList menuList;
+
+    /**
+     * Flag: is the fragment and MenuList initialized.
+     */
     boolean initialized;
+
+    /**
+     * RecyclerView containing the list of menus.
+     */
     RecyclerView recyclerView;
+
+    /**
+     * Adapter for the RecyclerView containing the list of menus.
+     */
     MenuListAdapter adapter;
+
+    /**
+     * Overlay for when there are no menu lists available.
+     */
     LinearLayout noMenuListsOverlay;
+
+    /**
+     * Overlay for when there is no localization of the menu list available.
+     */
     LinearLayout noLocalizationOverlay;
     AppPreferences preferences;
     SwipeRefreshLayout swipeRefreshLayout;
 
     /**
-     * Returns a new instance of this fragment for the given section
-     * number.
+     * Returns a new instance of this fragment for the given menu type.
      */
     public static Fragment newInstance(API.Type menuType) {
         MenuFragment fragment = new MenuFragment();
@@ -54,6 +84,14 @@ public class MenuFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Creates view for the fragment.
+     *
+     * @param inflater              Inflater
+     * @param container             Container
+     * @param savedInstanceState    Saved instance state
+     * @return                      View for the fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -158,6 +196,9 @@ public class MenuFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Resumes fragment.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -168,6 +209,9 @@ public class MenuFragment extends Fragment {
         }
     }
 
+    /**
+     * Refreshes contents of the RecyclerView.
+     */
     private void refreshMenuContent() {
         initialized = true;
 

@@ -23,14 +23,30 @@ import in.vilik.tamkapp.utils.DateUtil;
 import in.vilik.tamkapp.utils.UtilCompat;
 
 /**
- * Created by vili on 23/04/2017.
+ * Implements a bottom sheet menu.
+ *
+ * @author Vili Kinnunen vili.kinnunen@cs.tamk.fi
+ * @version 2017.0504
+ * @since 1.7
  */
+public class BottomSheetMenu extends BottomSheetDialog {
 
-public class BottomSheetOptions extends BottomSheetDialog {
+    /**
+     * Context.
+     */
     private Context context;
+
+    /**
+     * Root view.
+     */
     private LinearLayout rootView;
 
-    public BottomSheetOptions(@NonNull Context context) {
+    /**
+     * Initializes bottom sheet menu.
+     *
+     * @param context Context
+     */
+    public BottomSheetMenu(@NonNull Context context) {
         super(context);
 
         this.context = context;
@@ -42,87 +58,11 @@ public class BottomSheetOptions extends BottomSheetDialog {
         setContentView(rootView);
     }
 
-    public List<Category> getCategoriesForDate(final Day day) {
-        List<Category> categories = new ArrayList<>();
-
-        Category dayCategory = new Category();
-        dayCategory.setName(DateUtil.formatDate(context, day.getDate(), DateUtil.DateFormat.DAY));
-        List<Option> options = new ArrayList<>();
-        Option deadline = new Option();
-
-        deadline.setName(context.getString(R.string.deadline_bottom_sheet_title));
-        deadline.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_whatshot_black_24px));
-        deadline.setListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewNote(day.getDate(), Note.NoteType.DEADLINE);
-                BottomSheetOptions.this.dismiss();
-            }
-        });
-
-        options.add(deadline);
-
-        Option exam = new Option();
-
-        exam.setName(context.getString(R.string.exam_bottom_sheet_title));
-        exam.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_school_black_24px));
-        exam.setListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewNote(day.getDate(), Note.NoteType.EXAM);
-                BottomSheetOptions.this.dismiss();
-            }
-        });
-
-        options.add(exam);
-
-        Option event = new Option();
-
-        event.setName(context.getString(R.string.event_bottom_sheet_title));
-        event.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_event_available_black_24px));
-        event.setListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewNote(day.getDate(), Note.NoteType.EVENT);
-                BottomSheetOptions.this.dismiss();
-            }
-        });
-
-        options.add(event);
-
-        Option note = new Option();
-
-        note.setName(context.getString(R.string.note_bottom_sheet_title));
-        note.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_toc_black_24px));
-        note.setListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewNote(day.getDate(), Note.NoteType.NOTE);
-                BottomSheetOptions.this.dismiss();
-            }
-        });
-
-        options.add(note);
-
-        dayCategory.setOptions(options);
-
-        categories.add(dayCategory);
-
-        return categories;
-    }
-
-    private void createNewNote(Date date, Note.NoteType type) {
-        Intent intent = new Intent(context, NoteActivity.class);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-
-        intent.putExtra("date", calendar);
-        intent.putExtra("fullDay", true);
-        intent.putExtra("type", type.ordinal());
-
-        context.startActivity(intent);
-    }
-
+    /**
+     * Sets categories for the bottom sheet menu.
+     *
+     * @param categories    Categories for the bottom sheet menu
+     */
     public void setCategories(List<Category> categories) {
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -150,5 +90,98 @@ public class BottomSheetOptions extends BottomSheetDialog {
                 rootView.addView(optionView);
             }
         }
+    }
+
+    /**
+     * Creates option categories for a single day.
+     *
+     * @param day   Day to generate categories for
+     * @return      Categories for the day
+     */
+    public List<Category> getCategoriesForDate(final Day day) {
+        List<Category> categories = new ArrayList<>();
+
+        Category dayCategory = new Category();
+        dayCategory.setName(DateUtil.formatDate(context, day.getDate(), DateUtil.DateFormat.DAY));
+        List<Option> options = new ArrayList<>();
+        Option deadline = new Option();
+
+        deadline.setName(context.getString(R.string.deadline_bottom_sheet_title));
+        deadline.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_whatshot_black_24px));
+        deadline.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.DEADLINE);
+                BottomSheetMenu.this.dismiss();
+            }
+        });
+
+        options.add(deadline);
+
+        Option exam = new Option();
+
+        exam.setName(context.getString(R.string.exam_bottom_sheet_title));
+        exam.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_school_black_24px));
+        exam.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.EXAM);
+                BottomSheetMenu.this.dismiss();
+            }
+        });
+
+        options.add(exam);
+
+        Option event = new Option();
+
+        event.setName(context.getString(R.string.event_bottom_sheet_title));
+        event.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_event_available_black_24px));
+        event.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.EVENT);
+                BottomSheetMenu.this.dismiss();
+            }
+        });
+
+        options.add(event);
+
+        Option note = new Option();
+
+        note.setName(context.getString(R.string.note_bottom_sheet_title));
+        note.setIcon(UtilCompat.getDrawable(context, R.drawable.ic_toc_black_24px));
+        note.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewNote(day.getDate(), Note.NoteType.NOTE);
+                BottomSheetMenu.this.dismiss();
+            }
+        });
+
+        options.add(note);
+
+        dayCategory.setOptions(options);
+
+        categories.add(dayCategory);
+
+        return categories;
+    }
+
+    /**
+     * Starts new activity to create a note with specific date and type.
+     *
+     * @param date  Date for the note
+     * @param type  Type for the note
+     */
+    private void createNewNote(Date date, Note.NoteType type) {
+        Intent intent = new Intent(context, NoteActivity.class);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        intent.putExtra("date", calendar);
+        intent.putExtra("fullDay", true);
+        intent.putExtra("type", type.ordinal());
+
+        context.startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import in.vilik.tamkapp.R;
-import in.vilik.tamkapp.bottomsheet.BottomSheetOptions;
+import in.vilik.tamkapp.bottomsheet.BottomSheetMenu;
 import in.vilik.tamkapp.bottomsheet.Category;
 import in.vilik.tamkapp.timetable.Reservation;
 import in.vilik.tamkapp.timetable.TimetableElement;
@@ -82,7 +82,7 @@ class ReservationVH extends TimetableViewHolder {
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                final BottomSheetOptions optionsDialog = new BottomSheetOptions(context);
+                final BottomSheetMenu optionsDialog = new BottomSheetMenu(context);
 
                 List<Category> categories = optionsDialog.getCategoriesForDate(reservation.getParent());
                 optionsDialog.setCategories(categories);
