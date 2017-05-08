@@ -141,4 +141,19 @@ public class TimetableFragment extends Fragment {
             }
         });
     }
+
+    /**
+     * Triggers when fragment is paused.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Fixes a rare fragment overlapping bug
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.destroyDrawingCache();
+            swipeRefreshLayout.clearAnimation();
+        }
+    }
 }
