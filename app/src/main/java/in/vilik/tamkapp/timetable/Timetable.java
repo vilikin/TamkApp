@@ -375,6 +375,8 @@ public class Timetable extends DataLoader implements API {
 
             JSONArray reservationsJson = json.getJSONArray("reservations");
 
+            System.out.println(reservationsJson.toString(4));
+
             List<Reservation> reservations = parseReservations(reservationsJson);
 
             generateDays();

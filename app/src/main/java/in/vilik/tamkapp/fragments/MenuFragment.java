@@ -104,8 +104,8 @@ public class MenuFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewMenu);
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView;
-
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimaryDark);
+        swipeRefreshLayout.setRefreshing(true);
 
         noMenuListsOverlay = (LinearLayout) rootView.findViewById(R.id.empty_menulist_overlay);
         noLocalizationOverlay = (LinearLayout) rootView.findViewById(R.id.no_localization_menulist_overlay);

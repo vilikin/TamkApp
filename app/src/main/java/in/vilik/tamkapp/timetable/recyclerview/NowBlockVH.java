@@ -44,6 +44,11 @@ class NowBlockVH extends TimetableViewHolder {
 
         title.setText(reservation.getViewHeader());
         date.setText(reservation.getViewDateString());
-        classRoom.setText(reservation.getClassRoom().getCode());
+
+        if (reservation.getClassRoom() != null) {
+            classRoom.setText(reservation.getClassRoom().getCode());
+        } else {
+            classRoom.setText(R.string.timetable_no_classroom);
+        }
     }
 }
