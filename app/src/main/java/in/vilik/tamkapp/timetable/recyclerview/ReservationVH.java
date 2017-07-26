@@ -55,6 +55,7 @@ class ReservationVH extends TimetableViewHolder {
         if (reservation.getRealizations().isEmpty()) {
             realizations.setVisibility(View.GONE);
         } else {
+            realizations.setVisibility(View.VISIBLE);
             realizations.setText(reservation.getRealizationsString());
         }
 
