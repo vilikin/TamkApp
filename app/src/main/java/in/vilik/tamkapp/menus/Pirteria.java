@@ -226,13 +226,17 @@ public class Pirteria extends MenuList {
         String[] dietsStart = name.split("[(]");
 
         if (dietsStart.length > 1) {
-            String dietsRaw = dietsStart[1].split("[)]")[0];
+            String[] dietsRawArray = dietsStart[1].split("[)]");
 
-            String[] abbreviations = dietsRaw.split(",");
+            if (dietsRawArray.length > 0) {
+                String dietsRaw = dietsRawArray[0];
 
-            if (abbreviations.length > 0) {
-                for (String abbreviation : abbreviations) {
-                    diets.add(new Diet(abbreviation.trim(), null));
+                String[] abbreviations = dietsRaw.split(",");
+
+                if (abbreviations.length > 0) {
+                    for (String abbreviation : abbreviations) {
+                        diets.add(new Diet(abbreviation.trim(), null));
+                    }
                 }
             }
         }
